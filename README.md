@@ -1,3 +1,18 @@
+
+This is my end of first year project : it's a website of e-learning
+
+# Tools used : 
+    **html**
+    **css**
+    **reactJs**
+    **material-ui**
+
+this project was made by :
+    **BOUIFADENE Obaydah**
+    **DAMI Hajar**
+
+*all rights reserved*
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -1,52 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Comfortaa:wght@300&family=Sacramento&display=swap');
 *{
-    /* padding: 0;
-    margin: 0; */
     box-sizing: border-box;
 }
 html {
     font-family: "Montserrat", sans-serif;
     background-image: url("./background.png");
-
-  }
+    position: relative;
+}
 header {
-    position: absolute;
-   top: 0;
-   width: 100%;
-   margin: 0;
-   background-color:rgb(231, 231, 231);
-   left: 0px;
-   margin-left: 0;
-   padding : 10px;
-   vertical-align: middle; 
-   box-shadow: 0 0 10px 0 rgba(145, 145, 145, 0.3);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    background-color:rgb(231, 231, 231);
+    left: 0px;
+    margin-left: 0;
+    padding : 10px;
+    vertical-align: middle;
+    box-shadow: 0 0 10px 0 rgba(145, 145, 145, 0.3);
 }
 body{
-    padding: 0 16px;
-    /* color : #2b6dd1 */
-} 
+    z-index: -3;
+    position: relative;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 400px;  
+    margin : 70px 15px 80px 15px;
+    background-color:transparent;
+}
+
 footer {
-    position: absolute;
+    position: fixed;
     bottom : 0;
    width: 100%;
    margin: 0;
    background-color:rgb(231, 231, 231);
    left: 0px;
    padding : 10px;
-   vertical-align: middle; 
+   vertical-align: middle;
    box-shadow: 0 0 10px 0 rgba(145, 145, 145, 0.3);
 }
-/*
-margin:0px;
-    padding: 10px 0px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
-     display: inline-block;
-    height: 100%;
-    width: 100%;
-    float : right;
-    vertical-align: middle; 
-*/
+.img{
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    transform: rotate(19.63deg);
+    background : transparent;
+    margin-top: 20px;
+}
+
 @font-face {
     font-family: 'Simplifica';
-    src: url('./fonts/SIMPLIFICA.ttf') format('truetype');  
+    src: url('./fonts/SIMPLIFICA.ttf') format('truetype');
     font-weight: bold;
 }
+
+

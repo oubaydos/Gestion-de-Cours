@@ -5,8 +5,10 @@ import App from "./components/App";
 //ReactDOM.render(<App />, document.getElementById("root"));
 
 ReactDOM.render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+  <div>
+    <StrictMode>
+      <App />
+    </StrictMode>
+  </div>,
   document.getElementById("root")
 );

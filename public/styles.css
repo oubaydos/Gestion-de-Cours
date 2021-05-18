@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Comfortaa:wght@300&family=Sacramento&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Comfortaa:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&family=Sacramento&display=swap');
 *{
     box-sizing: border-box;
 }
@@ -25,13 +25,14 @@ body{
     padding-right: 10px;
     padding-left: 10px;
     padding-bottom: 400px;  
-    margin : 70px 15px 80px 15px;
+    margin : 70px 0 80px 0;
     background-color:transparent;
+    height:200vh;
 }
 
 footer {
-    position: fixed;
-    bottom : 0;
+    position: absolute;
+    bottom : -14%;
    width: 100%;
    margin: 0;
    background-color:rgb(231, 231, 231);

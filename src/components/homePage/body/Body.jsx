@@ -7,7 +7,10 @@ import Course1 from "./Course1";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import Link from "@material-ui/core/Link";
+import { Link as BrowserRouter, useHistory } from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -54,44 +57,78 @@ const useStyles = makeStyles((theme) => ({
 }));
 function Body(props) {
   let style = useStyles();
+  const history = useHistory();
+
+  function handleClickH1() {
+    history.push("/courses?sort=meilleur"); //handle backend
+  }
   return (
-    <body className={style.root} onMouseOver={props.onMouseOver}>
-      <ol className={style.list}>
-        <li className={style.li}>
-          <Grid container spacing={1} justify="space-around">
-            <Grid item xs={8}>
-              <Paper className={style.paper}>
-                <ol className={style.list}>
-                  <li className={style.li}>
-                    <Title />
-                  </li>
-                  <li className={style.li}>
-                    <Description />
-                  </li>
-                  <li className={style.li}>
-                    <SignUp />
-                  </li>
-                  <li className={style.liButton}>
-                    <SecondButton />
-                  </li>
-                </ol>
-              </Paper>
+    <div>
+      <div className={style.root} onMouseOver={props.onMouseOver}>
+        <ol className={style.list}>
+          <li className={style.li}>
+            <Grid container spacing={1} justify="space-around">
+              <Grid item xs={8}>
+                <Paper className={style.paper}>
+                  <ol className={style.list}>
+                    <li className={style.li}>
+                      <Title />
+                    </li>
+                    <li className={style.li}>
+                      <Description />
+                    </li>
+                    <li className={style.li}>
+                      <SignUp />
+                    </li>
+                    <li className={style.liButton}>
+                      <SecondButton />
+                    </li>
+                  </ol>
+                </Paper>
+              </Grid>
+              <Grid item xs={4}>
+                <Paper className={style.paper}>
+                  <Img />
+                </Paper>
+              </Grid>
             </Grid>
-            <Grid item xs={4}>
-              <Paper className={style.paper}>
-                <Img />
-              </Paper>
+          </li>
+          <li className={style.lii}>
+            <Typography>
+              <Link href="/courses?sort=meilleur" underline="none">
+                {/* handle BACKEND */}
+                <h1 style={{ color: "black" }}>Meilleurs Cours</h1>
+              </Link>
+            </Typography>
+          </li>
+          <li className={style.course}>
+            <Grid container spacing={1} justify="space-around">
+              <Grid item xs={3}>
+                <Paper className={style.paper}>
+                  <Course1 />
+                </Paper>
+              </Grid>
+
+              <Grid item xs={3}>
+                <Paper className={style.paper}>
+                  <Course1 />
+                </Paper>
+              </Grid>
+              <Grid item xs={3}>
+                <Paper className={style.paper}>
+                  <Course1 />
+                </Paper>
+              </Grid>
+              <Grid item xs={3}>
+                <Paper className={style.paper}>
+                  <Course1 />
+                </Paper>
+              </Grid>
             </Grid>
-          </Grid>
-        </li>
-        <li className={style.lii}>
-          <h1>Meilleurs Cours</h1>
-        </li>
-        <li className={style.course}>
-          <Course1 />
-        </li>
-      </ol>
-    </body>
+          </li>
+        </ol>
+      </div>
+    </div>
   );
 }
 export default Body;

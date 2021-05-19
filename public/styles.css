@@ -18,6 +18,7 @@ header {
     padding : 10px;
     vertical-align: middle;
     box-shadow: 0 0 10px 0 rgba(145, 145, 145, 0.3);
+    z-index : 2;
 }
 body{
     z-index: -3;
@@ -27,7 +28,7 @@ body{
     padding-bottom: 400px;  
     margin : 70px 0 80px 0;
     background-color:transparent;
-    height:200vh;
+    height:150vh;
 }
 
 footer {

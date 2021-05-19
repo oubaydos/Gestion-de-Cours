@@ -10,10 +10,14 @@ import {
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import ButtonBase from "@material-ui/core/ButtonBase";
+import Link from "@material-ui/core/Link";
 import { Link as RouterLink } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 275,
+    [theme.breakpoints.down("md")]: {
+      width: 200,
+    },
   },
   title: {
     height: "5%",
@@ -26,11 +30,12 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Comfortaa",
     fontWeight: 700,
     marginLeft: "4px",
+    marginTop: "2px",
   },
   mediaImg: {
     paddingTop: "70%",
   },
-  by: {
+  bydiv: {
     display: "flex",
     justifyContent: "center",
   },
@@ -39,62 +44,74 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     fontSize: "18px",
   },
+  By: {
+    fontFamily: "Comfortaa",
+    fontSize: "15px",
+    fontWeight: 400,
+  },
 }));
 
 const CourseCard = (props) => {
   const classes = useStyles();
-  const handleClick = () => {
-    alert("clicked");
-  };
 
   return (
     //component={Link} to={`/courses/${props.link}` in CardActionArea
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.mediaImg}
-          image={props.img}
-          title={props.alt}
-        />
-        <CardContent>
-          <Typography
-            className={classes.title}
-            gutterBottom
-            variant="subtitle1"
-            component="h6"
-          >
-            {props.title}
-          </Typography>
-          <div className={classes.by}>
-            By :
+    <RouterLink to={`/courses/${props.id}`} style={{ textDecoration: "none" }}>
+      <Card className={classes.root}>
+        <CardActionArea>
+          <CardMedia
+            className={classes.mediaImg}
+            image={props.img}
+            title={props.alt}
+          />
+          <CardContent>
             <Typography
-              className={classes.author}
+              className={classes.title}
               gutterBottom
-              variant="subtitle2"
-              component="h5"
+              variant="subtitle1"
+              component="h6"
             >
-              {props.author}
+              {props.title}
             </Typography>
-          </div>
+            <div className={classes.bydiv}>
+              <Typography
+                className={classes.By}
+                gutterBottom
+                variant="subtitle2"
+                component="h5"
+              >
+                Prof :
+              </Typography>
+              <Typography
+                className={classes.author}
+                gutterBottom
+                variant="subtitle2"
+                component="h5"
+              >
+                {props.author}
+              </Typography>
+            </div>
 
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            className={classes.div}
-          >
-            <span style={{ marginRight: "4px", marginTop: "2px" }}>
-              {props.rating}
-            </span>
-            <Rating
-              name="half-rating"
-              defaultValue={props.rating}
-              precision={0.5}
-            />
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+              className={classes.div}
+            >
+              <span style={{ marginRight: "4px", marginTop: "2px" }}>
+                {props.rating}
+              </span>
+              <Rating
+                name="half-rating"
+                defaultValue={props.rating}
+                precision={0.5}
+                readOnly
+              />
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </RouterLink>
   );
 };
 

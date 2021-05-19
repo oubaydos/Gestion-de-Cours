@@ -14,7 +14,7 @@ function TextButton(props) {
     <Button
       style={style}
       className={props.className}
-      size="small"
+      size={props.size || "small"}
       href={props.url}
     >
       {props.value}

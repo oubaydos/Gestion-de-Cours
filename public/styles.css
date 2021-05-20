@@ -21,6 +21,7 @@ header {
     z-index : 2;
 }
 body{
+    background-image: url("./background.png");
     z-index: -3;
     position: relative;
     padding-right: 10px;
@@ -58,3 +59,10 @@ footer {
 }
 
 
+.footerContact {
+    position: absolute;
+    padding : 10px;
+   background-color:rgb(231, 231, 231);
+   vertical-align: middle;
+   box-shadow: 0 0 10px 0 rgba(145, 145, 145, 0.3);
+}

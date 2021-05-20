@@ -3,13 +3,15 @@ import React, { useState } from "react";
 import Header from "./homePage/header/Header";
 import Footer from "./homePage/footer/Footer";
 import Body from "./homePage/body/Body";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import ContactUs from "./contactUs/ContactUs";
+
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { BottomScrollListener } from "react-bottom-scroll-listener";
 
 function H1() {
   return (
     <div>
-      <h1>Contact us page</h1>
+      <ContactUs />
     </div>
   );
 }
@@ -43,10 +45,10 @@ function App() {
   // i am trying to detect the bottom of the page to show footer
   return (
     <Router>
-      <Route component={ScrollerFunc} path="/" />
+      <Route component={ScrollerFunc} exact path="/" />
       <Route component={Head} exact path="/" />
       <Route component={Body} exact path="/" />
-      <Route component={Foot} path="/" />
+      <Route component={Foot} exact path="/" />
       <Route component={H1} exact path="/contactus" />
       <Route component={H2} exact path="/aboutus" />
     </Router>

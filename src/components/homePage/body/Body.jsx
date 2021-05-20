@@ -4,11 +4,13 @@ import Title from "./Title";
 import Description from "./Description";
 import SignUp, { SecondButton } from "./SignUp";
 import Course1 from "./Course1";
+import Course2 from "./Course2";
+import Course3 from "./Course3";
+import Course4 from "./Course4";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Link from "@material-ui/core/Link";
-import { Link as BrowserRouter, useHistory } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
@@ -57,11 +59,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 function Body(props) {
   let style = useStyles();
-  const history = useHistory();
 
-  function handleClickH1() {
-    history.push("/courses?sort=meilleur"); //handle backend
-  }
   return (
     <div>
       <div className={style.root} onMouseOver={props.onMouseOver}>
@@ -111,17 +109,17 @@ function Body(props) {
 
               <Grid item xs={3}>
                 <Paper className={style.paper}>
-                  <Course1 />
+                  <Course2 />
                 </Paper>
               </Grid>
               <Grid item xs={3}>
                 <Paper className={style.paper}>
-                  <Course1 />
+                  <Course3 />
                 </Paper>
               </Grid>
               <Grid item xs={3}>
                 <Paper className={style.paper}>
-                  <Course1 />
+                  <Course4 />
                 </Paper>
               </Grid>
             </Grid>

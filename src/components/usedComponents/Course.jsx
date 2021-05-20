@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 import {
@@ -9,8 +8,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
-import ButtonBase from "@material-ui/core/ButtonBase";
-import Link from "@material-ui/core/Link";
 import { Link as RouterLink } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {

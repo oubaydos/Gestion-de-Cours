@@ -1,13 +1,10 @@
 import React from "react";
 import Content from "./Content";
-import Copyright from "./Copyright";
+import Copyright from "../../usedComponents/Copyright";
 import Logo from "./Logo";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import { useState } from "react";
-// import { useScrollEvent } from "use-scroll-event";
-// import { BottomScrollListener } from "react-bottom-scroll-listener";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,23 +19,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Footer() {
-  // const [bottom, setBottom] = useState(false);
-  // const { y } = useScrollEvent({ detectScrolling: true });
-  // let finalY = 400;
-  // function handleBottom() {
-  //   console.log(scrolling, y);
-  //   if (bottom === true && y < finalY) setBottom(false);
-  //   else {
-  //     setBottom(true);
-  //     finalY = y;
-  //   }
-  // }
+function Footer(props) {
   let style = useStyles();
   return (
-    <div className={style.root}>
-      {/* <BottomScrollListener onBottom={handleBottom} /> */}
-      {/* {bottom === true && ( */}
+    <div
+      className={
+        props.className ? `${props.className} ${style.root}` : style.root
+      }
+    >
       <div>
         <Grid container spacing={1} justify="space-around">
           <Grid item xs={4}>
@@ -62,7 +50,6 @@ function Footer() {
           </Grid>
         </Grid>
       </div>
-      {/* )} */}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -9,8 +9,11 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Copyright from "../usedComponents/Copyright";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import DoneIcon from "@material-ui/icons/Done";
+//style :
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -34,19 +37,47 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+//component :
+
 export default function SignUp() {
+  const classes = useStyles();
+  //effect-state
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+  });
+  const [sent, setSent] = useState(false);
+
+  //react form hook :
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const classes = useStyles();
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-  });
-  const submitFunc = (data) => {
+
+  const submitFunc = async (data) => {
+    if (
+      !errors.email &&
+      !errors.firstName &&
+      !errors.lastName &&
+      !errors.message
+    ) {
+      setSent(true);
+    }
     console.log(data);
+    setSent(true);
+    try {
+      await axios.post(`http://localhost:5000/contact`, {
+        text: JSON.stringify(data),
+      });
+    } catch (error) {
+      console.error("l9it error\n\n\n\n");
+    }
   };
+
+  //return
+
   return (
     <div>
       <Container component="main" maxWidth="xs">
@@ -136,6 +167,20 @@ export default function SignUp() {
               Submit
             </Button>
           </form>
+          {sent && (
+            <Box mt={5}>
+              <div
+                style={{
+                  padding: "10px",
+                  borderRadius: "3px 3px 3px 3px",
+                  color: "#270",
+                  backgroundColor: "#DFF2BF",
+                }}
+              >
+                votre message est envoyé <DoneIcon />
+              </div>
+            </Box>
+          )}
           <Box mt={5}>
             <Copyright title="Gestion de Cours - ENSIAS" color="black" />
           </Box>
@@ -144,3 +189,4 @@ export default function SignUp() {
     </div>
   );
 }
+// u need to restart each time : setSent

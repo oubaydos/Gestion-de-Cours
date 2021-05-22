@@ -1,7 +1,7 @@
 import React from "react";
 import Img from "../homePage/body/Img";
 import Title from "./Body/Title";
-
+import Foote from "./Foote"
 import Description from "./Body/Description";
 import Description2 from "./Body/Description2";
 
@@ -127,11 +127,8 @@ function Body(props) {
       <Grid item xs={12}>  <FinalCard/></Grid> 
       </Grid>
         </Grid>
-       <footer class="footer">
-    <div class="footerContainer">
-        <p class="copyright"> &copy; {new Date().getFullYear()} Copyright : Gestion de Cours - ENSIAS </p>
-    </div>
-</footer>
+       <Foote />
+
 </div>
   );
 }

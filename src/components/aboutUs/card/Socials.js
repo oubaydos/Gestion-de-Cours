@@ -31,4 +31,3 @@ export default function Socials(props) {
         </Container>
     )
 }
-/* <Icon data-tip="alessandrowirawan@gmail.com" url="mailto:alessandrowirawan@gmail.com" />*/

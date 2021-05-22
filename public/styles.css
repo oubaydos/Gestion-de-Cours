@@ -34,18 +34,14 @@ body{
 
 footer {
     position: absolute;
-    font-size: 13px;
-    bottom : -50%;
-   width: 400;
-   height: 5%;
+    bottom : -14%;
+   width: 100%;
    margin: 0;
-   background-color:rgba(232, 237, 243, 0);
+   background-color:rgb(231, 231, 231);
    left: 0px;
    padding : 10px;
-   margin-left: 40%;
-   font-family: Comfortaa;
-
-  
+   vertical-align: middle;
+   box-shadow: 0 0 10px 0 rgba(145, 145, 145, 0.3);
 }
 .img{
     position: absolute;

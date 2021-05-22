@@ -4,6 +4,7 @@ import Header from "./homePage/header/Header";
 import Footer from "./homePage/footer/Footer";
 import Body from "./homePage/body/Body";
 import ContactUs from "./contactUs/ContactUs";
+import AboutUs from "./aboutUs/AboutUs";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { BottomScrollListener } from "react-bottom-scroll-listener";
@@ -16,7 +17,9 @@ function H1() {
   );
 }
 function H2() {
-  return <h1>About us page</h1>;
+  return <div>
+  <AboutUs />
+</div>;
 }
 
 function App() {

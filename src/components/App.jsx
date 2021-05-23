@@ -8,6 +8,7 @@ import AboutUs from "./aboutUs/AboutUs";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { BottomScrollListener } from "react-bottom-scroll-listener";
+import SignUp from "./signup/SignUp";
 
 function H1() {
   return (
@@ -17,9 +18,11 @@ function H1() {
   );
 }
 function H2() {
-  return <div>
-  <AboutUs />
-</div>;
+  return (
+    <div>
+      <AboutUs />
+    </div>
+  );
 }
 
 function App() {
@@ -54,6 +57,7 @@ function App() {
       <Route component={Foot} exact path="/" />
       <Route component={H1} exact path="/contactus" />
       <Route component={H2} exact path="/aboutus" />
+      <Route component={SignUp} exact path="/signup" />
     </Router>
   );
 }

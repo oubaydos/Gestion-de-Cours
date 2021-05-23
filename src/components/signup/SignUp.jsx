@@ -4,15 +4,19 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import PermContactCalendarIcon from "@material-ui/icons/PermContactCalendar";
+import LockIcon from "@material-ui/icons/Lock";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Copyright from "../usedComponents/Copyright";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import DoneIcon from "@material-ui/icons/Done";
 import Link from "@material-ui/core/Link";
+import FormLabel from "@material-ui/core/FormLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 //style :
 
 const useStyles = makeStyles((theme) => ({
@@ -31,11 +35,26 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(2, 0, -4),
   },
   textField: {
     background: "white",
   },
+  formControl: {
+    margin: theme.spacing(1, 0, 0),
+  },
+  root: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  label: {
+    marginTop: "15px",
+    marginLeft: "20px",
+    marginBottom: "15px",
+    fontFamily: "Montserrat",
+    fontSize: "17px",
+  },
+  p: { margin: theme.spacing(3, 2, -4) },
 }));
 
 //component :
@@ -48,7 +67,15 @@ export default function SignUp() {
     document.body.style.overflow = "hidden";
   });
   const [sent, setSent] = useState(false);
-
+  const [state, setState] = React.useState({
+    prof: false,
+    student: false,
+  });
+  const handleChange = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
+  const { prof, student } = state;
+  const error = [prof, student].filter((v) => v).length !== 1;
   //react form hook :
 
   const {
@@ -62,16 +89,26 @@ export default function SignUp() {
       !errors.email &&
       !errors.firstName &&
       !errors.lastName &&
-      !errors.message
+      !errors.password &&
+      state.prof !== state.student
     ) {
       setSent(true);
+    } else {
+      return;
     }
-    console.log(data);
-    setSent(true);
     try {
-      await axios.post(`http://localhost:5000/contact`, {
-        text: JSON.stringify(data),
-      });
+      data.isStudent = state.student;
+      await axios.post(`http://localhost:5000/users`, data).then(
+        (res) => {},
+        (err) => {
+          let error = "";
+          for (let i of err.response.data.errors) {
+            error += i.param + " : " + i.msg + "\n\n";
+          }
+          alert("erreur de code : " + err.response.status + "\n" + error);
+          console.log(error);
+        }
+      );
     } catch (error) {
       console.error("l9it error\n\n\n\n");
     }
@@ -84,10 +121,10 @@ export default function SignUp() {
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <PermContactCalendarIcon />
+            <LockIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Contactez-nous
+            S'inscrire
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit(submitFunc)}>
             <Grid container spacing={2}>
@@ -145,19 +182,54 @@ export default function SignUp() {
                   className={classes.textField}
                   variant="outlined"
                   fullWidth
-                  multiline
-                  rows={7}
-                  name="message"
-                  label="Message"
-                  id="message"
-                  {...register("message", {
+                  name="password"
+                  label="Mot de passe"
+                  id="password"
+                  type="password"
+                  {...register("password", {
                     required: true,
-                    minLength: 2,
+                    minLength: 6,
                   })}
-                  helperText={errors.message ? "message trop court" : ""}
+                  helperText={errors.password ? "mot de passe trop court" : ""}
                 />
               </Grid>
             </Grid>
+
+            <div className={classes.root}>
+              <FormControl
+                required
+                error={error}
+                component="fieldset"
+                className={classes.formControl}
+              >
+                <FormLabel component="legend" className={classes.formLabel}>
+                  Choisir un choix svp!
+                </FormLabel>
+                <label className={classes.label}>Vous Êtes ?: </label>
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={student}
+                        onChange={handleChange}
+                        name="student"
+                      />
+                    }
+                    label="Etudiant"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={prof}
+                        onChange={handleChange}
+                        name="prof"
+                      />
+                    }
+                    label="Professeur"
+                  />
+                </FormGroup>
+              </FormControl>
+            </div>
             <Button
               type="submit"
               fullWidth
@@ -165,7 +237,7 @@ export default function SignUp() {
               color="primary"
               className={classes.submit}
             >
-              Submit
+              S'inscrire
             </Button>
           </form>
           {sent && (
@@ -173,15 +245,21 @@ export default function SignUp() {
               <div
                 style={{
                   padding: "10px",
+                  marginBottom: "-20px",
                   borderRadius: "3px 3px 3px 3px",
                   color: "#270",
                   backgroundColor: "#DFF2BF",
                 }}
               >
-                votre message est envoyé <DoneIcon />
+                Vérifier votre boite mail
               </div>
             </Box>
           )}
+          <Box mt={5} className={classes.p}>
+            <Link href="/login">
+              <p>S'authetifier</p>
+            </Link>
+          </Box>
           <Box mt={5}>
             <Link href="/">
               <Copyright title="Gestion de Cours - ENSIAS" color="black" />
@@ -192,4 +270,3 @@ export default function SignUp() {
     </div>
   );
 }
-// u need to restart each time : setSent

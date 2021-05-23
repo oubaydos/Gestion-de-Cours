@@ -9,6 +9,7 @@ import AboutUs from "./aboutUs/AboutUs";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { BottomScrollListener } from "react-bottom-scroll-listener";
 import SignUp from "./signup/SignUp";
+import SignIn from "./signin/SignIn";
 
 function H1() {
   return (
@@ -58,6 +59,7 @@ function App() {
       <Route component={H1} exact path="/contactus" />
       <Route component={H2} exact path="/aboutus" />
       <Route component={SignUp} exact path="/signup" />
+      <Route component={SignIn} exact path="/signin" />
     </Router>
   );
 }

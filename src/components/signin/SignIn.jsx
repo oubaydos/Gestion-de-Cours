@@ -85,21 +85,18 @@ export default function SignUp() {
   } = useForm();
 
   const submitFunc = async (data) => {
-    if (
-      !errors.email &&
-      !errors.firstName &&
-      !errors.lastName &&
-      !errors.password &&
-      state.prof !== state.student
-    ) {
+    if (!errors.email && !errors.password && state.prof !== state.student) {
       setSent(true);
     } else {
       return;
     }
     try {
       data.isStudent = state.student;
-      await axios.post(`http://localhost:5000/users`, data).then(
-        (res) => {},
+      await axios.post(`http://localhost:5000/auth`, data).then(
+        (res) => {
+          alert(res.status);
+          console.log(res);
+        },
         (err) => {
           let error = "";
           for (let i of err.response.data.errors) {
@@ -124,43 +121,10 @@ export default function SignUp() {
             <LockIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            S'inscrire
+            S'authenrifier
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit(submitFunc)}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  className={classes.textField}
-                  autoComplete="fname"
-                  name="firstName"
-                  variant="outlined"
-                  fullWidth
-                  id="firstName"
-                  label="Prénom"
-                  autoFocus
-                  {...register("firstName", {
-                    required: true,
-                    pattern: /^[A-Za-z]+$/i,
-                  })}
-                  helperText={errors.firstName ? "vérifier le prénom svp" : ""}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  className={classes.textField}
-                  variant="outlined"
-                  fullWidth
-                  id="lastName"
-                  label="Nom"
-                  name="lastName"
-                  autoComplete="lname"
-                  {...register("lastName", {
-                    required: true,
-                    pattern: /^[A-Za-z]+$/i,
-                  })}
-                  helperText={errors.lastName ? "vérifier le nom svp" : ""}
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField
                   className={classes.textField}
@@ -237,7 +201,7 @@ export default function SignUp() {
               color="primary"
               className={classes.submit}
             >
-              S'inscrire
+              S'authentifier
             </Button>
           </form>
           {sent && (
@@ -256,8 +220,8 @@ export default function SignUp() {
             </Box>
           )}
           <Box mt={5} className={classes.p}>
-            <Link href="/signin">
-              <p>S'authetifier</p>
+            <Link href="/signup">
+              <p>S'inscrire</p>
             </Link>
           </Box>
           <Box mt={5}>

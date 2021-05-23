@@ -27,4 +27,4 @@ app.get("/", (req, res) => {
 //require("./routes/api/contact.js")(app);
 app.use("/contact", require("./routes/api/contact"));
 app.use("/users", require("./routes/api/users.js"));
-app.use("/auth", require("./routes/api/auth.js"));
+app.use("/auth", require("./routes/api/auth.js")); //auth.js

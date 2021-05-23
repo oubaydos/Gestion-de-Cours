@@ -161,7 +161,7 @@ router.get(`/confirmation/:token`, async (req, res) => {
         }
       );
       if (error !== null) throw error;
-      res.status(200).redirect("http://127.0.0.1:3000/login");
+      res.status(200).redirect("http://127.0.0.1:3000/signin");
     } else {
       /////mazal matraiitit hadchi
       let { prof } = jwt.verify(req.params.token, process.env.JWT_SECRET);
@@ -182,7 +182,7 @@ router.get(`/confirmation/:token`, async (req, res) => {
         }
       );
       if (error !== null) throw error;
-      res.status(200).redirect("http://127.0.0.1:3000/login");
+      res.status(200).redirect("http://127.0.0.1:3000/signin");
     }
   } catch (e) {
     res.status(410).json({ errors: e });

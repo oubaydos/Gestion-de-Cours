@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import Header from "./homePage/header/Header";
 import Footer from "./homePage/footer/Footer";
 import Body from "./homePage/body/Body";
@@ -8,7 +7,7 @@ import AboutUs from "./aboutUs/AboutUs";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { BottomScrollListener } from "react-bottom-scroll-listener";
-import SignUp from "./signup/SignUp";
+import SignUp from "./signup/SignUp.jsx";
 import SignIn from "./signin/SignIn";
 
 function H1() {
@@ -27,6 +26,7 @@ function H2() {
 }
 
 function App() {
+  const [logedIn, setLogedIn] = useState(false);
   const [bottom, setBottom] = useState(false);
   function handleBottom() {
     console.log("bottom", bottom);
@@ -49,9 +49,26 @@ function App() {
   function Foot() {
     return <footer>{bottom === true && <Footer />}</footer>;
   }
-  // i am trying to detect the bottom of the page to show footer
+  function cond() {
+    return (
+      <div>
+        {logedIn ? <p>you are logged in</p> : <p>you are not logged in</p>}
+      </div>
+    );
+  }
+  //khasni nchuf wach token expired
+  useEffect(() => {
+    if (
+      localStorage.getItem("currentUser") !== undefined &&
+      localStorage.getItem("currentUser") !== null
+    )
+      setLogedIn(true);
+    console.log(logedIn);
+  });
+
   return (
     <Router>
+      <Route component={cond} exact path="/dashboard" />
       <Route component={ScrollerFunc} exact path="/" />
       <Route component={Head} exact path="/" />
       <Route component={Body} exact path="/" />

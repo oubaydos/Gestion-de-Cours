@@ -23,6 +23,7 @@ function MyButton(props) {
       className={props.className}
       size="small"
       href={props.url}
+      onClick={props.onClick}
     >
       {props.value}
     </Button>

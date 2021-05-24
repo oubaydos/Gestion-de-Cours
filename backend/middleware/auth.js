@@ -9,8 +9,10 @@ module.exports = (req, res, next) => {
   //verify
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log(decoded);
+    console.log("req body : ", decoded);
+
     req.student = decoded.student;
+    req.prof = decoded.prof;
     next();
   } catch (e) {
     res.status(401).json({ msg: "token invalid" });

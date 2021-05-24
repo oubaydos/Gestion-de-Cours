@@ -91,7 +91,7 @@ router.post(
             else {
               console.log("9bl mandkhlo\n\n" + token + "\n");
               await require("./register")(token, email);
-              res.status(200); //200
+              res.status(200).json({ token: token });
             }
           }
         ); //2weeks
@@ -124,7 +124,7 @@ router.post(
             else {
               console.log("9bl mandkhlo");
               await require("./register")(token, email, false);
-              res.status(200); //200
+              res.status(200).json({ token: token }); //200
             }
           }
         ); //2weeks

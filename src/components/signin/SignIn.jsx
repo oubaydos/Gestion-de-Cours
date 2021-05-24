@@ -17,6 +17,7 @@ import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+let login;
 //style :
 
 const useStyles = makeStyles((theme) => ({
@@ -57,8 +58,6 @@ const useStyles = makeStyles((theme) => ({
   p: { margin: theme.spacing(3, 2, -4) },
 }));
 
-//component :
-
 export default function SignUp() {
   const classes = useStyles();
   //effect-state
@@ -96,6 +95,7 @@ export default function SignUp() {
         (res) => {
           alert(res.status);
           console.log(res);
+          localStorage.setItem("currentUser", res.data.token);
         },
         (err) => {
           let error = "";
@@ -110,6 +110,7 @@ export default function SignUp() {
       console.error("l9it error\n\n\n\n");
     }
   };
+  login = submitFunc;
 
   //return
 

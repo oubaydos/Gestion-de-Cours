@@ -9,23 +9,30 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 router.get("/", auth, async (req, res) => {
   try {
-    let error = null;
-    if (req.student !== undefined)
+    let error1 = null,
+      error2 = null,
+      error = null;
+    console.log(req.user + req.student + req.prof);
+    if (req.student)
       await Student.findOne({ _id: req.student.id }, (err, data) => {
         if (err) {
-          err = error;
+          console.log("err");
+          error1 = err;
           return;
         }
-        if (data) res.send(data);
+        if (data) return res.status(200).send(data);
+        else error1 = new Error("no data found");
       });
-    else
+    else if (req.prof)
       await Prof.findOne({ _id: req.prof.id }, (err, data) => {
         if (err) {
-          err = error;
+          console.log("err");
+          error2 = err;
           return;
         }
-        if (data) res.send(data);
+        if (data) return res.status(200).send(data);
       });
+    error1 === null ? (error = error2) : (error = error1);
     if (error) throw error;
   } catch (e) {
     console.log(e);
@@ -48,40 +55,43 @@ router.post(
     .custom(async (value, { req }) => {
       let e = false;
       console.log("wslna hna b3da");
-      await Student.findOne(
-        {
-          email: value,
-        },
-        async (err, data) => {
-          if (data === null) {
-            console.log("\n\n\n" + data + "\n\n\n");
-            e = true;
-            return;
-          }
-          let bool = await bcrypt.compare(req.body.password, data.password);
-          console.log("\n\n\n" + bool + "\n\n\n");
+      if (req.body.isStudent === "true" || req.body.isStudent === true)
+        await Student.findOne(
+          {
+            email: value,
+          },
+          async (err, data) => {
+            if (data === null) {
+              console.log("\n\n\n" + data + "\n\n\n");
+              e = true;
+              return;
+            }
+            let bool = await bcrypt.compare(req.body.password, data.password);
+            console.log("\n\n\n" + bool + "\n\n\n");
 
-          if (err || !bool) {
-            e = true;
+            if (err || !bool) {
+              e = true;
+            }
           }
-        }
-      );
-      await Prof.findOne(
-        {
-          email: value,
-        },
-        async (err, data) => {
-          if (data == null) {
-            e = true;
-            return;
+        );
+      else
+        await Prof.findOne(
+          {
+            email: value,
+          },
+          async (err, data) => {
+            console.log(data);
+            if (data == null) {
+              e = true;
+              return;
+            }
+            let bool = await bcrypt.compare(req.body.password, data.password);
+            console.log(bool + "\n\n\n\n\n");
+            if (err || !bool) {
+              e = true;
+            }
           }
-          let bool = await bcrypt.compare(req.body.password, data.password);
-          console.log(bool + "\n\n\n\n\n");
-          if (err || !bool) {
-            e = true;
-          }
-        }
-      );
+        );
       if (e) throw new Error("erreur dans les credentielles");
       return true;
     }),

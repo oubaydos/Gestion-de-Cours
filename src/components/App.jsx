@@ -4,7 +4,7 @@ import Footer from "./homePage/footer/Footer";
 import Body from "./homePage/body/Body";
 import ContactUs from "./contactUs/ContactUs";
 import AboutUs from "./aboutUs/AboutUs";
-
+import AllCourses from "./allCourses/AllCourses";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { BottomScrollListener } from "react-bottom-scroll-listener";
 import SignUp from "./signup/SignUp.jsx";
@@ -68,6 +68,7 @@ function App() {
 
   return (
     <Router>
+      <Route component={AllCourses} exact path="/courses" />
       <Route component={cond} exact path="/dashboard" />
       <Route component={ScrollerFunc} exact path="/" />
       <Route component={Head} exact path="/" />

@@ -9,21 +9,9 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { BottomScrollListener } from "react-bottom-scroll-listener";
 import SignUp from "./signup/SignUp.jsx";
 import SignIn from "./signin/SignIn";
-
-function H1() {
-  return (
-    <div>
-      <ContactUs />
-    </div>
-  );
-}
-function H2() {
-  return (
-    <div>
-      <AboutUs />
-    </div>
-  );
-}
+import Profil from "./dashboard/profil";
+import PageNotFound from "./errors/404";
+import { Helmet } from "react-helmet";
 
 function App() {
   const [logedIn, setLogedIn] = useState(false);
@@ -49,13 +37,7 @@ function App() {
   function Foot() {
     return <footer>{bottom === true && <Footer />}</footer>;
   }
-  function cond() {
-    return (
-      <div>
-        {logedIn ? <p>you are logged in</p> : <p>you are not logged in</p>}
-      </div>
-    );
-  }
+
   //khasni nchuf wach token expired
   useEffect(() => {
     if (
@@ -65,20 +47,55 @@ function App() {
       setLogedIn(true);
     console.log(logedIn);
   });
+  function CondRoute(props) {
+    //conditionnal 404
+    console.log("props", props.inverse === true);
+    if (props.inverse === true) {
+      return (
+        <Route
+          component={!logedIn ? props.component : PageNotFound}
+          exact={props.exact}
+          path={props.path}
+        />
+      );
+    }
+    return (
+      <Route
+        component={logedIn ? props.component : PageNotFound}
+        exact={props.exact}
+        path={props.path}
+      />
+    );
+  }
 
   return (
-    <Router>
-      <Route component={AllCourses} exact path="/courses" />
-      <Route component={cond} exact path="/dashboard" />
-      <Route component={ScrollerFunc} exact path="/" />
-      <Route component={Head} exact path="/" />
-      <Route component={Body} exact path="/" />
-      <Route component={Foot} exact path="/" />
-      <Route component={H1} exact path="/contactus" />
-      <Route component={H2} exact path="/aboutus" />
-      <Route component={SignUp} exact path="/signup" />
-      <Route component={SignIn} exact path="/signin" />
-    </Router>
+    <>
+      <Helmet>
+        <title>Gestion de cours</title>
+      </Helmet>
+      <Router>
+        <CondRoute component={Profil} exact={true} path="/dashboard" />
+        <Route component={AllCourses} exact path="/courses" />
+        <Route component={ScrollerFunc} exact path="/" />
+        <Route component={Head} path="/" />
+        <Route component={Body} exact path="/" />
+        <Route component={Foot} exact path="/" />
+        <Route component={ContactUs} exact path="/contactus" />
+        <Route component={AboutUs} exact path="/aboutus" />
+        <CondRoute
+          component={SignUp}
+          exact={true}
+          inverse={true}
+          path="/signup"
+        />
+        <CondRoute
+          component={SignIn}
+          exact={true}
+          inverse={true}
+          path="/signin"
+        />
+      </Router>
+    </>
   );
 }
 export default App;

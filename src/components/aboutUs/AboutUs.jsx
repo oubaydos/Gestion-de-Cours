@@ -8,16 +8,8 @@ import { useEffect } from "react";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import Header from "./header/Header";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import FinalCard from "./card/FinalCard";
-function Head() {
-  return (
-    <header>
-      <Header />
-    </header>
-  );
-}
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -119,11 +111,6 @@ function AboutUs() {
   useEffect(() => {
     document.body.style.overflowX = "hidden";
   });
-  return (
-    <Router>
-      <Route component={Head} exact path="/aboutus" />
-      <Route component={Body} exact path="/aboutus" />
-    </Router>
-  );
+  return <Body />;
 }
 export default AboutUs;

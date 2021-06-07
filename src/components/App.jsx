@@ -11,6 +11,7 @@ import SignUp from "./signup/SignUp.jsx";
 import SignIn from "./signin/SignIn";
 import Profil from "./dashboard/profil";
 import PageNotFound from "./errors/404";
+import MyCourses from "./mycourses/Mycourses";
 import { Helmet } from "react-helmet";
 
 function App() {
@@ -75,6 +76,7 @@ function App() {
       </Helmet>
       <Router>
         <CondRoute component={Profil} exact={true} path="/dashboard" />
+        <CondRoute component={MyCourses} exact={true} path="/mycourses" />
         <Route component={AllCourses} exact path="/courses" />
         <Route component={ScrollerFunc} exact path="/" />
         <Route component={Head} path="/" />

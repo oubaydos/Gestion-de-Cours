@@ -7,9 +7,9 @@ import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import Header from "../homePage/header/Header";
 import Menu from "./Menu";
+import Cours from "../onecourse/Cours"
 import CourseCard from "../usedComponents/Course";
 import Copyright from "../usedComponents/Copyright";
-
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
@@ -79,6 +79,7 @@ export default function Album() {
           </Container>
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
+        
           <Grid container spacing={4}>
             {cards.map((card) => (
               <Grid item key={card} xs={12} sm={6} md={4}>

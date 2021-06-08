@@ -34,7 +34,9 @@ function App() {
         <Header />
       </header>
     );
+
   }
+  
   function Foot() {
     return <footer>{bottom === true && <Footer />}</footer>;
   }

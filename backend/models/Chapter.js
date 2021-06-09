@@ -6,10 +6,11 @@ const ChapterShema = new mongoose.Schema({
     required: true,
   },
   data: {
-    type: Object,
+    type: String, //filename
   },
   courseId: {
-    type: mongoose.Types.ObjectId, //not sure
+    type: mongoose.Schema.Types.ObjectId, //not sure
+    ref: "Course",
     required: true,
   },
 });

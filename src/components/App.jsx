@@ -13,6 +13,7 @@ import Profil from "./dashboard/profil";
 import PageNotFound from "./errors/404";
 import MyCourses from "./mycourses/Mycourses";
 import { Helmet } from "react-helmet";
+import Img from "./dashboard/Img";
 
 function App() {
   const [logedIn, setLogedIn] = useState(false);
@@ -28,6 +29,17 @@ function App() {
       <BottomScrollListener onBottom={handleBottom} triggerOnNoScroll={true} />
     );
   }
+  // function temp() {
+  //   //kifach tjib chi image mn backend
+  //   return (
+  //     <img
+  //       src="http://localhost:5000/addCourse/e0e35040fe509e2cd8689ec45a958539.jfif"
+  //       width="824"
+  //       height="618"
+  //       alt="img"
+  //     />
+  //   );
+  // }
   function Head() {
     return (
       <header>

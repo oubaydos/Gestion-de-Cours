@@ -12,8 +12,13 @@ connectDB();
 const app = express();
 
 app.use(express.static(__dirname));
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+
 app.use(cors());
 
 app.listen(process.env.PORT_BACK || 5000, function () {
@@ -30,5 +35,8 @@ app.use("/contact", require("./routes/api/contact"));
 app.use("/users", require("./routes/api/users.js"));
 app.use("/auth", require("./routes/api/auth.js")); //auth.js
 app.use("/deleteAccount", require("./routes/api/deleteAccount.js")); //auth.js
+app.use("/addCourse", require("./routes/api/addCourse"));
+app.use("/addChapter", require("./routes/api/addChapter"));
+app.use("/allCourses", require("./routes/api/allCourses"));
 
 //test Pdf

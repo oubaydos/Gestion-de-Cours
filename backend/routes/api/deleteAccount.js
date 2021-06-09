@@ -4,10 +4,6 @@ const auth = require("../../middleware/auth");
 const Student = require("../../models/Student");
 const Prof = require("../../models/Prof");
 
-const { check, validationResult } = require("express-validator");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-
 router.delete("/", auth, async (req, res) => {
   try {
     let error1 = null,

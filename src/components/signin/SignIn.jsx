@@ -17,6 +17,8 @@ import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import { useHistory } from "react-router-dom";
+
 let login;
 //style :
 
@@ -60,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+
   //effect-state
 
   useEffect(() => {
@@ -82,7 +85,6 @@ export default function SignUp() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   const submitFunc = async (data) => {
     if (!errors.email && !errors.password && state.prof !== state.student) {
       setSent(true);
@@ -92,10 +94,11 @@ export default function SignUp() {
     try {
       data.isStudent = state.student;
       await axios.post(`http://localhost:5000/auth`, data).then(
-        (res) => {
+        async (res) => {
           alert(res.status);
           console.log(res);
           localStorage.setItem("currentUser", res.data.token);
+          window.location.reload(false);
         },
         (err) => {
           let error = "";
@@ -111,9 +114,6 @@ export default function SignUp() {
     }
   };
   login = submitFunc;
-
-  //return
-
   return (
     <div>
       <Container component="main" maxWidth="xs">
@@ -205,7 +205,7 @@ export default function SignUp() {
               S'authentifier
             </Button>
           </form>
-          {sent && (
+          {/* {sent && (
             <Box mt={5}>
               <div
                 style={{
@@ -219,7 +219,7 @@ export default function SignUp() {
                 Vérifier votre boite mail
               </div>
             </Box>
-          )}
+          )} */}
           <Box mt={5} className={classes.p}>
             <Link href="/signup">
               <p>S'inscrire</p>

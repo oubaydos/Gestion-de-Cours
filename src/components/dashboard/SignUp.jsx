@@ -2,6 +2,7 @@ import React from "react";
 import MyButton from "../usedComponents/MyButton";
 import { makeStyles } from "@material-ui/core/styles";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import axios from "axios";
 const useStyles = makeStyles({
   root: {
     float: "left",
@@ -24,6 +25,33 @@ const useStyles = makeStyles({
   },
 });
 
+async function deleteAccount() {
+  try {
+    let a = localStorage.getItem("currentUser");
+    if (a !== null && a !== undefined) {
+      axios.defaults.headers.common["x-auth-token"] = a;
+    } else {
+      alert("token problem :)");
+      return;
+    }
+    await axios.delete(`http://localhost:5000/deleteAccount`).then(
+      (res) => {
+        alert("clicked");
+        alert(res.status);
+        console.log(res);
+        localStorage.setItem("currentUser", null);
+        window.location.reload(false);
+      },
+      (err) => {
+        alert("clicked err");
+
+        console.log(err);
+      }
+    );
+  } catch (error) {
+    console.error("l9it error\n\n\n\n");
+  }
+}
 function SignUp(props) {
   let style = useStyles();
   return (
@@ -77,7 +105,7 @@ function DeleteButton(props) {
       fgColor="white"
       className={style.third}
       value={<Del />}
-      onClick={() => alert("account deleted! :)not really")}
+      onClick={deleteAccount}
       size="13px"
     />
   );

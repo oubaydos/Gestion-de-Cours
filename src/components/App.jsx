@@ -34,9 +34,8 @@ function App() {
         <Header />
       </header>
     );
-
   }
-  
+
   function Foot() {
     return <footer>{bottom === true && <Footer />}</footer>;
   }
@@ -56,7 +55,7 @@ function App() {
     if (props.inverse === true) {
       return (
         <Route
-          component={!logedIn ? props.component : PageNotFound}
+          component={!logedIn ? props.component : Profil}
           exact={props.exact}
           path={props.path}
         />
@@ -86,6 +85,7 @@ function App() {
         <Route component={Foot} exact path="/" />
         <Route component={ContactUs} exact path="/contactus" />
         <Route component={AboutUs} exact path="/aboutus" />
+        {/* <Route component={SignUp} exact path="/signup" /> */}
         <CondRoute
           component={SignUp}
           exact={true}

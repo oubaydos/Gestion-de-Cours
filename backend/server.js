@@ -19,7 +19,8 @@ app.use(cors());
 app.listen(process.env.PORT_BACK || 5000, function () {
   console.log(`listening on ${process.env.PORT || 5000}`);
 });
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
+  await require("./routes/api/testSendpdf")();
   res.send("got the get request");
 });
 
@@ -28,3 +29,6 @@ app.get("/", (req, res) => {
 app.use("/contact", require("./routes/api/contact"));
 app.use("/users", require("./routes/api/users.js"));
 app.use("/auth", require("./routes/api/auth.js")); //auth.js
+app.use("/deleteAccount", require("./routes/api/deleteAccount.js")); //auth.js
+
+//test Pdf

@@ -146,7 +146,7 @@ function Album() {
                       title={card.title}
                       author={card.prof}
                       rating={card.rating}
-                      id={card}
+                      id={card._id}
                     />
                   </Grid>
                 ))}

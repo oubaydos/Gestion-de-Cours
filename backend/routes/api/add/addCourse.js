@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 
-const Course = require("../../models/Course");
+const Course = require("../../../models/Course");
 const crypto = require("crypto");
 const mongoose = require("mongoose");
 const multer = require("multer");

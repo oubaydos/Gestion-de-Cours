@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -9,6 +9,7 @@ import Header from "../homePage/header/Header";
 import Menu from "../allCourses/Menu";
 import CourseCard from "../usedComponents/Course";
 import Copyright from "../usedComponents/Copyright";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -49,6 +50,51 @@ export default function Album() {
   const cards = Array.from({ length: numOfItems }, (_, i) => i + 1);
   const classes = useStyles();
 
+  let [courses, setcourses] = useState({ data: [] });
+  let [profs, setProfs] = useState([]);
+  const getCourses = async () => {
+    try {
+      await axios
+        .all([
+          axios.get(`http://localhost:5000/allProfs`),
+          axios.get(`http://localhost:5000/allCourses`),
+        ])
+        .then(
+          axios.spread((data1, data2) => {
+            //hadchi 3rfto mkhrb9
+            console.log(data2.data);
+            setProfs(data1.data);
+            console.log(data1.data);
+            let temp = data2.data;
+
+            console.log("hello ");
+            for (let j = 0; j < temp.length; j++) {
+              for (let k = 0; k < profs.length; k++) {
+                if (profs[k]._id === temp[j].instructor) {
+                  temp[j].prof = profs[k].firstName + " " + profs[k].lastName;
+                  console.log(temp[i].prof);
+                }
+              }
+            }
+
+            console.log("courses :  : ");
+            console.log(temp);
+            setcourses({ data: temp });
+            courses.data = temp;
+
+            console.log(courses);
+          })
+        );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  //
+  let i = 0;
+  useEffect(() => {
+    getCourses();
+  }, [courses]);
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -80,7 +126,6 @@ export default function Album() {
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-          
             {cards.map((card) => (
               <Grid item key={card} xs={12} sm={6} md={4}>
                 <CourseCard
@@ -93,10 +138,8 @@ export default function Album() {
                   id={card}
                 />
               </Grid>
-              
             ))}
           </Grid>
-          
         </Container>
       </main>
       <Link href="/" underline="none">

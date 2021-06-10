@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-const Formation = require("../../models/Formation");
+
+const Chapter = require("../../../models/Chapter");
 const crypto = require("crypto");
 const mongoose = require("mongoose");
 const multer = require("multer");
@@ -45,22 +46,12 @@ const storage = new GridFsStorage({
 const upload = multer({ storage });
 
 router.post("/", upload.single("file"), async (req, res) => {
-  let formation;
-  req.body.instructor
-    ? (formation = new Formation({
-        title: req.body.title,
-        description: req.body.description,
-        instructor: req.body.instructor,
-        image: tempNameFile,
-        rating: 0,
-      }))
-    : (formation = new Formation({
-        title: req.body.title,
-        description: req.body.description,
-        rating: 0,
-        image: tempNameFile,
-      }));
-  await formation.save();
+  let chapter = new Chapter({
+    title: req.body.title,
+    data: tempNameFile,
+    courseId: req.body.courseId,
+  });
+  await chapter.save();
   let a = req.body;
   console.log(a);
   console.log(tempNameFile);
@@ -75,19 +66,8 @@ router.get("/:filename", (req, res) => {
         err: "No file exists",
       });
     }
-
-    // Check if image
-    if (file.contentType === "image/jpeg" || file.contentType === "image/png") {
-      // Read output to browser
-      const readstream = gfs.createReadStream(file.filename);
-      readstream.pipe(res);
-    } else {
-      const readstream = gfs.createReadStream(file.filename);
-      readstream.pipe(res);
-      // res.status(404).json({
-      //   err: "Not an image",
-      // });
-    }
+    const readstream = gfs.createReadStream(file.filename);
+    readstream.pipe(res);
   });
 });
 module.exports = router;

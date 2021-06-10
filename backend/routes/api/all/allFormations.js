@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const Course = require("../../models/Course");
+const Formation = require("../../../models/Formation");
 
 router.get("/", async (req, res) => {
-  await Course.find({}, (err, rst) => {
+  await Formation.find({}, (err, rst) => {
     if (err || rst === null || rst === undefined)
       return res.status(410).json({
         errors: err,

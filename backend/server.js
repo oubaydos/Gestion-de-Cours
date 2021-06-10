@@ -35,11 +35,15 @@ app.use("/contact", require("./routes/api/contact"));
 app.use("/users", require("./routes/api/users.js"));
 app.use("/auth", require("./routes/api/auth.js")); //auth.js
 app.use("/deleteAccount", require("./routes/api/deleteAccount.js")); //auth.js
-app.use("/addCourse", require("./routes/api/addCourse"));
-app.use("/addChapter", require("./routes/api/addChapter"));
-app.use("/allCourses", require("./routes/api/allCourses"));
-app.use("/allProfs", require("./routes/api/allProfs"));
-app.use("/allFormations", require("./routes/api/allFormations"));
-app.use("/addFormation", require("./routes/api/addFormation"));
+app.use("/addCourse", require("./routes/api/add/addCourse"));
+app.use("/addChapter", require("./routes/api/add/addChapter"));
+app.use("/allCourses", require("./routes/api/all/allCourses"));
+app.use("/allProfs", require("./routes/api/all/allProfs"));
+app.use("/allFormations", require("./routes/api/all/allFormations"));
+app.use("/addFormation", require("./routes/api/add/addFormation"));
+app.use("/enrollCourse", require("./routes/api/enroll/enrollCourse"));
+app.use("/enrollFormation", require("./routes/api/enroll/enrollFormation"));
+app.use("/myCourses", require("./routes/api/my/myCourses"));
+app.use("/myFormations", require("./routes/api/my/myFormations"));
 
 //test Pdf

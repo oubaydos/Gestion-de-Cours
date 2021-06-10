@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       marginTop: "20%",
     },
-    marginTop: "14%",
+    marginTop: "100px",
   },
   lii: {
     [theme.breakpoints.down("md")]: {
@@ -75,7 +75,7 @@ function Body(props) {
                     <li className={style.liButton}>
                       <StartedButton />
                     </li>
-                    <li style={{ marginTop: "125px" }}>
+                    <li style={{ marginTop: "150px" }}>
                       <DoneButton />
                     </li>
                     <li style={{ marginTop: "320px", marginRight: "100px" }}>

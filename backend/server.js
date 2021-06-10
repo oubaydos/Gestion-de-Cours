@@ -38,5 +38,8 @@ app.use("/deleteAccount", require("./routes/api/deleteAccount.js")); //auth.js
 app.use("/addCourse", require("./routes/api/addCourse"));
 app.use("/addChapter", require("./routes/api/addChapter"));
 app.use("/allCourses", require("./routes/api/allCourses"));
+app.use("/allProfs", require("./routes/api/allProfs"));
+app.use("/allFormations", require("./routes/api/allFormations"));
+app.use("/addFormation", require("./routes/api/addFormation"));
 
 //test Pdf

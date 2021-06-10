@@ -86,7 +86,7 @@ export default function CustomizedMenus() {
           onClick={() => {
             setAnchorEl(null);
             setDown(false);
-            history.push("/courses?content=formations");
+            history.push("/formations");
           }}
         >
           <ListItemText primary="Formations" />

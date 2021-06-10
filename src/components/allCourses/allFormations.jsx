@@ -56,7 +56,7 @@ function Album() {
       await axios
         .all([
           axios.get(`http://localhost:5000/allProfs`),
-          axios.get(`http://localhost:5000/allCourses`),
+          axios.get(`http://localhost:5000/allFormations`),
         ])
         .then(
           axios.spread((data1, data2) => {

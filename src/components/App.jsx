@@ -5,6 +5,8 @@ import Body from "./homePage/body/Body";
 import ContactUs from "./contactUs/ContactUs";
 import AboutUs from "./aboutUs/AboutUs";
 import AllCourses from "./allCourses/AllCourses";
+import AllFormations from "./allCourses/allFormations";
+
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { BottomScrollListener } from "react-bottom-scroll-listener";
 import SignUp from "./signup/SignUp.jsx";
@@ -91,6 +93,7 @@ function App() {
         <CondRoute component={Profil} exact={true} path="/dashboard" />
         <CondRoute component={MyCourses} exact={true} path="/mycourses" />
         <Route component={AllCourses} exact path="/courses" />
+        <Route component={AllFormations} exact path="/formations" />
         <Route component={ScrollerFunc} exact path="/" />
         <Route component={Head} path="/" />
         <Route component={Body} exact path="/" />

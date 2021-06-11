@@ -16,6 +16,8 @@ import PageNotFound from "./errors/404";
 import MyCourses from "./mycourses/Mycourses";
 import { Helmet } from "react-helmet";
 import Img from "./dashboard/Img";
+import Prof1 from "./prof/Prof1"
+import Course from "./prof/Addcourse/Course"
 
 function App() {
   const [logedIn, setLogedIn] = useState(false);
@@ -100,6 +102,8 @@ function App() {
         <Route component={Foot} exact path="/" />
         <Route component={ContactUs} exact path="/contactus" />
         <Route component={AboutUs} exact path="/aboutus" />
+        <Route component={Prof1} exact path="/prof" />
+        <Route component={Course} exact path="/addcourse" />
         {/* <Route component={SignUp} exact path="/signup" /> */}
         <CondRoute
           component={SignUp}

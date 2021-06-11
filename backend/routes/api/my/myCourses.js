@@ -11,10 +11,12 @@ router.post("/", auth, async (req, res) => {
     let error1 = null,
       error2 = null;
     error = null;
-    console.log(req.user + req.student + req.prof);
+    //console.log(req.user + req.student + req.prof);
     if (req.student) {
       if (!error1 && !error2 && !error)
         await Student.findById(req.student.id, (err, data) => {
+          coursesIds = [];
+          courses = [];
           if (err || !data) {
             error1 = err + "erreur dans l'etudiant ";
             return;
@@ -23,6 +25,7 @@ router.post("/", auth, async (req, res) => {
             coursesIds.push(i.course);
           }
         });
+
       if (!error1 && !error2 && !error) {
         coursesIds.forEach(async (i, index) => {
           await Course.findById(i, (err, data) => {

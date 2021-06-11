@@ -15,6 +15,8 @@ router.post("/", auth, async (req, res) => {
     if (req.student) {
       if (!error1 && !error2 && !error)
         await Student.findById(req.student.id, (err, data) => {
+          formationsIds = [];
+          formations = [];
           if (err || !data) {
             error1 = err + "erreur dans l'etudiant ";
             return;

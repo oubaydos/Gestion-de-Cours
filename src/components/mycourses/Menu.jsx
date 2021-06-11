@@ -76,7 +76,7 @@ export default function CustomizedMenus() {
           onClick={() => {
             setAnchorEl(null);
             setDown(false);
-            history.push("/courses");
+            history.push("/mycourses");
           }}
         >
           <ListItemText primary="Cours" />
@@ -86,7 +86,7 @@ export default function CustomizedMenus() {
           onClick={() => {
             setAnchorEl(null);
             setDown(false);
-            history.push("/formations");
+            history.push("/myformations");
           }}
         >
           <ListItemText primary="Formations" />

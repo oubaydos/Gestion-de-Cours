@@ -76,7 +76,13 @@ export default function CustomizedMenus() {
           onClick={() => {
             setAnchorEl(null);
             setDown(false);
-            history.push("/courses");
+            history.push(
+              `/search/${
+                window.location.href.split("/")[
+                  window.location.href.split("/").length - 1
+                ]
+              }`
+            );
           }}
         >
           <ListItemText primary="Cours" />
@@ -86,7 +92,13 @@ export default function CustomizedMenus() {
           onClick={() => {
             setAnchorEl(null);
             setDown(false);
-            history.push("/formations");
+            history.push(
+              `/searchFormation/${
+                window.location.href.split("/")[
+                  window.location.href.split("/").length - 1
+                ]
+              }`
+            );
           }}
         >
           <ListItemText primary="Formations" />

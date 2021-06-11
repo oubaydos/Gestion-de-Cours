@@ -61,7 +61,7 @@ function Album() {
       await axios
         .all([
           axios.get(`http://localhost:5000/allProfs`),
-          axios.post(`http://localhost:5000/myCourses`),
+          axios.post(`http://localhost:5000/myFormations`),
         ])
         .then(
           axios.spread((data1, data2) => {
@@ -128,7 +128,7 @@ function Album() {
                   color="textPrimary"
                   gutterBottom
                 >
-                  Mes Cours
+                  Mes Formations
                 </Typography>
 
                 <div className={classes.heroButtons}>

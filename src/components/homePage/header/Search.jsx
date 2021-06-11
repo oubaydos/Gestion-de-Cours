@@ -22,11 +22,12 @@ let useStyle = makeStyles((theme) => ({
 }));
 function Search() {
   const history = useHistory();
-  function handleClick(str) {
-    history.push("/search"); //khask tdir lien dial search
-  }
+
   let [search, setSearch] = useState("");
   let style = useStyle().root;
+  function handleClick(str) {
+    history.push(`/search/${search}`); //khask tdir lien dial search
+  }
   return (
     <Hidden>
       <SearchBar

@@ -6,6 +6,8 @@ import ContactUs from "./contactUs/ContactUs";
 import AboutUs from "./aboutUs/AboutUs";
 import AllCourses from "./allCourses/AllCourses";
 import AllFormations from "./allCourses/allFormations";
+import Search from "./search/Search";
+import SearchFormation from "./search/SearchFormation";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { BottomScrollListener } from "react-bottom-scroll-listener";
@@ -14,6 +16,7 @@ import SignIn from "./signin/SignIn";
 import Profil from "./dashboard/profil";
 import PageNotFound from "./errors/404";
 import MyCourses from "./mycourses/Mycourses";
+import MyFormations from "./mycourses/MyFormations";
 import { Helmet } from "react-helmet";
 import Img from "./dashboard/Img";
 
@@ -90,12 +93,19 @@ function App() {
         <title>Gestion de cours</title>
       </Helmet>
       <Router>
+        <Route component={Head} exact path="/" />
+
         <CondRoute component={Profil} exact={true} path="/dashboard" />
         <CondRoute component={MyCourses} exact={true} path="/mycourses" />
+        <CondRoute component={MyFormations} exact={true} path="/myformations" />
         <Route component={AllCourses} exact path="/courses" />
+
+        <Route component={Search} path="/search" />
+        <Route component={SearchFormation} path="/searchFormation" />
+
         <Route component={AllFormations} exact path="/formations" />
         <Route component={ScrollerFunc} exact path="/" />
-        <Route component={Head} path="/" />
+
         <Route component={Body} exact path="/" />
         <Route component={Foot} exact path="/" />
         <Route component={ContactUs} exact path="/contactus" />

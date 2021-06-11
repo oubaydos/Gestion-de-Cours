@@ -45,5 +45,7 @@ app.use("/enrollCourse", require("./routes/api/enroll/enrollCourse"));
 app.use("/enrollFormation", require("./routes/api/enroll/enrollFormation"));
 app.use("/myCourses", require("./routes/api/my/myCourses"));
 app.use("/myFormations", require("./routes/api/my/myFormations"));
+app.use("/searchCourse", require("./routes/api/search/searchCourse"));
+app.use("/searchFormation", require("./routes/api/search/searchFormation"));
 
 //test Pdf

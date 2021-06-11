@@ -7,11 +7,12 @@ import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import Header from "../homePage/header/Header";
 import Menu from "./Menu";
+import Cours from "../onecourse/Cours";
 import CourseCard from "../usedComponents/Course";
 import Copyright from "../usedComponents/Copyright";
 import axios from "axios";
-axios.defaults.headers.post["x-auth-token"] =
-  localStorage.getItem("currentUser");
+import CircularProgress from "@material-ui/core/CircularProgress";
+
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
@@ -46,22 +47,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function Album() {
-  document.body.style.overflow = "scroll";
-
   const numOfItems = 15; //get from api
   const cards = Array.from({ length: numOfItems }, (_, i) => i + 1);
   const classes = useStyles();
   let [courses, setcourses] = useState({ data: [] });
   let [profs, setProfs] = useState([]);
-  let [loading, setLoading] = useState(true);
-
   //axios
   const getCourses = async () => {
     try {
       await axios
         .all([
           axios.get(`http://localhost:5000/allProfs`),
-          axios.post(`http://localhost:5000/myCourses`),
+          axios.get(
+            `http://localhost:5000/searchFormation/${
+              window.location.href.split("/")[
+                window.location.href.split("/").length - 1
+              ]
+            }`
+          ),
         ])
         .then(
           axios.spread((data1, data2) => {
@@ -90,7 +93,6 @@ function Album() {
             courses.data = temp;
 
             console.log(courses);
-            if (loading === true) setLoading(false);
           })
         );
     } catch (err) {
@@ -105,12 +107,12 @@ function Album() {
   //
   let i = 0;
   useEffect(() => {
-    if (courses.data !== [] && profs.data !== []) getCourses();
-  }, [loading]);
+    getCourses();
+  }, [courses]);
   return (
     <div>
       {courses.data.length === 0 && profs.length === 0 ? (
-        <div>loading</div>
+        <div>loading...</div>
       ) : (
         <React.Fragment>
           <CssBaseline />
@@ -128,7 +130,7 @@ function Album() {
                   color="textPrimary"
                   gutterBottom
                 >
-                  Mes Cours
+                  Formations
                 </Typography>
 
                 <div className={classes.heroButtons}>

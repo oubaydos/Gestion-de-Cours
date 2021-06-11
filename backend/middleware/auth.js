@@ -13,6 +13,7 @@ module.exports = (req, res, next) => {
 
     req.student = decoded.student;
     req.prof = decoded.prof;
+    console.log("wslna 7ed hna");
     next();
   } catch (e) {
     res.status(401).json({ msg: "token invalid" });

@@ -122,7 +122,7 @@ function Album() {
                   color="textPrimary"
                   gutterBottom
                 >
-                  Cours et Formations
+                  Cours
                 </Typography>
 
                 <div className={classes.heroButtons}>

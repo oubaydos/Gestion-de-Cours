@@ -48,67 +48,29 @@ const useStyles = makeStyles((theme) => ({
 function Album() {
   document.body.style.overflow = "scroll";
 
-  const numOfItems = 15; //get from api
   const classes = useStyles();
-  let [courses, setcourses] = useState({ data: [] });
-  let [profs, setProfs] = useState([]);
-  let [loading, setLoading] = useState(true);
+  const [data, setData] = useState(null);
 
-  //axios
-  const getCourses = async () => {
-    try {
-      await axios
-        .all([
-          axios.get(`http://localhost:5000/allProfs`),
-          axios.post(`http://localhost:5000/myFormations`),
-        ])
-        .then(
-          axios.spread((data1, data2) => {
-            //hadchi 3rfto mkhrb9
-            console.log(data2.data);
-            setProfs(data1.data);
-            console.log(data1.data);
-            // setcourses((arr) => (arr = data2.data));
-            let temp = data2.data;
-
-            console.log("hello ");
-            // console.log(courses);
-            for (let j = 0; j < temp.length; j++) {
-              for (let k = 0; k < profs.length; k++) {
-                if (profs[k]._id === temp[j].instructor) {
-                  temp[j].prof = profs[k].firstName + " " + profs[k].lastName;
-                  console.log(temp[i].prof);
-                }
-              }
-            }
-
-            console.log("courses :  : ");
-            console.log(temp);
-            //courses.data = temp;
-            setcourses({ data: temp });
-            courses.data = temp;
-
-            console.log(courses);
-            if (loading === true) setLoading(false);
-          })
-        );
-    } catch (err) {
-      // let error = "";
-      // for (let i of err.response.data.errors) {
-      //   error += i.param + " : " + i.msg + "\n\n";
-      // }
-      // alert("erreur de code : " + err.response.status + "\n" + error);
-      console.log(err);
-    }
-  };
-  //
-  let i = 0;
+  async function getCourse() {
+    await axios.post(`http://localhost:5000/myStartedCourses`).then(
+      (res) => {
+        console.log("res : : : : ");
+        console.log(res);
+        setData(res.data);
+      },
+      (err) => {
+        alert("error : " + err.response.data.errors);
+      }
+    );
+  }
   useEffect(() => {
-    if (courses.data !== [] && profs.data !== []) getCourses();
-  }, [loading, courses]);
+    if (data === null) {
+      getCourse();
+    }
+  }, [data]);
   return (
     <div>
-      {courses.data.length === 0 && profs.length === 0 ? (
+      {data === null ? (
         <div>loading</div>
       ) : (
         <React.Fragment>
@@ -127,13 +89,16 @@ function Album() {
                   color="textPrimary"
                   gutterBottom
                 >
-                  Mes Formations
+                  Mes Cours Commencés
                 </Typography>
 
                 <div className={classes.heroButtons}>
                   <Grid container spacing={2} justify="center">
                     <Grid item>
-                      <Menu />
+                      <Menu
+                        coursesLink="/mystartedcourses"
+                        formationsLink="/mystartedformations"
+                      />
                     </Grid>
                   </Grid>
                 </div>
@@ -142,16 +107,16 @@ function Album() {
 
             <Container className={classes.cardGrid} maxWidth="md">
               <Grid container spacing={4}>
-                {courses.data.map((card) => (
-                  <Grid item key={card._id} xs={12} sm={6} md={4}>
+                {data.map((card) => (
+                  <Grid item key={card.data._id} xs={12} sm={6} md={4}>
                     <CourseCard
                       link="id"
-                      img={"http://localhost:5000/addCourse/" + card.image}
+                      img={"http://localhost:5000/addCourse/" + card.data.image}
                       alt="course1"
-                      title={card.title}
-                      author={card.prof}
-                      rating={card.rating}
-                      id={card._id}
+                      title={card.data.title}
+                      author={card.teacher}
+                      rating={card.data.rating}
+                      id={card.data._id}
                     />
                   </Grid>
                 ))}
@@ -169,7 +134,3 @@ function Album() {
   );
 }
 export default Album;
-/** hadchi khsr
- * ma3rftch 3lach
- * hh
- */

@@ -47,5 +47,14 @@ app.use("/myCourses", require("./routes/api/my/myCourses"));
 app.use("/myFormations", require("./routes/api/my/myFormations"));
 app.use("/searchCourse", require("./routes/api/search/searchCourse"));
 app.use("/searchFormation", require("./routes/api/search/searchFormation"));
+app.use("/bestCourses", require("./routes/api/best/bestCourses"));
+app.use("/getCourse", require("./routes/api/courseDesc/getCourse"));
+app.use("/myStartedCourses", require("./routes/api/my/myStartedCourses"));
+app.use("/myStartedFormations", require("./routes/api/my/myStartedFormations"));
+app.use(
+  "/myFinishedFormations",
+  require("./routes/api/my/myFinishedFormations")
+);
+app.use("/myFinishedCourses", require("./routes/api/my/myFinishedCourses"));
 
 //test Pdf

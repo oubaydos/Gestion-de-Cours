@@ -39,7 +39,7 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-export default function CustomizedMenus() {
+export default function CustomizedMenus(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [down, setDown] = React.useState(false);
   const handleClick = (event) => {
@@ -76,7 +76,7 @@ export default function CustomizedMenus() {
           onClick={() => {
             setAnchorEl(null);
             setDown(false);
-            history.push("/mycourses");
+            history.push(props.coursesLink || "/mycourses");
           }}
         >
           <ListItemText primary="Cours" />
@@ -86,7 +86,7 @@ export default function CustomizedMenus() {
           onClick={() => {
             setAnchorEl(null);
             setDown(false);
-            history.push("/myformations");
+            history.push(props.formationsLink || "/myformations");
           }}
         >
           <ListItemText primary="Formations" />

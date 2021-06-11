@@ -74,7 +74,7 @@ function StartedButton(props) {
       fgColor="black"
       className={style.secondary}
       value="Mes Formations/Cours commencées"
-      url="/mycourses/started"
+      url="/mystartedcourses"
     />
   );
 }
@@ -86,7 +86,7 @@ function DoneButton(props) {
       fgColor="black"
       className={style.secondary}
       value="Mes Formations/Cours terminées"
-      url="/mycourses/finished"
+      url="/myfinishedcourses"
     />
   );
 }

@@ -16,10 +16,14 @@ import SignIn from "./signin/SignIn";
 import Profil from "./dashboard/profil";
 import PageNotFound from "./errors/404";
 import MyCourses from "./mycourses/Mycourses";
+import MyStartedCourses from "./mycourses/MyStartedCourses";
+import MyStartedFormations from "./mycourses/MyStartedFormations";
+import MyFinishedCourses from "./mycourses/MyFinishedCourses";
+import MyFinishedFormations from "./mycourses/MyFinishedFormations";
+
 import MyFormations from "./mycourses/MyFormations";
 import { Helmet } from "react-helmet";
-import Img from "./dashboard/Img";
-
+import Enroll from "./enrollCourse/Enroll";
 function App() {
   const [logedIn, setLogedIn] = useState(false);
   const [bottom, setBottom] = useState(false);
@@ -34,17 +38,6 @@ function App() {
       <BottomScrollListener onBottom={handleBottom} triggerOnNoScroll={true} />
     );
   }
-  // function temp() {
-  //   //kifach tjib chi image mn backend
-  //   return (
-  //     <img
-  //       src="http://localhost:5000/addCourse/e0e35040fe509e2cd8689ec45a958539.jfif"
-  //       width="824"
-  //       height="618"
-  //       alt="img"
-  //     />
-  //   );
-  // }
   function Head() {
     return (
       <header>
@@ -93,11 +86,32 @@ function App() {
         <title>Gestion de cours</title>
       </Helmet>
       <Router>
-        <Route component={Head} exact path="/" />
+        <Route component={Head} path="/" />
 
         <CondRoute component={Profil} exact={true} path="/dashboard" />
         <CondRoute component={MyCourses} exact={true} path="/mycourses" />
+        <CondRoute
+          component={MyStartedCourses}
+          exact={true}
+          path="/mystartedcourses"
+        />
+        <CondRoute
+          component={MyFinishedCourses}
+          exact={true}
+          path="/myfinishedcourses"
+        />
+        <CondRoute
+          component={MyStartedFormations}
+          exact={true}
+          path="/mystartedformations"
+        />
+        <CondRoute
+          component={MyFinishedFormations}
+          exact={true}
+          path="/myfinishedformations"
+        />
         <CondRoute component={MyFormations} exact={true} path="/myformations" />
+        <Route component={Enroll} path="/courses/:h" />
         <Route component={AllCourses} exact path="/courses" />
 
         <Route component={Search} path="/search" />
@@ -124,6 +138,103 @@ function App() {
           path="/signin"
         />
       </Router>
+      {/* {loading === true ? (
+        <h1 style={{ top: "40%" }}>loading</h1>
+      ) : (
+        [
+          courses.data.length === 0 ? (
+            <div>
+              <CssBaseline />
+              <header>
+                <Header />
+              </header>
+
+              <main>
+                <div className={classes.heroContent}>
+                  <Container maxWidth="sm">
+                    <Typography
+                      component="h1"
+                      variant="h2"
+                      align="center"
+                      color="textPrimary"
+                      gutterBottom
+                    >
+                      Mes Formations
+                    </Typography>
+
+                    <div className={classes.heroButtons}>
+                      <Grid container spacing={2} justify="center">
+                        <Grid item>
+                          <Menu />
+                        </Grid>
+                      </Grid>
+                    </div>
+                  </Container>
+                </div>
+
+                <Container
+                  className={classes.cardGrid}
+                  maxWidth="md"
+                ></Container>
+              </main>
+            </div>
+          ) : (
+            <React.Fragment>
+              <CssBaseline />
+              <header>
+                <Header />
+              </header>
+
+              <main>
+                <div className={classes.heroContent}>
+                  <Container maxWidth="sm">
+                    <Typography
+                      component="h1"
+                      variant="h2"
+                      align="center"
+                      color="textPrimary"
+                      gutterBottom
+                    >
+                      Mes Formations
+                    </Typography>
+
+                    <div className={classes.heroButtons}>
+                      <Grid container spacing={2} justify="center">
+                        <Grid item>
+                          <Menu />
+                        </Grid>
+                      </Grid>
+                    </div>
+                  </Container>
+                </div>
+
+                <Container className={classes.cardGrid} maxWidth="md">
+                  <Grid container spacing={4}>
+                    {courses.data.map((card) => (
+                      <Grid item key={card._id} xs={12} sm={6} md={4}>
+                        <CourseCard
+                          link="id"
+                          img={"http://localhost:5000/addCourse/" + card.image}
+                          alt="course1"
+                          title={card.title}
+                          author={card.prof}
+                          rating={card.rating}
+                          id={card._id}
+                        />
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Container>
+              </main>
+              <Link href="/" underline="none">
+                <div className={classes.footer}>
+                  <Copyright title="Gestion de Cours" color="black" />
+                </div>
+              </Link>
+            </React.Fragment>
+          ),
+        ]
+      )} */}
     </>
   );
 }

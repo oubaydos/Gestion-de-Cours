@@ -52,8 +52,14 @@ const CourseCard = (props) => {
   const classes = useStyles();
 
   return (
-    //component={Link} to={`/courses/${props.link}` in CardActionArea
-    <RouterLink to={`/courses/${props.id}`} style={{ textDecoration: "none" }}>
+    <RouterLink
+      to={
+        props.isFormation === true
+          ? `/formations/${props.id}`
+          : `/courses/${props.id}`
+      }
+      style={{ textDecoration: "none" }}
+    >
       <Card className={classes.root}>
         <CardActionArea>
           <CardMedia

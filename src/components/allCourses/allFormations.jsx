@@ -7,7 +7,6 @@ import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import Header from "../homePage/header/Header";
 import Menu from "./Menu";
-import Cours from "../onecourse/Cours";
 import CourseCard from "../usedComponents/Course";
 import Copyright from "../usedComponents/Copyright";
 import axios from "axios";
@@ -140,6 +139,7 @@ function Album() {
                 {courses.data.map((card) => (
                   <Grid item key={card._id} xs={12} sm={6} md={4}>
                     <CourseCard
+                      isFormation={true}
                       link="id"
                       img={"http://localhost:5000/addCourse/" + card.image}
                       alt="course1"

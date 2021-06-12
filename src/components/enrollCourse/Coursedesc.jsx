@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-
+import enroll, { enrollFormation } from "./enrollAcourse";
 import MyButton from "../usedComponents/MyButton";
 const useStyles = makeStyles({
   root: {
@@ -21,7 +21,7 @@ function Coursedesc(props) {
       <MyButton
         bgColor="#0056D2"
         fgColor=" rgba(255, 255, 255, 1)"
-        url={props.enroll}
+        onClick={props.isFormation ? enrollFormation : enroll}
         className={style.root}
         value="intégrer ce cours"
         //using parameters to lock the choice of prof
@@ -69,7 +69,9 @@ function Coursedesc(props) {
           paddingRight: "100px",
         }}
       >
-        A props de ce cours :
+        {props.isFormation
+          ? "A props de cette formation :"
+          : "A props de ce cours :"}
       </p>
     </div>
   );

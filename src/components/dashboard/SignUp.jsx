@@ -68,6 +68,7 @@ function SignUp(props) {
 
 function StartedButton(props) {
   let style = useStyles();
+  if (localStorage.getItem("isStudent") !== "true") return <div></div>;
   return (
     <MyButton
       bgColor="#FBEEC1"
@@ -80,6 +81,8 @@ function StartedButton(props) {
 }
 function DoneButton(props) {
   let style = useStyles();
+  if (localStorage.getItem("isStudent") !== "true") return <div></div>;
+
   return (
     <MyButton
       bgColor="#FBEEC1"

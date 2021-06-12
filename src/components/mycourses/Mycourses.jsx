@@ -105,7 +105,8 @@ function Album() {
   //
   let i = 0;
   useEffect(() => {
-    if (courses.data !== [] && profs.data !== []) getCourses();
+    //hna bdlt chi haja latkhsr
+    if ((courses.data !== [] && profs.data !== []) || loading) getCourses();
   }, [loading]);
   return (
     <div>

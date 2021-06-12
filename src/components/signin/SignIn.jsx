@@ -98,6 +98,7 @@ export default function SignUp() {
           alert(res.status);
           console.log(res);
           localStorage.setItem("currentUser", res.data.token);
+          localStorage.setItem("isStudent", data.isStudent);
           window.location.reload(false);
         },
         (err) => {

@@ -104,8 +104,8 @@ function Album() {
   //
   let i = 0;
   useEffect(() => {
-    if (courses.data !== [] && profs.data !== []) getCourses();
-  }, [loading, courses]);
+    if ((courses.data !== [] && profs.data !== []) || loading) getCourses();
+  }, [loading]);
   return (
     <div>
       {courses.data.length === 0 && profs.length === 0 ? (
@@ -147,6 +147,7 @@ function Album() {
                     <CourseCard
                       link="id"
                       img={"http://localhost:5000/addCourse/" + card.image}
+                      isFormation={true}
                       alt="course1"
                       title={card.title}
                       author={card.prof}

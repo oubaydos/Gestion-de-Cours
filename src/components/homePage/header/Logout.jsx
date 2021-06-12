@@ -4,6 +4,7 @@ import MyButton from "../../usedComponents/MyButton";
 function Logout() {
   let handleClick = () => {
     localStorage.removeItem("currentUser");
+    localStorage.removeItem("isStudent");
     window.location.reload(false);
   };
   return (

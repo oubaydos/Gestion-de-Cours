@@ -7,7 +7,6 @@ import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import Header from "../homePage/header/Header";
 import Menu from "./Menu";
-import Cours from "../onecourse/Cours";
 import CourseCard from "../usedComponents/Course";
 import Copyright from "../usedComponents/Copyright";
 import axios from "axios";

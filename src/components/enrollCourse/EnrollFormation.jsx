@@ -47,7 +47,7 @@ function Enroll() {
   };
 
   async function getCourse() {
-    await axios.post(`http://localhost:5000/getCourse`, dataSent).then(
+    await axios.post(`http://localhost:5000/getFormation`, dataSent).then(
       (res) => {
         console.log("res : : : : ");
         console.log(res);
@@ -78,6 +78,7 @@ function Enroll() {
               <Coursedesc
                 title={data.data.title}
                 description={data.data.description}
+                isFormation={true}
                 //enroll = func
               />
             </Grid>

@@ -17,7 +17,9 @@ function Course1(props) {
         .then(
           axios.spread((data1, data2) => {
             //hadchi 3rfto mkhrb9
+            console.log("profs : ");
             console.log(data2.data);
+            console.log("courses : ");
             setProfs(data1.data);
             console.log(data1.data);
             // setcourses((arr) => (arr = data2.data));
@@ -51,7 +53,7 @@ function Course1(props) {
   //
   let i = 0;
   useEffect(() => {
-    getCourses();
+    if (loading) getCourses();
   }, [loading]);
 
   return (

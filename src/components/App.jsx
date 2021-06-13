@@ -25,6 +25,7 @@ import MyFormations from "./mycourses/MyFormations";
 import { Helmet } from "react-helmet";
 import Enroll from "./enrollCourse/Enroll";
 import EnrollFormation from "./enrollCourse/EnrollFormation";
+import Onecourse from "./onecourse/Onecourse";
 function App() {
   const [logedIn, setLogedIn] = useState(false);
   const [bottom, setBottom] = useState(false);
@@ -126,6 +127,7 @@ function App() {
         <Route component={Foot} exact path="/" />
         <Route component={ContactUs} exact path="/contactus" />
         <Route component={AboutUs} exact path="/aboutus" />
+        <Route component={Onecourse} exact path="/Onecourse" />
         {/* <Route component={SignUp} exact path="/signup" /> */}
         <CondRoute
           component={SignUp}

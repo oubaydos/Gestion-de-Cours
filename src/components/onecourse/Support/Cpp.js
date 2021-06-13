@@ -1,11 +1,6 @@
 import React from "react";
 
-import AllPagesPDFViewer from "./PDFF/component/pdf/all-pages"
-
-
-
-
-
+import AllPagesPDFViewer from "./PDFF/all-pages"
 export default function Cpp(props) {
   return (
     <div className="App">

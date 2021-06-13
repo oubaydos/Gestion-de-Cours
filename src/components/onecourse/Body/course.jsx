@@ -144,7 +144,7 @@ function Course(props) {
                     className={classes.button}
                     
                   >
-                    Back
+                   Chapitre précédent 
                   </Button>
                   
                     {activeStep === steps.length - 1 ? 
@@ -158,7 +158,7 @@ function Course(props) {
                     className={classes.button}
                    
                      >
-                    next</Button>}
+                    Chapitre suivant</Button>}
                 </div>
               </div>
             </StepContent>
@@ -208,7 +208,7 @@ function Course(props) {
      
       size="small"
           variant="contained" className={classes.button}>
-            Reset
+            Revoir le cours
           </Button>
           </Grid>
           <Grid item xs={4}>
@@ -288,7 +288,7 @@ function Course(props) {
                     className={classes.button}
                     
                   >
-                    Back
+                    chapitre précédent 
                   </Button>
                   
                     {activeStep === steps.length - 1 ? 
@@ -302,7 +302,7 @@ function Course(props) {
                     className={classes.button}
                    
                      >
-                    next</Button>}
+                    Chapitre Suivant</Button>}
                 </div>
               </div>
             </StepContent>
@@ -352,7 +352,7 @@ function Course(props) {
      
       size="small"
           variant="contained" className={classes.button}>
-            Reset
+            Revoir le cours
           </Button>
           </Grid>
           <Grid item xs={4}>

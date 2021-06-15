@@ -111,7 +111,7 @@ function Album() {
                   <Grid item key={card.data._id} xs={12} sm={6} md={4}>
                     <CourseCard
                       link="id"
-                      img={"http://localhost:5000/addCourse/" + card.data.image}
+                      img={"http://localhost:5000/addPic/" + card.data.image}
                       alt="course1"
                       title={card.data.title}
                       author={card.teacher}

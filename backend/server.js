@@ -58,5 +58,12 @@ app.use(
 );
 app.use("/myFinishedCourses", require("./routes/api/my/myFinishedCourses"));
 app.use("/isStudent", require("./routes/api/isStudent"));
+app.use("/test", require("./routes/api/test"));
+//test add course
+app.use("/addPic", require("./routes/api/add/addPic"));
+app.use(
+  "/getNumberOfChapters",
+  require("./routes/api/courseDesc/getNumberOfChapters")
+);
 
 //test Pdf

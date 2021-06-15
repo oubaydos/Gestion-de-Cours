@@ -99,7 +99,9 @@ export default function SignUp() {
           console.log(res);
           localStorage.setItem("currentUser", res.data.token);
           localStorage.setItem("isStudent", data.isStudent);
-          window.location.reload(false);
+          window.location.reload();
+          // if (data.isStudent === "true") window.location.href = "/dashboard";
+          // else window.location.href = "/prof/dashboard";
         },
         (err) => {
           let error = "";

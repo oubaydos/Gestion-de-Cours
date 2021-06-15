@@ -25,6 +25,15 @@ const CourseShema = new mongoose.Schema({
   },
   image: {
     type: String,
+    default: "5f59da118313c69b8873ae904e11d4a9.png",
+  },
+  type: {
+    type: String,
+    required: true,
+  },
+  Chapters: {
+    type: Array,
+    default: [],
   },
 });
 let Course = mongoose.model("Cours", CourseShema);

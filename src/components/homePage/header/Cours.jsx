@@ -14,10 +14,18 @@ let useStyle = makeStyles({
 });
 function Cours() {
   let style = useStyle();
+  let isStudent = localStorage.getItem("isStudent");
+  isStudent === "true" ? (isStudent = true) : (isStudent = false);
   return (
-    <Button className={style.root} size="small" href="/courses">
-      Cours
-    </Button>
+    <div>
+      {isStudent === true || isStudent === undefined ? (
+        <Button className={style.root} size="small" href="/courses">
+          Cours
+        </Button>
+      ) : (
+        <div></div>
+      )}
+    </div>
   );
 }
 export default Cours;

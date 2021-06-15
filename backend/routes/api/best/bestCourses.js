@@ -7,6 +7,7 @@ router.get("/", async (req, res) => {
     if (err || rst === null || rst === undefined)
       return res.status(410).json({
         errors: err,
+        rst: rst === null ? null : rst === undefined ? undefined : "full",
       });
     else {
       let data = rst;

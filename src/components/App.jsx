@@ -26,6 +26,17 @@ import { Helmet } from "react-helmet";
 import Enroll from "./enrollCourse/Enroll";
 import EnrollFormation from "./enrollCourse/EnrollFormation";
 import Onecourse from "./onecourse/Onecourse";
+
+//this could cause a pb
+import Prof from "./prof/Prof1";
+import Test from "./prof/Addcourse/Course";
+import AddPic from "./prof/Addcourse/AddPic";
+import ProfCourses from "./prof/Mycourses/Mycourses";
+import EditCourse from "./prof/Mycourses/Enroll";
+import AddChapters from "./prof/Addcourse/AddChapters";
+//
+import "../css/styles.css";
+
 function App() {
   const [logedIn, setLogedIn] = useState(false);
   const [bottom, setBottom] = useState(false);
@@ -65,13 +76,23 @@ function App() {
     //conditionnal 404
     console.log("props", props.inverse === true);
     if (props.inverse === true) {
-      return (
-        <Route
-          component={!logedIn ? props.component : Profil}
-          exact={props.exact}
-          path={props.path}
-        />
-      );
+      if (localStorage.getItem("isStudent") === "true")
+        return (
+          <Route
+            component={!logedIn ? props.component : Profil}
+            exact={props.exact}
+            path={props.path}
+          />
+        );
+      else {
+        return (
+          <Route
+            component={!logedIn ? props.component : Prof}
+            exact={props.exact}
+            path={props.path}
+          />
+        );
+      }
     }
     return (
       <Route
@@ -88,8 +109,28 @@ function App() {
         <title>Gestion de cours</title>
       </Helmet>
       <Router>
-        <Route component={Head} path="/" />
+        <CondRoute component={Prof} exact={true} path="/prof/dashboard" />
 
+        <Route component={Head} path="/" />
+        <Route component={Test} exact path="/prof/addCourse" />
+        <Route component={AddPic} exact path="/prof/courses/:h/addpic" />
+        <Route
+          component={AddChapters}
+          exact
+          path="/prof/courses/:h/addChapters"
+        />
+
+        {/* kain chi pb fhad rendering -- jrb / test/chi l3ba katmchi background  */}
+        <CondRoute
+          component={ProfCourses}
+          exact={true}
+          path="/prof/mycourses"
+        />
+        <CondRoute
+          component={EditCourse}
+          exact={true}
+          path="/prof/courses/:h"
+        />
         <CondRoute component={Profil} exact={true} path="/dashboard" />
         <CondRoute component={MyCourses} exact={true} path="/mycourses" />
         <CondRoute
@@ -129,6 +170,7 @@ function App() {
         <Route component={AboutUs} exact path="/aboutus" />
         <Route component={Onecourse} exact path="/Onecourse" />
         {/* <Route component={SignUp} exact path="/signup" /> */}
+        {/* <Route component={SignUp} exact path="/signup" />  about us lfog*/}
         <CondRoute
           component={SignUp}
           exact={true}

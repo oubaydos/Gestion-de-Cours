@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require("path");
 
 const Chapter = require("../../../models/Chapter");
+const Course = require("../../../models/Course");
 const crypto = require("crypto");
 const mongoose = require("mongoose");
 const multer = require("multer");
@@ -10,6 +11,9 @@ const GridFsStorage = require("multer-gridfs-storage");
 const Grid = require("gridfs-stream");
 
 const mongoURI = "mongodb://localhost:27017/PFA";
+
+let i = 0;
+
 const conn = mongoose.createConnection(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -46,16 +50,17 @@ const storage = new GridFsStorage({
 const upload = multer({ storage });
 
 router.post("/", upload.single("file"), async (req, res) => {
-  let chapter = new Chapter({
-    title: req.body.title,
-    data: tempNameFile,
-    courseId: req.body.courseId,
-  });
-  await chapter.save();
-  let a = req.body;
-  console.log(a);
+  let err = null;
+  Course.findOneAndUpdate(
+    { _id: req.body.id },
+    { $addToSet: { Chapters: tempNameFile } },
+    (e, data) => {
+      if (e || !data) return (err = e + "erreur de cours");
+    }
+  );
   console.log(tempNameFile);
-  res.send("good to go");
+  if (err) return res.status(404).json({ msg: err });
+  return res.send("good to go");
 });
 
 router.get("/:filename", (req, res) => {

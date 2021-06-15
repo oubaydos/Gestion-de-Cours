@@ -84,7 +84,7 @@ function Enroll() {
             <Grid className={classes.card} item xs={2}>
               <CourseCard
                 link="id"
-                img={"http://localhost:5000/addCourse/" + data.data.image}
+                img={"http://localhost:5000/addPic/" + data.data.image}
                 alt="course1"
                 title={data.data.title}
                 author={data.teacher}

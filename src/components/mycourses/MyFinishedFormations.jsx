@@ -114,7 +114,7 @@ function Album() {
                     <CourseCard
                       isFormation={true}
                       link="id"
-                      img={"http://localhost:5000/addCourse/" + card.data.image}
+                      img={"http://localhost:5000/addPic/" + card.data.image}
                       alt="course1"
                       title={card.data.title}
                       author={card.teacher}

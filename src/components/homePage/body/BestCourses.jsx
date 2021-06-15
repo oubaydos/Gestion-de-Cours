@@ -40,6 +40,8 @@ async function Axios() {
     } catch (err) {
       console.log(err);
     }
+    console.log("coiu");
+    console.log(courses);
     return courses;
   };
 

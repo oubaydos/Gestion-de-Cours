@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Comfortaa:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600&family=Sacramento&display=swap');
+*{
+    box-sizing: border-box;
+}
+html {
+    font-family: "Montserrat", sans-serif;
+    background-image: url("./background.png");
+    position: relative;
+}
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    background-color:rgb(231, 231, 231);
+    left: 0px;
+    margin-left: 0;
+    padding : 10px;
+    vertical-align: middle;
+    box-shadow: 0 0 10px 0 rgba(145, 145, 145, 0.3);
+    z-index : 2;
+}
+body{
+    background-image: url("./background.png");
+    z-index: -3;
+    position: relative;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 400px;  
+    margin : 70px 0 80px 0;
+    background-color:transparent;
+    height:150vh;
+}
+
+footer {
+    position: absolute;
+    bottom : -14%;
+   width: 100%;
+   margin: 0;
+   background-color:rgb(231, 231, 231);
+   left: 0px;
+   padding : 10px;
+   vertical-align: middle;
+   box-shadow: 0 0 10px 0 rgba(145, 145, 145, 0.3);
+}
+.img{
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    transform: rotate(19.63deg);
+    background : transparent;
+    margin-top: 20px;
+}
+
+@font-face {
+    font-family: 'Simplifica';
+    src: url('./fonts/SIMPLIFICA.ttf') format('truetype');
+    font-weight: bold;
+}
+
+
+.footerContact {
+    position: absolute;
+    padding : 10px;
+   background-color:rgb(231, 231, 231);
+   vertical-align: middle;
+   box-shadow: 0 0 10px 0 rgba(145, 145, 145, 0.3);
+}
+/* For pdf */
+
+
+.react-pdf__Page__annotations.annotationLayer {
+  padding: 20px;
+}
+
+.react-pdf__Page__canvas {
+  margin: 0 auto;
+}
+.react-pdf__Page {
+  margin-top: 10px;
+}
+.react-pdf__Page__textContent {
+  border: 1px solid darkgrey;
+  box-shadow: 5px 5px 5px 1px #ccc;
+  border-radius: 5px;
+}
+/* For all pages */
+.all-page-container {
+  margin-left: 5px;
+  margin-top: 0%;
+  height: 500%;
+  max-height: 600px;
+  max-width: 1000%;
+  overflow: auto;
+  bottom: -50%;
+ 
+}

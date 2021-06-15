@@ -63,7 +63,7 @@ function Course1(props) {
       ) : (
         <Course
           link="id"
-          img={"http://localhost:5000/addCourse/" + courses.data[0].image}
+          img={"http://localhost:5000/addPic/" + courses.data[0].image}
           alt="course1"
           title={courses.data[0].title}
           author={courses.data[0].prof}

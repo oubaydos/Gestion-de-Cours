@@ -49,6 +49,7 @@ function Album() {
   const classes = useStyles();
   let [courses, setcourses] = useState({ data: [] });
   let [profs, setProfs] = useState([]);
+  let [loading, setLoading] = useState(true);
   //axios
   const getCourses = async () => {
     try {
@@ -82,7 +83,7 @@ function Album() {
             //courses.data = temp;
             setcourses({ data: temp });
             courses.data = temp;
-
+            setLoading(false);
             console.log(courses);
           })
         );
@@ -98,11 +99,11 @@ function Album() {
   //
   let i = 0;
   useEffect(() => {
-    getCourses();
-  }, [courses]);
+    if (loading) getCourses();
+  }, [loading]);
   return (
     <div>
-      {courses.data.length === 0 && profs.length === 0 ? (
+      {loading ? (
         <div>loading</div>
       ) : (
         <React.Fragment>
@@ -141,7 +142,7 @@ function Album() {
                     <CourseCard
                       isFormation={true}
                       link="id"
-                      img={"http://localhost:5000/addCourse/" + card.image}
+                      img={"http://localhost:5000/addPic/" + card.image}
                       alt="course1"
                       title={card.title}
                       author={card.prof}

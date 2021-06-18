@@ -35,6 +35,15 @@ const CourseShema = new mongoose.Schema({
     type: Array,
     default: [],
   },
+  quiz: {
+    type: String,
+    default:
+      "https://docs.google.com/forms/d/e/1FAIpQLSctF47eV05W4YgwMU6mRvPts1gS-ZjbPjHc3loV1HuPN5Vnsg/viewform?usp=sf_link",
+  },
+  numberOfDoneStudents: {
+    type: Number,
+    default: 0,
+  },
 });
 let Course = mongoose.model("Cours", CourseShema);
 module.exports = Course;

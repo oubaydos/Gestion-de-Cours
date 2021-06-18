@@ -20,6 +20,7 @@ router.post("/", auth, async (req, res) => {
       numberOfChapters: req.body.numberOfChapters,
       instructor: req.prof.id,
       type: req.body.type,
+      quiz: req.body.quiz,
     });
     console.log("course");
     await course.save((err) => {

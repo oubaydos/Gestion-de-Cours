@@ -9,6 +9,7 @@ async function enroll() {
       (res) => {
         console.log("res : : : : ");
         console.log(res);
+        window.location.href = "/mycourses";
       },
       (err) => {
         alert("error : " + err.response.data.errors);
@@ -27,6 +28,7 @@ async function enrollFormation() {
       (res) => {
         console.log("res : : : : ");
         console.log(res);
+        window.location.href = "/myformations";
       },
       (err) => {
         alert("error : " + err.response.data.errors);

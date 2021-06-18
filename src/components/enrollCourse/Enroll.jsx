@@ -88,7 +88,12 @@ function Enroll() {
                 alt="course1"
                 title={data.data.title}
                 author={data.teacher}
-                rating={data.data.rating}
+                rating={
+                  data.data.numberOfDoneStudents === undefined ||
+                  data.data.numberOfDoneStudents === 0
+                    ? 0
+                    : data.data.rating / data.data.numberOfDoneStudents
+                }
               />
             </Grid>
           </Grid>

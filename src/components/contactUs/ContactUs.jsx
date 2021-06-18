@@ -65,9 +65,10 @@ export default function SignUp() {
       !errors.message
     ) {
       setSent(true);
+    } else {
+      return console.log("erreur");
     }
     console.log(data);
-    setSent(true);
     try {
       await axios.post(`http://localhost:5000/contact`, {
         text: JSON.stringify(data),

@@ -59,7 +59,8 @@ function Album() {
         setData(res.data);
       },
       (err) => {
-        alert("error : " + err.response.data.errors);
+        console.log(err.response);
+        //alert("error : " + err.response.errors);
       }
     );
   }
@@ -110,12 +111,18 @@ function Album() {
                 {data.map((card) => (
                   <Grid item key={card.data._id} xs={12} sm={6} md={4}>
                     <CourseCard
+                      myfinished={true}
                       link="id"
                       img={"http://localhost:5000/addPic/" + card.data.image}
                       alt="course1"
                       title={card.data.title}
                       author={card.teacher}
-                      rating={card.data.rating}
+                      rating={
+                        card.data.numberOfDoneStudents === undefined ||
+                        card.data.numberOfDoneStudents === 0
+                          ? 0
+                          : card.data.rating / card.data.numberOfDoneStudents
+                      }
                       id={card.data._id}
                     />
                   </Grid>

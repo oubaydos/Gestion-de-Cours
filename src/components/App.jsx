@@ -24,6 +24,8 @@ import MyFinishedFormations from "./mycourses/MyFinishedFormations";
 import MyFormations from "./mycourses/MyFormations";
 import { Helmet } from "react-helmet";
 import Enroll from "./enrollCourse/Enroll";
+import Finish from "./mycourses/finish/Enroll";
+import FinishFormation from "./mycourses/finish/FinishFormation";
 import EnrollFormation from "./enrollCourse/EnrollFormation";
 import Onecourse from "./onecourse/Onecourse";
 
@@ -31,9 +33,19 @@ import Onecourse from "./onecourse/Onecourse";
 import Prof from "./prof/Prof1";
 import Test from "./prof/Addcourse/Course";
 import AddPic from "./prof/Addcourse/AddPic";
+import AddPicForFormation from "./prof/AddFormation/AddPic";
 import ProfCourses from "./prof/Mycourses/Mycourses";
+import SurveillerCourses from "./prof/surveiller/Mycourses/Mycourses";
+import SurveillerOneCourse from "./prof/surveiller/onecourse/OneCourse";
+import ProfFormations from "./prof/Mycourses/MyFormations";
 import EditCourse from "./prof/Mycourses/Enroll";
 import AddChapters from "./prof/Addcourse/AddChapters";
+import AddCourses from "./prof/AddFormation/AddChapters";
+import AddFormation from "./prof/AddFormation/Course";
+//onecourse
+import Start from "./mycourses/start/Start";
+import StartFormation from "./mycourses/start/StartFormation";
+import AdminLogin from "./admin/SignIn";
 //
 import "../css/styles.css";
 
@@ -113,11 +125,13 @@ function App() {
 
         <Route component={Head} path="/" />
         <Route component={Test} exact path="/prof/addCourse" />
-        <Route component={AddPic} exact path="/prof/courses/:h/addpic" />
+        <Route component={AddPic} exact path="/prof/mycourses/:h/addpic" />
+
+        <Route component={AddFormation} exact path="/prof/addFormation" />
         <Route
           component={AddChapters}
           exact
-          path="/prof/courses/:h/addChapters"
+          path="/prof/mycourses/:h/addChapters"
         />
 
         {/* kain chi pb fhad rendering -- jrb / test/chi l3ba katmchi background  */}
@@ -127,9 +141,39 @@ function App() {
           path="/prof/mycourses"
         />
         <CondRoute
+          component={SurveillerCourses}
+          exact={true}
+          path="/prof/surveiller"
+        />
+        <CondRoute
+          component={SurveillerOneCourse}
+          exact={true}
+          path="/prof/surveiller/:h"
+        />
+        <CondRoute
+          component={AddCourses}
+          exact={true}
+          path="/prof/myformations/:h/addCourses"
+        />
+        <CondRoute
+          component={AddPicForFormation}
+          exact={true}
+          path="/prof/myformations/:h/addpic"
+        />
+        <CondRoute
+          component={ProfFormations}
+          exact={true}
+          path="/prof/myformations"
+        />
+        <CondRoute
           component={EditCourse}
           exact={true}
-          path="/prof/courses/:h"
+          path="/prof/mycourses/:h"
+        />
+        <CondRoute
+          component={EditCourse}
+          exact={true}
+          path="/prof/myformations/:h"
         />
         <CondRoute component={Profil} exact={true} path="/dashboard" />
         <CondRoute component={MyCourses} exact={true} path="/mycourses" />
@@ -155,6 +199,10 @@ function App() {
         />
         <CondRoute component={MyFormations} exact={true} path="/myformations" />
         <Route component={Enroll} path="/courses/:h" />
+        <Route component={Finish} path="/myfinishedcourses/:h" />
+        <Route component={FinishFormation} path="/myfinishedformations/:h" />
+        <Route component={Start} path="/mycourses/:h" />
+        <Route component={StartFormation} path="/myformations/:h" />
         <Route component={EnrollFormation} path="/formations/:h" />
         <Route component={AllCourses} exact path="/courses" />
 
@@ -168,7 +216,7 @@ function App() {
         <Route component={Foot} exact path="/" />
         <Route component={ContactUs} exact path="/contactus" />
         <Route component={AboutUs} exact path="/aboutus" />
-        <Route component={Onecourse} exact path="/Onecourse" />
+        <Route component={Onecourse} exact path="/mystartedcourses/:h/learn" />
         {/* <Route component={SignUp} exact path="/signup" /> */}
         {/* <Route component={SignUp} exact path="/signup" />  about us lfog*/}
         <CondRoute
@@ -182,6 +230,12 @@ function App() {
           exact={true}
           inverse={true}
           path="/signin"
+        />
+        <CondRoute
+          component={AdminLogin}
+          exact={true}
+          inverse={true}
+          path="/admin/signin"
         />
       </Router>
     </>

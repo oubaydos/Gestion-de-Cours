@@ -23,7 +23,9 @@ function Coursedesc(props) {
         fgColor=" rgba(255, 255, 255, 1)"
         onClick={props.isFormation ? enrollFormation : enroll}
         className={style.root}
-        value="intégrer ce cours"
+        value={
+          props.isFormation ? "intégrer cette formation" : "intégrer ce cours"
+        }
         //using parameters to lock the choice of prof
         //                        or student in inscription form
       />

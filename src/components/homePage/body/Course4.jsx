@@ -10,42 +10,18 @@ function Course1(props) {
   const getCourses = async () => {
     try {
       await axios
-        .all([
-          axios.get(`http://localhost:5000/allProfs`),
-          axios.get(`http://localhost:5000/bestCourses`),
-        ])
-        .then(
-          axios.spread((data1, data2) => {
-            //hadchi 3rfto mkhrb9
-            console.log(data2.data);
-            setProfs(data1.data);
-            console.log(data1.data);
-            // setcourses((arr) => (arr = data2.data));
-            let temp = data2.data;
+        .get(`http://localhost:5000/bestCourses`)
 
-            console.log("hello ");
-            // console.log(courses);
-            for (let j = 0; j < temp.length; j++) {
-              for (let k = 0; k < profs.length; k++) {
-                if (profs[k]._id === temp[j].instructor) {
-                  temp[j].prof = profs[k].firstName + " " + profs[k].lastName;
-                  console.log(temp[i].prof);
-                }
-              }
-            }
-
-            console.log("courses :  : ");
-            console.log(temp);
-            //courses.data = temp;
-            setcourses({ data: temp });
-            courses.data = temp;
-
-            console.log(courses);
-            if (loading === true) setLoading(false);
-          })
-        );
+        .then((res) => {
+          console.log("this is 444444444444444444444");
+          console.log(res.data);
+          courses = res.data;
+          setcourses({ data: res.data });
+          setLoading(false);
+        });
     } catch (err) {
-      console.log(err);
+      console.log("error : ");
+      console.log(err.response);
     }
   };
   //
@@ -61,12 +37,19 @@ function Course1(props) {
       ) : (
         <Course
           link="id"
-          img={"http://localhost:5000/addPic/" + courses.data[3].image}
+          img={"http://localhost:5000/addPic/" + courses.data[3].item.image}
           alt="course1"
-          title={courses.data[3].title}
+          title={courses.data[3].item.title}
           author={courses.data[3].prof}
-          rating={courses.data[3].rating}
-          id={courses.data[3]._id} //khask tjibo mn back end :)
+          all={true}
+          rating={
+            courses.data[3].item.numberOfDoneStudents === undefined ||
+            courses.data[3].item.numberOfDoneStudents === 0
+              ? 0
+              : courses.data[3].item.rating /
+                courses.data[3].item.numberOfDoneStudents
+          }
+          id={courses.data[3].item._id} //khask tjibo mn back end :)
         />
       )}
     </div>

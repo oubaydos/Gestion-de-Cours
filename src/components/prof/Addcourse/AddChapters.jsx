@@ -179,7 +179,7 @@ export default function SignUp() {
                 <AddIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
-                Ajouter une image de cours
+                Ajouter Les Chapitres de Ce Cours
               </Typography>
 
               <form
@@ -232,7 +232,7 @@ export default function SignUp() {
                   color="primary"
                   className={classes.submit}
                 >
-                  Ajouter L'image
+                  Ajouter
                 </Button>
               </form>
               {sent && (
@@ -246,19 +246,7 @@ export default function SignUp() {
                       backgroundColor: "#DFF2BF",
                     }}
                   >
-                    l'image est bien ajouté! vous pouvez ajouter des chapitres
-                    ici :
-                    <br />
-                    <a
-                      href={addChapterlink}
-                      style={{
-                        textDecoration: "none",
-                        color: "black",
-                        fontWeight: 450,
-                      }}
-                    >
-                      Ajouter Des Chapitres !
-                    </a>
+                    les chapitres sont bien ajouté!
                   </div>
                 </Box>
               )}

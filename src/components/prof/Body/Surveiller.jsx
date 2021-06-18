@@ -8,10 +8,9 @@ const useStyles = makeStyles({
     position: "absolute",
     marginLeft: "12%",
     fontFamily: "Cascadia Code",
-    width:"1000x",
-height: "35px",
+    width: "1000x",
+    height: "35px",
   },
-  
 });
 
 function Surveiller(props) {
@@ -20,14 +19,12 @@ function Surveiller(props) {
     <MyButton
       bgColor="#0056D2"
       fgColor=" rgba(255, 255, 255, 1)"
-
       className={style.root}
       value=" Surveiller"
-      url="/surveiller" //using parameters to lock the choice of prof
+      url="/prof/surveiller" //using parameters to lock the choice of prof
       //                        or student in inscription form
     />
   );
 }
 
 export default Surveiller;
-

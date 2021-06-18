@@ -65,5 +65,29 @@ app.use(
   "/getNumberOfChapters",
   require("./routes/api/courseDesc/getNumberOfChapters")
 );
+app.use(
+  "/getNumberOfCourses",
+  require("./routes/api/courseDesc/getNumberOfCourses")
+);
+app.use("/startCourse", require("./routes/api/start/startCourse"));
+app.use("/startFormation", require("./routes/api/start/startFormation"));
+app.use("/finishCourse", require("./routes/api/finish/finishCourse"));
+app.use("/getChapters", require("./routes/api/courseDesc/getChapters"));
+app.use("/setCurrentChapter", require("./routes/api/start/setCurrentChapter"));
+app.use("/getCurrentChapter", require("./routes/api/start/getCurrentChapter"));
+app.use("/addFormation", require("./routes/api/add/addFormation"));
+app.use("/FillFormation", require("./routes/api/add/FillFormation"));
+app.use("/getMark", require("./routes/api/courseDesc/getMark"));
+app.use("/setMark", require("./routes/api/finish/setMark"));
+app.use("/unenrollCourse", require("./routes/api/unenroll/course"));
+app.use("/unenrollFormation", require("./routes/api/unenroll/formation"));
+app.use("/getCurrentCourse", require("./routes/api/finish/getCurrentCourse"));
+app.use("/setMarkFormation", require("./routes/api/finish/setMarkFormation"));
+app.use("/hasRatedFormation", require("./routes/api/finish/hasRatedFormation"));
+app.use(
+  "/getCourseStudents",
+  require("./routes/api/monitoring/getCourseStudents")
+);
+app.use("/setTestMark", require("./routes/api/monitoring/setMark"));
 
 //test Pdf

@@ -8,6 +8,7 @@ const multer = require("multer");
 const GridFsStorage = require("multer-gridfs-storage");
 const Grid = require("gridfs-stream");
 const Course = require("../../../models/Course");
+const Formation = require("../../../models/Formation");
 
 const mongoURI = "mongodb://localhost:27017/PFA";
 const conn = mongoose.createConnection(mongoURI, {
@@ -58,7 +59,19 @@ router.post("/test", upload.single("file"), async (req, res) => {
     }
   );
 });
-
+router.post("/formation", upload.single("file"), async (req, res) => {
+  console.log(tempNameFile);
+  Formation.findByIdAndUpdate(
+    req.body.id,
+    { image: tempNameFile },
+    { new: true },
+    (err, data) => {
+      if (err || !data) {
+        return res.status(404).json({ msg: "bad formation id - db problem" });
+      } else return res.status(200).send("good to go");
+    }
+  );
+});
 router.get("/:filename", (req, res) => {
   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
     if (!file || file.length === 0) {

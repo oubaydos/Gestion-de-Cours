@@ -84,7 +84,8 @@ export default function SignUp() {
       !errors.title &&
       !errors.numberOfChapters &&
       !errors.description &&
-      !errors.courseImage
+      !errors.courseImage &&
+      !errors.quiz
     ) {
       console.log("hh");
     } else {
@@ -181,6 +182,26 @@ export default function SignUp() {
                   helperText={
                     errors.numberOfChapters
                       ? "le nombre de chapitres est obligatoire et doit contenir seulement des chiffres"
+                      : ""
+                  }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  className={classes.textField}
+                  variant="outlined"
+                  fullWidth
+                  name="quiz"
+                  label="Lien de quiz"
+                  id="quiz"
+                  {...register("quiz", {
+                    required: true,
+                    pattern:
+                      /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
+                  })}
+                  helperText={
+                    errors.quiz
+                      ? "le quiz est obligatoire et doit etre un lien de google forms"
                       : ""
                   }
                 />

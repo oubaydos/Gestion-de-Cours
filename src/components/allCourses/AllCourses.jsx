@@ -49,60 +49,30 @@ function Album() {
   const classes = useStyles();
   let [courses, setcourses] = useState({ data: [] });
   let [profs, setProfs] = useState([]);
+  let [loading, setLoading] = useState(true);
   //axios
   const getCourses = async () => {
     try {
       await axios
-        .all([
-          axios.get(`http://localhost:5000/allProfs`),
-          axios.get(`http://localhost:5000/allCourses`),
-        ])
-        .then(
-          axios.spread((data1, data2) => {
-            //hadchi 3rfto mkhrb9
-            console.log(data2.data);
-            setProfs(data1.data);
-            console.log(data1.data);
-            // setcourses((arr) => (arr = data2.data));
-            let temp = data2.data;
+        .get(`http://localhost:5000/allCourses`)
 
-            console.log("hello ");
-            // console.log(courses);
-            for (let j = 0; j < temp.length; j++) {
-              for (let k = 0; k < profs.length; k++) {
-                if (profs[k]._id === temp[j].instructor) {
-                  temp[j].prof = profs[k].firstName + " " + profs[k].lastName;
-                  console.log(temp[i].prof);
-                }
-              }
-            }
-
-            console.log("courses :  : ");
-            console.log(temp);
-            //courses.data = temp;
-            setcourses({ data: temp });
-            courses.data = temp;
-
-            console.log(courses);
-          })
-        );
+        .then((res) => {
+          console.log(res.data);
+          setcourses({ data: res.data });
+          setLoading(false);
+        });
     } catch (err) {
-      // let error = "";
-      // for (let i of err.response.data.errors) {
-      //   error += i.param + " : " + i.msg + "\n\n";
-      // }
-      // alert("erreur de code : " + err.response.status + "\n" + error);
-      console.log(err);
+      console.log("error : ", err.response);
     }
   };
   //
   let i = 0;
   useEffect(() => {
-    if (courses.data.length === 0 || profs.length === 0) getCourses();
-  }, [courses]);
+    if (loading) getCourses();
+  }, [loading]);
   return (
     <div>
-      {courses.data.length === 0 && profs.length === 0 ? (
+      {loading ? (
         <div>loading</div>
       ) : (
         <React.Fragment>
@@ -137,15 +107,21 @@ function Album() {
             <Container className={classes.cardGrid} maxWidth="md">
               <Grid container spacing={4}>
                 {courses.data.map((card) => (
-                  <Grid item key={card._id} xs={12} sm={6} md={4}>
+                  <Grid item key={card.item._id} xs={12} sm={6} md={4}>
                     <CourseCard
+                      all={true}
                       link="id"
-                      img={"http://localhost:5000/addPic/" + card.image}
+                      img={"http://localhost:5000/addPic/" + card.item.image}
                       alt="course1"
-                      title={card.title}
+                      title={card.item.title}
                       author={card.prof}
-                      rating={card.rating}
-                      id={card._id}
+                      rating={
+                        card.item.numberOfDoneStudents === undefined ||
+                        card.item.numberOfDoneStudents === 0
+                          ? 0
+                          : card.item.rating / card.item.numberOfDoneStudents
+                      }
+                      id={card.item._id}
                     />
                   </Grid>
                 ))}

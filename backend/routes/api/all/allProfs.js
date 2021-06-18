@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
   await Prof.find({}, (err, rst) => {
     console.log(rst);
     if (err || rst === null || rst === undefined) {
-      console.log(err);
+      console.log("erreur 410 : ", err);
       return res.status(410).json({
         errors: err,
       });

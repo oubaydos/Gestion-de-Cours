@@ -50,16 +50,31 @@ const useStyles = makeStyles((theme) => ({
 
 const CourseCard = (props) => {
   const classes = useStyles();
-
-  return (
-    <RouterLink
-      to={
-        props.isFormation === true
-          ? `/formations/${props.id}`
-          : `/courses/${props.id}`
+  let href = () => {
+    if (props.isFormation === undefined || props.isFormation === false) {
+      if (props.all === true) {
+        return `/courses/${props.id}`;
+      } else if (props.my) {
+        return `/mycourses/${props.id}`;
+      } else if (props.mystarted) {
+        return `/mystartedcourses/${props.id}/learn`;
+      } else if (props.myfinished) {
+        return `/myfinishedcourses/${props.id}`;
       }
-      style={{ textDecoration: "none" }}
-    >
+    } else {
+      if (props.all === true) {
+        return `/formations/${props.id}`;
+      } else if (props.my) {
+        return `/myformations/${props.id}`;
+      } else if (props.mystarted) {
+        return `/mystartedformations/${props.id}/learn`;
+      } else if (props.myfinished) {
+        return `/myfinishedformations/${props.id}`;
+      }
+    }
+  };
+  return (
+    <RouterLink to={href()} style={{ textDecoration: "none" }}>
       <Card className={classes.root}>
         <CardActionArea>
           <CardMedia

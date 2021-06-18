@@ -23,15 +23,30 @@ const StudentSchema = new mongoose.Schema({
   },
   //array = [...timeOfEnrolling,timeOfEnding,rating,course : {object}]
   enrolledCourses: {
-    type: Array,
+    type: Array, //[{ course: mongoose.Schema.Types.ObjectId, enrollingTime: Number }],
     default: [],
   },
   startedCourses: {
     type: Array,
+    // [
+    //   {
+    //     course: mongoose.Schema.Types.ObjectId,
+    //     startingTime: Number,
+    //     currentChapter: Number,
+    //   },
+    // ],
     default: [],
   },
   finishedCourses: {
     type: Array,
+    // [
+    //   {
+    //     course: mongoose.Schema.Types.ObjectId,
+    //     startingTime: Number,
+    //     finishingTime: Number,
+    //     rated: Boolean,
+    //   },
+    // ],
     default: [],
   },
   enrolledFormations: {

@@ -30,22 +30,37 @@ router.post("/", auth, async (req, res) => {
         });
 
       if (!error1 && !error2 && !error) {
+        let breakOut = false;
         console.log(coursesIds);
         if (coursesIds.length === 0) res.status(200).send("[]");
         else
           coursesIds.forEach(async (i, index) => {
-            await Course.findById(i, (err, data) => {
+            if (breakOut) return;
+            await Course.findById(i, async (err, data) => {
               if (err || !data) {
                 error1 = err || "probleme dans les cours de cet etudiant";
+                breakOut = true;
                 return;
+              } else {
+                await Prof.findById(data.instructor, (e, d) => {
+                  if (e || !d) {
+                    error1 = e || "pb dans le prof";
+                    return (breakOut = true);
+                  }
+                  if (!e && d) {
+                    courses.push({
+                      data,
+                      prof: d.firstName + " " + d.lastName,
+                    });
+                    if (index === coursesIds.length - 1) {
+                      console.log("courses lasr ");
+                      console.log(courses);
+                      res.status(200).json(courses);
+                    }
+                  }
+                });
               }
-              courses.push(data);
             });
-            if (index === coursesIds.length - 1) {
-              console.log("courses lasr ");
-              console.log(courses);
-              res.status(200).json(courses);
-            }
           });
       }
     } else if (req.prof) {

@@ -13,6 +13,10 @@ const FormationSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  numberOfCourses: {
+    type: Number,
+    required: true,
+  },
   instructor: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Professeur", //to check
@@ -25,6 +29,10 @@ const FormationSchema = new mongoose.Schema({
   courses: {
     type: Array,
     default: [],
+  },
+  numberOfDoneStudents: {
+    type: Number,
+    default: 0,
   },
 });
 let Formation = mongoose.model("Formation", FormationSchema);

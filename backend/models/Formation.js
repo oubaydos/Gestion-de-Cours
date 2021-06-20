@@ -24,6 +24,7 @@ const FormationSchema = new mongoose.Schema({
   },
   image: {
     type: String,
+    default: "5f59da118313c69b8873ae904e11d4a9.png",
     //add a default image to all these models
   },
   courses: {

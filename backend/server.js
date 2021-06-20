@@ -38,6 +38,7 @@ app.use("/deleteAccount", require("./routes/api/deleteAccount.js")); //auth.js
 app.use("/addCourse", require("./routes/api/add/addCourse"));
 app.use("/addChapter", require("./routes/api/add/addChapter"));
 app.use("/allCourses", require("./routes/api/all/allCourses"));
+app.use("/allStudents", require("./routes/api/all/allStudents"));
 app.use("/allProfs", require("./routes/api/all/allProfs"));
 app.use("/allFormations", require("./routes/api/all/allFormations"));
 app.use("/addFormation", require("./routes/api/add/addFormation"));
@@ -89,5 +90,12 @@ app.use(
   require("./routes/api/monitoring/getCourseStudents")
 );
 app.use("/setTestMark", require("./routes/api/monitoring/setMark"));
+app.use("/admin/auth", require("./routes/api/admin/auth"));
+app.use("/admin/register", require("./routes/api/admin/users"));
+app.use("/deleteCourse", require("./routes/api/delete/deleteCourse"));
+app.use("/deleteFormation", require("./routes/api/delete/deleteFormation"));
+app.use("/deleteStudent", require("./routes/api/delete/deleteStudent"));
+app.use("/deleteProf", require("./routes/api/delete/deleteProf"));
+app.use("/admin/changePassword", require("./routes/api/admin/changePassword"));
 
 //test Pdf

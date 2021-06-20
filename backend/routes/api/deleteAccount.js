@@ -3,6 +3,7 @@ const router = express.Router();
 const auth = require("../../middleware/auth");
 const Student = require("../../models/Student");
 const Prof = require("../../models/Prof");
+const Admin = require("../../models/Admin");
 
 router.delete("/", auth, async (req, res) => {
   try {
@@ -29,6 +30,16 @@ router.delete("/", auth, async (req, res) => {
         }
         if (data) return res.status(200).send(data);
       });
+    else if (req.admin) {
+      await Admin.deleteOne({ _id: req.admin.id }, (err, data) => {
+        if (err) {
+          console.log("err");
+          error2 = err;
+          return;
+        }
+        if (data) return res.status(200).send(data);
+      });
+    }
     error1 === null ? (error = error2) : (error = error1);
     if (error) throw error;
   } catch (e) {

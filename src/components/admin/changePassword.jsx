@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import LockIcon from "@material-ui/icons/Lock";
+import SettingsIcon from "@material-ui/icons/Settings";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -12,6 +12,7 @@ import Copyright from "../usedComponents/Copyright";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Link from "@material-ui/core/Link";
+import AddIcon from "@material-ui/icons/Add";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
@@ -88,32 +89,32 @@ export default function SignUp() {
     formState: { errors },
   } = useForm();
   const submitFunc = async (data) => {
-    if (!errors.username && !errors.password) {
+    if (!errors.oldPassword && !errors.password) {
       setSent(true);
     } else {
       return;
     }
     try {
-      await axios.post(`http://localhost:5000/admin/auth`, data).then(
-        async (res) => {
-          alert(res.status);
-          console.log(res);
-          localStorage.setItem("currentUser", res.data.token);
-          localStorage.setItem("isAdmin", true);
-          //window.location.reload();
-          document.location.href = "/admin/dashboard";
-        },
-        (err) => {
-          let error = "";
-          for (let i of err.response.data.errors) {
-            error += i.param + " : " + i.msg + "\n\n";
+      console.log(data);
+      await axios
+        .post(`http://localhost:5000/admin/changePassword`, data, {
+          headers: { "x-auth-token": localStorage.getItem("currentUser") },
+        })
+        .then(
+          async (res) => {
+            alert(res.status);
+            console.log(res);
+            //window.location.reload();
+            document.location.href = "/admin/dashboard";
+          },
+          (err) => {
+            alert("erreur de code : " + err.response.status + "\n" + err);
+            console.log(err.response || err);
           }
-          alert("erreur de code : " + err.response.status + "\n" + error);
-          console.log(error);
-        }
-      );
+        );
     } catch (error) {
       console.error("l9it error\n\n\n\n");
+      console.log(error);
     }
   };
   login = submitFunc;
@@ -122,12 +123,13 @@ export default function SignUp() {
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <LockIcon />
+            <SettingsIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             <span className={classes.span}>Admin Panel</span>
-            <br />
-            S'authentifier
+          </Typography>
+          <Typography component="h1" variant="h5">
+            Changer le mot de passe
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit(submitFunc)}>
             <Grid container spacing={2}>
@@ -136,20 +138,19 @@ export default function SignUp() {
                   className={classes.textField}
                   variant="outlined"
                   fullWidth
-                  id="username"
-                  label="Nom d'utilisateur"
-                  name="username"
-                  autoComplete="username"
-                  {...register("username", {
+                  id="oldPassword"
+                  label="Mot de passe ancien"
+                  name="oldPassword"
+                  type="password"
+                  autoComplete="oldPassword"
+                  {...register("oldPassword", {
                     required: true,
+                    minLength: 6,
                   })}
                   helperText={
-                    errors.username ? "vérifier le nom d'utilisateur svp" : ""
+                    errors.oldPassword ? "vérifier le mot de passe svp" : ""
                   }
                 />
-                <p className={classes.helperText}>
-                  le nom d'utilisateur par default est : admin
-                </p>
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -166,9 +167,6 @@ export default function SignUp() {
                   })}
                   helperText={errors.password ? "mot de passe trop court" : ""}
                 />
-                <p className={classes.helperText}>
-                  le mot de passe par default est : admin2021
-                </p>
               </Grid>
             </Grid>
 
@@ -179,7 +177,7 @@ export default function SignUp() {
               color="primary"
               className={classes.submit}
             >
-              S'authentifier
+              Changer
             </Button>
           </form>
           {sent && (
@@ -193,7 +191,7 @@ export default function SignUp() {
                   backgroundColor: "#DFF2BF",
                 }}
               >
-                Bienvenue cher Admin
+                l'admin est bien ajouté
               </div>
             </Box>
           )}

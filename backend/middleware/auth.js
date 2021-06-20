@@ -13,6 +13,7 @@ module.exports = (req, res, next) => {
 
     req.student = decoded.student;
     req.prof = decoded.prof;
+    req.admin = decoded.admin;
     console.log("wslna 7ed hna");
     next();
   } catch (e) {

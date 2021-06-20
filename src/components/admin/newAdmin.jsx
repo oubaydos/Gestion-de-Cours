@@ -12,6 +12,7 @@ import Copyright from "../usedComponents/Copyright";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Link from "@material-ui/core/Link";
+import AddIcon from "@material-ui/icons/Add";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
@@ -94,12 +95,10 @@ export default function SignUp() {
       return;
     }
     try {
-      await axios.post(`http://localhost:5000/admin/auth`, data).then(
+      await axios.post(`http://localhost:5000/admin/register`, data).then(
         async (res) => {
           alert(res.status);
           console.log(res);
-          localStorage.setItem("currentUser", res.data.token);
-          localStorage.setItem("isAdmin", true);
           //window.location.reload();
           document.location.href = "/admin/dashboard";
         },
@@ -122,12 +121,13 @@ export default function SignUp() {
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <LockIcon />
+            <AddIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             <span className={classes.span}>Admin Panel</span>
-            <br />
-            S'authentifier
+          </Typography>
+          <Typography component="h1" variant="h5">
+            Ajouter un admin
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit(submitFunc)}>
             <Grid container spacing={2}>
@@ -147,9 +147,6 @@ export default function SignUp() {
                     errors.username ? "vérifier le nom d'utilisateur svp" : ""
                   }
                 />
-                <p className={classes.helperText}>
-                  le nom d'utilisateur par default est : admin
-                </p>
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -166,9 +163,6 @@ export default function SignUp() {
                   })}
                   helperText={errors.password ? "mot de passe trop court" : ""}
                 />
-                <p className={classes.helperText}>
-                  le mot de passe par default est : admin2021
-                </p>
               </Grid>
             </Grid>
 
@@ -179,7 +173,7 @@ export default function SignUp() {
               color="primary"
               className={classes.submit}
             >
-              S'authentifier
+              Ajouter
             </Button>
           </form>
           {sent && (
@@ -193,7 +187,7 @@ export default function SignUp() {
                   backgroundColor: "#DFF2BF",
                 }}
               >
-                Bienvenue cher Admin
+                l'admin est bien ajouté
               </div>
             </Box>
           )}

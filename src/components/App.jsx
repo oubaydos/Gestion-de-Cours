@@ -8,7 +8,7 @@ import AllCourses from "./allCourses/AllCourses";
 import AllFormations from "./allCourses/allFormations";
 import Search from "./search/Search";
 import SearchFormation from "./search/SearchFormation";
-
+import TestFormation from "./Formation/Test";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { BottomScrollListener } from "react-bottom-scroll-listener";
 import SignUp from "./signup/SignUp.jsx";
@@ -46,7 +46,18 @@ import AddFormation from "./prof/AddFormation/Course";
 import Start from "./mycourses/start/Start";
 import StartFormation from "./mycourses/start/StartFormation";
 import AdminLogin from "./admin/SignIn";
+import AdminDashboard from "./admin/dashboard/profil";
+//certificate - testf
+import TestCertificate from "./certificate/Certificate";
 //
+import NewAdmin from "./admin/newAdmin";
+import AdminAllCourses from "./admin/GestionDesCours/AllCourses";
+import AdminAllFormations from "./admin/GestionDesCours/allFormations";
+import AdminCourseDetails from "./admin/GestionDesCours/description/Enroll";
+import AdminFormationDetails from "./admin/GestionDesCours/description/EnrollFormation";
+import Students from "./admin/GestionDesEtudiants/Etudiants";
+import Profs from "./admin/GestionDesProfs/Prof";
+import AdminChangePassword from "./admin/changePassword";
 import "../css/styles.css";
 
 function App() {
@@ -64,6 +75,9 @@ function App() {
     );
   }
   function Head() {
+    if (document.location.pathname.split("/")[1] === "test") {
+      return <div></div>;
+    }
     return (
       <header>
         <Header />
@@ -121,6 +135,10 @@ function App() {
         <title>Gestion de cours</title>
       </Helmet>
       <Router>
+        <Route component={TestCertificate} exact path="/testcertificate" />
+        <Route component={AdminAllCourses} exact path="/admin/courses" />
+        <Route component={AdminAllFormations} exact path="/admin/formations" />
+        {/*this is a test ^|^ */}
         <CondRoute component={Prof} exact={true} path="/prof/dashboard" />
 
         <Route component={Head} path="/" />
@@ -128,6 +146,15 @@ function App() {
         <Route component={AddPic} exact path="/prof/mycourses/:h/addpic" />
 
         <Route component={AddFormation} exact path="/prof/addFormation" />
+        <Route component={NewAdmin} exact path="/admin/newAdmin" />
+        <Route component={AdminCourseDetails} exact path="/admin/courses/:h" />
+        <Route component={Students} exact path="/admin/students" />
+        <Route component={Profs} exact path="/admin/profs" />
+        <Route
+          component={AdminFormationDetails}
+          exact
+          path="/admin/formations/:h"
+        />
         <Route
           component={AddChapters}
           exact
@@ -164,6 +191,11 @@ function App() {
           component={ProfFormations}
           exact={true}
           path="/prof/myformations"
+        />
+        <CondRoute
+          component={AdminChangePassword}
+          exact={true}
+          path="/admin/changePassword"
         />
         <CondRoute
           component={EditCourse}
@@ -231,11 +263,11 @@ function App() {
           inverse={true}
           path="/signin"
         />
+        <Route component={AdminLogin} exact path="/admin" />
         <CondRoute
-          component={AdminLogin}
+          component={AdminDashboard}
           exact={true}
-          inverse={true}
-          path="/admin/signin"
+          path="/admin/dashboard"
         />
       </Router>
     </>

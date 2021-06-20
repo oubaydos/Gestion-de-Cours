@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const Prof = require("../../../models/Prof");
+const Student = require("../../../models/Student");
 
 router.get("/", async (req, res) => {
   console.log("hello");
-  await Prof.find({}, (err, rst) => {
+  await Student.find({}, (err, rst) => {
     console.log(rst);
     if (err || rst === null || rst === undefined) {
       console.log("erreur 410 : ", err);
       return res.status(410).json({
-        errors: err || "no result found",
+        errors: err,
       });
     } else {
       let data = rst;

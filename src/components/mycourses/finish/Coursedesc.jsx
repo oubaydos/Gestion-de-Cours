@@ -89,7 +89,8 @@ function Coursedesc(props) {
       <p
         className={style.root}
         style={{
-          left: props.rated ? "24%" : props.isFormation ? "27%" : "30%",
+          left: props.isFormation ? "50%" : "53%",
+          top: props.title.length >= 40 ? "850px" : "800px",
         }}
       >
         {props.rated
@@ -100,6 +101,10 @@ function Coursedesc(props) {
       </p>
       {!props.rated && (
         <Rating
+          style={{
+            left: props.isFormation ? "70%" : "73%",
+            top: props.title.length >= 40 ? "890px" : "840px",
+          }}
           name="half-rating"
           precision={0.5}
           size="large"
@@ -139,7 +144,7 @@ function Coursedesc(props) {
           lineHeight: "1.6",
           fontSize: "17px",
 
-          top: "30%",
+          top: props.title.length >= 40 ? "36%" : "30%",
         }}
       >
         {props.description}
@@ -151,7 +156,7 @@ function Coursedesc(props) {
           fontFamily: "Architects Daughter",
           fontSize: "30px",
           fontWeight: 200,
-          top: "20%",
+          top: props.title.length >= 40 ? "26%" : "20%",
 
           paddingRight: "100px",
         }}
@@ -177,21 +182,19 @@ function Coursedesc(props) {
           "vous pouvez consulter vos notes dans les cours de cette formations après que le prof corrige les quiz"
         ) : (
           <div>
-            <div>Votre Note : </div>
             <p
               style={{
                 position: "absolute",
-                width: "200%",
-                marginLeft: "80%",
-                marginTop: "-7px",
                 fontFamily: "Comfortaa",
                 lineHeight: "1.6",
                 fontSize: "20px",
                 fontWeight: 500,
-
-                top: "30%",
+                right: "-1000px",
+                maxWidth: "200px",
+                top: props.title.length >= 40 ? "90px" : "75px",
               }}
             >
+              <div>Votre Note : </div>
               {props.mark} /20
             </p>
           </div>

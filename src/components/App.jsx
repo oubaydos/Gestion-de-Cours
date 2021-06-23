@@ -30,7 +30,7 @@ import Onecourse from "./onecourse/Onecourse";
 
 //this could cause a pb
 import Prof from "./prof/Prof1";
-import Test from "./prof/Addcourse/Course";
+import ProfAddCourse from "./prof/Addcourse/Cours";
 import AddPic from "./prof/Addcourse/AddPic";
 import AddPicForFormation from "./prof/AddFormation/AddPic";
 import ProfCourses from "./prof/Mycourses/Mycourses";
@@ -103,6 +103,48 @@ function App() {
       setLogedIn(true);
     console.log(logedIn);
   });
+  function AdminRoute(props) {
+    if (localStorage.getItem("isAdmin") === "true") {
+      return (
+        <Route
+          component={props.component}
+          exact={props.exact}
+          path={props.path}
+        />
+      );
+    }
+    return (
+      <Route component={PageNotFound} exact={props.exact} path={props.path} />
+    );
+  }
+  function ProfRoute(props) {
+    if (localStorage.getItem("isStudent") === "false") {
+      return (
+        <Route
+          component={props.component}
+          exact={props.exact}
+          path={props.path}
+        />
+      );
+    }
+    return (
+      <Route component={PageNotFound} exact={props.exact} path={props.path} />
+    );
+  }
+  function StudentRoute(props) {
+    if (localStorage.getItem("isStudent") === "true") {
+      return (
+        <Route
+          component={props.component}
+          exact={props.exact}
+          path={props.path}
+        />
+      );
+    }
+    return (
+      <Route component={PageNotFound} exact={props.exact} path={props.path} />
+    );
+  }
   function CondRoute(props) {
     //conditionnal 404
     if (props.inverse === true) {
@@ -150,134 +192,146 @@ function App() {
         <title>Gestion de cours</title>
       </Helmet>
       <Router>
-        <Route
+        <StudentRoute
           component={Certificate}
-          exact
+          exact={true}
           path="/myfinishedcourses/:h/certificate/:b"
         />
-        <Route
+        <StudentRoute
           component={Certificate}
-          exact
+          exact={true}
           path="/myfinishedformations/:h/certificate/:b"
         />
-        <Route component={AdminAllCourses} exact path="/admin/courses" />
-        <Route component={AdminAllFormations} exact path="/admin/formations" />
+        <AdminRoute component={AdminAllCourses} exact path="/admin/courses" />
+        <AdminRoute
+          component={AdminAllFormations}
+          exact
+          path="/admin/formations"
+        />
         {/*this is a test ^|^ */}
-        <CondRoute component={Prof} exact={true} path="/prof/dashboard" />
+        <ProfRoute component={Prof} exact={true} path="/prof/dashboard" />
 
         <Route component={Head} path="/" />
-        <Route
+        <StudentRoute
           component={OneFormation}
-          exact
+          exact={true}
           path="/mystartedformations/:i/learn"
         />
-        <Route component={Test} exact path="/prof/addCourse" />
-        <Route component={AddPic} exact path="/prof/mycourses/:h/addpic" />
+        <ProfRoute component={ProfAddCourse} exact path="/prof/addCourse" />
+        <ProfRoute component={AddPic} exact path="/prof/mycourses/:h/addpic" />
 
-        <Route component={AddFormation} exact path="/prof/addFormation" />
-        <Route component={NewAdmin} exact path="/admin/newAdmin" />
-        <Route component={AdminCourseDetails} exact path="/admin/courses/:h" />
-        <Route component={Students} exact path="/admin/students" />
-        <Route component={Profs} exact path="/admin/profs" />
-        <Route
-          component={AdminFormationDetails}
+        <ProfRoute component={AddFormation} exact path="/prof/addFormation" />
+        <ProfRoute component={NewAdmin} exact path="/admin/newAdmin" />
+        <AdminRoute
+          component={AdminCourseDetails}
           exact
+          path="/admin/courses/:h"
+        />
+        <AdminRoute component={Students} exact path="/admin/students" />
+        <AdminRoute component={Profs} exact path="/admin/profs" />
+        <AdminRoute
+          component={AdminFormationDetails}
+          exact={true}
           path="/admin/formations/:h"
         />
-        <Route
+        <ProfRoute
           component={AddChapters}
-          exact
+          exact={true}
           path="/prof/mycourses/:h/addChapters"
         />
 
         {/* kain chi pb fhad rendering -- jrb / test/chi l3ba katmchi background  */}
-        <CondRoute
+        <ProfRoute
           component={ProfCourses}
           exact={true}
           path="/prof/mycourses"
         />
-        <CondRoute
+        <ProfRoute
           component={SurveillerCourses}
           exact={true}
           path="/prof/surveiller"
         />
-        <CondRoute
+        <ProfRoute
           component={SurveillerOneCourse}
           exact={true}
           path="/prof/surveiller/:h"
         />
-        <CondRoute
+        <ProfRoute
           component={AddCourses}
           exact={true}
           path="/prof/myformations/:h/addCourses"
         />
-        <CondRoute
+        <ProfRoute
           component={AddPicForFormation}
           exact={true}
           path="/prof/myformations/:h/addpic"
         />
-        <CondRoute
+        <ProfRoute
           component={ProfFormations}
           exact={true}
           path="/prof/myformations"
         />
-        <CondRoute
+        <AdminRoute
           component={AdminChangePassword}
           exact={true}
           path="/admin/changePassword"
         />
-        <CondRoute
+        <StudentRoute
           component={ChangePassword}
           exact={true}
           path="/changePassword"
         />
-        <CondRoute
+        <ProfRoute
           component={ProfChangePassword}
           exact={true}
           path="/prof/changePassword"
         />
-        <CondRoute
+        <ProfRoute
           component={EditCourse}
           exact={true}
           path="/prof/mycourses/:h"
         />
-        <CondRoute
+        <ProfRoute
           component={EditCourse}
           exact={true}
           path="/prof/myformations/:h"
         />
-        <CondRoute component={Profil} exact={true} path="/dashboard" />
-        <CondRoute component={MyCourses} exact={true} path="/mycourses" />
-        <CondRoute
+        <StudentRoute component={Profil} exact={true} path="/dashboard" />
+        <StudentRoute component={MyCourses} exact={true} path="/mycourses" />
+        <StudentRoute
           component={MyStartedCourses}
           exact={true}
           path="/mystartedcourses"
         />
-        <CondRoute
+        <StudentRoute
           component={MyFinishedCourses}
           exact={true}
           path="/myfinishedcourses"
         />
-        <CondRoute
+        <StudentRoute
           component={MyStartedFormations}
           exact={true}
           path="/mystartedformations"
         />
-        <CondRoute
+        <StudentRoute
           component={MyFinishedFormations}
           exact={true}
           path="/myfinishedformations"
         />
-        <CondRoute component={MyFormations} exact={true} path="/myformations" />
+        <StudentRoute
+          component={MyFormations}
+          exact={true}
+          path="/myformations"
+        />
         <Route component={Enroll} path="/courses/:h" />
-        <Route component={Finish} exact path="/myfinishedcourses/:h" />
-        <Route
+        <StudentRoute component={Finish} exact path="/myfinishedcourses/:h" />
+        <StudentRoute
           component={FinishFormation}
-          exact
+          exact={true}
           path="/myfinishedformations/:h"
         />
-        <Route component={Start} path="/mycourses/:h" />
-        <Route component={StartFormation} path="/myformations/:h" />
+        <StudentRoute component={Start} path="/mycourses/:h" />
+        <StudentRoute component={StartFormation} path="/myformations/:h" />
         <Route component={EnrollFormation} path="/formations/:h" />
         <Route component={AllCourses} exact path="/courses" />
 
@@ -291,9 +345,11 @@ function App() {
         <Route component={Foot} exact path="/" />
         <Route component={ContactUs} exact path="/contactus" />
         <Route component={AboutUs} exact path="/aboutus" />
-        <Route component={Onecourse} exact path="/mystartedcourses/:h/learn" />
-        {/* <Route component={SignUp} exact path="/signup" /> */}
-        {/* <Route component={SignUp} exact path="/signup" />  about us lfog*/}
+        <StudentRoute
+          component={Onecourse}
+          exact
+          path="/mystartedcourses/:h/learn"
+        />
         <CondRoute
           component={SignUp}
           exact={true}
@@ -306,8 +362,13 @@ function App() {
           inverse={true}
           path="/signin"
         />
-        <Route component={AdminLogin} exact path="/admin" />
-        <CondRoute
+        <AdminRoute
+          component={AdminLogin}
+          exact={true}
+          inverse={true}
+          path="/admin"
+        />
+        <AdminRoute
           component={AdminDashboard}
           exact={true}
           path="/admin/dashboard"

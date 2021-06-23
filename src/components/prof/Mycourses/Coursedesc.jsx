@@ -12,14 +12,13 @@ let enrollFormation = () => {
 };
 const useStyles = makeStyles({
   root: {
-    top: "45%",
+    top: "60%",
     float: "left",
     position: "absolute",
-    marginLeft: "12%",
     fontFamily: "Cascadia Code",
     width: "1000x",
     height: "35px",
-    left: "30%",
+    left: "70%",
   },
 });
 function Coursedesc(props) {
@@ -131,7 +130,7 @@ function Coursedesc(props) {
           lineHeight: "1.6",
           fontSize: "17px",
 
-          top: "30%",
+          top: props.title.length >= 40 ? "36%" : "30%",
         }}
       >
         {props.description}
@@ -143,7 +142,7 @@ function Coursedesc(props) {
           fontFamily: "Architects Daughter",
           fontSize: "30px",
           fontWeight: 200,
-          top: "20%",
+          top: props.title.length >= 40 ? "26%" : "20%",
 
           paddingRight: "100px",
         }}

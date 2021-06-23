@@ -68,7 +68,7 @@ function Album() {
   //
   let i = 0;
   useEffect(() => {
-    if (loading) getCourses();
+    if (loading) setTimeout(getCourses, 500);
   }, [loading]);
   return (
     <div>

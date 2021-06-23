@@ -21,9 +21,6 @@ function Prof1() {
 
   return (
     <div>
-      <header>
-        <Header />
-      </header>
       <div style={{ marginTop: "150px" }}>
         <Prof />
       </div>

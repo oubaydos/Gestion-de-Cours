@@ -84,7 +84,7 @@ function Album() {
   let i = 0;
   useEffect(() => {
     //hna bdlt chi haja latkhsr
-    if (loading) getCourses();
+    if (loading) setTimeout(getCourses, 500);
   }, [loading]);
   return (
     <div>

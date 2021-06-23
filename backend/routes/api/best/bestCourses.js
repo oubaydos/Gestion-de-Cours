@@ -51,7 +51,7 @@ router.get("/", async (req, res) => {
         if (breakOut) return;
         if (index >= 4) return;
         await Prof.findById(item.instructor, (e, donne) => {
-          if (e || donne === null || donne === undefined) {
+          if (e || donne === null) {
             console.log("error 410 : ", /*e ||*/ "prof id not found");
             breakOut = true;
             return res.status(410).json({

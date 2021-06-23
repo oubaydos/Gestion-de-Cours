@@ -22,9 +22,8 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     left: "70%",
-    top: "20%",
+    top: "25%",
     position: "absolute",
-    height: "100%",
   },
   cardMedia: {
     paddingTop: "56.25%", // 16:9

@@ -95,11 +95,18 @@ export default function SignUp() {
       data.isStudent = state.student;
       await axios.post(`http://localhost:5000/auth`, data).then(
         async (res) => {
-          alert(res.status);
+          if (res.data.active === false) {
+            return alert(
+              "veuillez verifier votre boite mail avant de s'authentifier"
+            );
+          }
+          //alert(res.status);
           console.log(res);
           localStorage.setItem("currentUser", res.data.token);
           localStorage.setItem("isStudent", data.isStudent);
-          window.location.reload();
+          data.isStudent === "true" || data.isStudent === true
+            ? (window.location.href = "/dashboard")
+            : (window.location.href = "/prof/dashboard");
           // if (data.isStudent === "true") window.location.href = "/dashboard";
           // else window.location.href = "/prof/dashboard";
         },

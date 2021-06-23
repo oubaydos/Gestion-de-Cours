@@ -66,7 +66,7 @@ function Album() {
   }
   useEffect(() => {
     if (data === null) {
-      getCourse();
+      setTimeout(getCourse, 500);
     }
   }, [data]);
   return (

@@ -133,7 +133,6 @@ export default function SignUp() {
     formState: { errors },
   } = useForm();
   const submitFunc = async (data) => {
-    alert("clicked");
     console.log("data \n\n");
     if (errors.course) return console.log("erreur, verifier vos données");
     //console.log(data);
@@ -259,7 +258,7 @@ export default function SignUp() {
                   backgroundColor: "#DFF2BF",
                 }}
               >
-                votre message est envoyé <DoneIcon />
+                les cours sont bien ajouté dans la formation <DoneIcon />
               </div>
             </Box>
           )}

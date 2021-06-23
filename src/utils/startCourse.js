@@ -14,6 +14,7 @@ let func = async (courseId) => {
       .then(
         (res) => {
           console.log("res : : : : ");
+
           console.log(res);
           alert("success"); //need to handle this success
           window.location.href = `/mystartedcourses/${courseId}/learn`;

@@ -76,10 +76,16 @@ function Body(props) {
                       <Description />
                     </li>
                     <li className={style.li}>
-                      <SignUp />
+                      {(localStorage.getItem("currentUser") === null ||
+                        localStorage.getItem("currentUser") === undefined) && (
+                        <SignUp />
+                      )}
                     </li>
                     <li className={style.liButton}>
-                      <SecondButton />
+                      {(localStorage.getItem("currentUser") === null ||
+                        localStorage.getItem("currentUser") === undefined) && (
+                        <SecondButton />
+                      )}
                     </li>
                   </ol>
                 </Paper>

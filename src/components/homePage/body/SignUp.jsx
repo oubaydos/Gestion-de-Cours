@@ -26,7 +26,7 @@ function SignUp(props) {
       fgColor="black"
       className={style.root}
       value="devenir Enseignant"
-      url="/signup?prof=true" //using parameters to lock the choice of prof
+      url="/signup" //using parameters to lock the choice of prof
       //                        or student in inscription form
     />
   );
@@ -40,7 +40,7 @@ function SecondButton(props) {
       fgColor="black"
       className={style.secondary}
       value="devenir Etudiant"
-      url="/signup?prof=false"
+      url="/signup"
     />
   );
 }

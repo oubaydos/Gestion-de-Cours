@@ -48,7 +48,6 @@ function Album() {
   const cards = Array.from({ length: numOfItems }, (_, i) => i + 1);
   const classes = useStyles();
   let [courses, setcourses] = useState({ data: [] });
-  let [profs, setProfs] = useState([]);
   let [loading, setLoading] = useState(true);
   //axios
   const getCourses = async () => {
@@ -68,12 +67,12 @@ function Album() {
   //
   let i = 0;
   useEffect(() => {
-    if (loading) getCourses();
+    if (loading) setTimeout(getCourses, 500);
   }, [loading]);
   return (
     <div>
       {loading ? (
-        <div>loading</div>
+        <div>loading...{loading}</div>
       ) : (
         <React.Fragment>
           <CssBaseline />

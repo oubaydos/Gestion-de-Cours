@@ -9,7 +9,13 @@ function Dashboard() {
     <Hidden mdDown>
       <TextButton
         value="Mon Profil"
-        url={isStudent ? "/dashboard" : "/prof/dashboard"}
+        url={
+          localStorage.getItem("isStudent") === "true"
+            ? "/dashboard"
+            : localStorage.getItem("isAdmin") === "true"
+            ? "/admin/dashboard"
+            : "/prof/dashboard"
+        }
       />
     </Hidden>
   );

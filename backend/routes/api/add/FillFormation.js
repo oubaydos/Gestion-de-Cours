@@ -49,6 +49,7 @@ router.post("/", auth, async (req, res) => {
                   (err, data) => {
                     if (err || !data)
                       return (error2 = err || "no formation found");
+                    else return res.send("all is good");
                   }
                 );
               }

@@ -5,7 +5,8 @@ function Logout() {
   let handleClick = () => {
     localStorage.removeItem("currentUser");
     localStorage.removeItem("isStudent");
-    window.location.reload(false);
+    localStorage.removeItem("isAdmin");
+    window.location.href = "/";
   };
   return (
     <MyButton

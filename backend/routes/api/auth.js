@@ -122,7 +122,7 @@ router.post(
           (err, token) => {
             if (err) throw err;
             else {
-              res.status(200).send({ token: token });
+              res.status(200).send({ token: token, active: student.active });
             }
           }
         );
@@ -141,7 +141,7 @@ router.post(
           (err, token) => {
             if (err) throw err;
             else {
-              res.status(200).send({ token: token });
+              res.status(200).send({ token: token, active: prof.active });
             }
           }
         );

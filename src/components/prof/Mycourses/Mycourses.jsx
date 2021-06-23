@@ -59,7 +59,6 @@ function Album() {
     try {
       await axios.post(`http://localhost:5000/myCourses`).then(
         (res) => {
-          courses = res.data;
           setcourses(res.data);
           setLoading(false);
           courses.map((item) => {
@@ -84,7 +83,7 @@ function Album() {
   let i = 0;
   useEffect(() => {
     //hna bdlt chi haja latkhsr
-    if (loading) getCourses();
+    if (loading) setTimeout(getCourses, 500);
   }, [loading]);
   return (
     <div>

@@ -11,9 +11,13 @@ router.get("/", async (req, res) => {
         errors: err || "course id not found",
       });
     } else {
+      console.log(rst);
       // res.status(200).json(data);
       let breakOut = false;
       ans = [];
+      if (rst.length === 0) {
+        return res.status(200).json(ans);
+      }
       rst.forEach(async (item, index) => {
         if (breakOut) return;
         await Prof.findById(item.instructor, (e, donne) => {

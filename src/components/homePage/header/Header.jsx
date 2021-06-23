@@ -25,11 +25,15 @@ function Header() {
     <div>
       {logedIn ? <Logout /> : <SignUp />}
       {logedIn ? <Dashboard /> : <SignIn />}
-      {logedIn ? <MyCourses /> : <ContactUs />}
-      {!logedIn && <AboutUs />}
+      {logedIn &&
+        (localStorage.getItem("isAdmin") === null ||
+          localStorage.getItem("isAdmin") === undefined) && <MyCourses />}
+      <ContactUs />
+      <AboutUs />
       <Logo />
       <Cours />
-      <Search />
+      {localStorage.getItem("isAdmin") !== "true" &&
+        localStorage.getItem("isStudent") !== "false" && <Search />}
     </div>
   );
 }

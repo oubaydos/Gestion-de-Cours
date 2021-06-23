@@ -96,7 +96,6 @@ export default function SignUp() {
     console.log(data);
 
     try {
-      console.log("dkhlna");
       await axios
         .post(`http://localhost:5000/addCourse`, data, {
           headers: {
@@ -105,12 +104,11 @@ export default function SignUp() {
         })
         .then(
           (res) => {
+            alert("added");
             setSent(true);
-            console.log("hh");
             console.log(res);
           },
           (err) => {
-            console.log("hh");
             Object.entries(err).forEach(([key, value]) =>
               console.log(key, " : ", value)
             );

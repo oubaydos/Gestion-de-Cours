@@ -73,11 +73,11 @@ function Album() {
   //
   let i = 0;
   useEffect(() => {
-    if ((courses.data !== [] && profs.data !== []) || loading) getCourses();
+    if (loading) setTimeout(getCourses, 500);
   }, [loading]);
   return (
     <div>
-      {courses.data.length === 0 && profs.length === 0 ? (
+      {loading ? (
         <div>loading</div>
       ) : (
         <React.Fragment>

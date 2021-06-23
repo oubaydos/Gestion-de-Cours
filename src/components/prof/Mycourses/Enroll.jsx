@@ -21,9 +21,8 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     left: "70%",
-    top: "20%",
+    top: "25%",
     position: "absolute",
-    height: "100%",
   },
   cardMedia: {
     paddingTop: "56.25%", // 16:9
@@ -82,7 +81,7 @@ function Enroll() {
       ) : (
         <div>
           <Grid container>
-            <Grid item xs={8}>
+            <Grid item xs={12}>
               <Coursedesc
                 title={data.data.title}
                 description={data.data.description}
@@ -93,7 +92,7 @@ function Enroll() {
                 }
                 //enroll = func
               />
-            </Grid>
+            </Grid>{" "}
             <Grid className={classes.card} item xs={2}>
               <CourseCard
                 link="id"

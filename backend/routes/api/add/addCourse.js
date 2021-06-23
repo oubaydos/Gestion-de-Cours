@@ -35,6 +35,7 @@ router.post("/", auth, async (req, res) => {
       },
       (err, data) => {
         if (err) return (error2 = err);
+        res.status(200).send("all is good");
       }
     );
     error1 === null ? (error = error2) : (error = error1);

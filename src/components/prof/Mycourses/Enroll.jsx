@@ -5,7 +5,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import { useLocation } from "react-router-dom";
-
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),

@@ -173,25 +173,29 @@ function Coursedesc(props) {
           paddingRight: "100px",
         }}
       >
-        {props.isFormation
-          ? "vous pouvez consulter vos notes dans les cours de cette formations après que le prof corrige les quiz"
-          : "Votre Note : "}
-        <p
-          style={{
-            position: "absolute",
-            width: "200%",
-            marginLeft: "80%",
-            marginTop: "-7px",
-            fontFamily: "Comfortaa",
-            lineHeight: "1.6",
-            fontSize: "20px",
-            fontWeight: 500,
+        {props.isFormation ? (
+          "vous pouvez consulter vos notes dans les cours de cette formations après que le prof corrige les quiz"
+        ) : (
+          <div>
+            <div>Votre Note : </div>
+            <p
+              style={{
+                position: "absolute",
+                width: "200%",
+                marginLeft: "80%",
+                marginTop: "-7px",
+                fontFamily: "Comfortaa",
+                lineHeight: "1.6",
+                fontSize: "20px",
+                fontWeight: 500,
 
-            top: "30%",
-          }}
-        >
-          {props.mark} /20
-        </p>
+                top: "30%",
+              }}
+            >
+              {props.mark} /20
+            </p>
+          </div>
+        )}
       </p>
     </div>
   );

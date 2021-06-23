@@ -8,7 +8,6 @@ import AllCourses from "./allCourses/AllCourses";
 import AllFormations from "./allCourses/allFormations";
 import Search from "./search/Search";
 import SearchFormation from "./search/SearchFormation";
-import TestFormation from "./Formation/Test";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { BottomScrollListener } from "react-bottom-scroll-listener";
 import SignUp from "./signup/SignUp.jsx";
@@ -48,7 +47,7 @@ import StartFormation from "./mycourses/start/StartFormation";
 import AdminLogin from "./admin/SignIn";
 import AdminDashboard from "./admin/dashboard/profil";
 //certificate - testf
-import TestCertificate from "./certificate/Certificate";
+import Certificate from "./certificate/Certificate";
 //
 import NewAdmin from "./admin/newAdmin";
 import AdminAllCourses from "./admin/GestionDesCours/AllCourses";
@@ -58,6 +57,9 @@ import AdminFormationDetails from "./admin/GestionDesCours/description/EnrollFor
 import Students from "./admin/GestionDesEtudiants/Etudiants";
 import Profs from "./admin/GestionDesProfs/Prof";
 import AdminChangePassword from "./admin/changePassword";
+import ProfChangePassword from "./prof/changePassword";
+import ChangePassword from "./changePassword/changePassword";
+import OneFormation from "./Formation/formation";
 import "../css/styles.css";
 
 function App() {
@@ -75,7 +77,10 @@ function App() {
     );
   }
   function Head() {
-    if (document.location.pathname.split("/")[1] === "test") {
+    if (
+      document.location.pathname.split("/")[3] === "certificate" ||
+      document.location.pathname.split("/")[1] === "testcertificate"
+    ) {
       return <div></div>;
     }
     return (
@@ -100,7 +105,6 @@ function App() {
   });
   function CondRoute(props) {
     //conditionnal 404
-    console.log("props", props.inverse === true);
     if (props.inverse === true) {
       if (localStorage.getItem("isStudent") === "true")
         return (
@@ -110,10 +114,21 @@ function App() {
             path={props.path}
           />
         );
-      else {
+      else if (
+        localStorage.getItem("isAdmin") === null ||
+        localStorage.getItem("isAdmin") === undefined
+      ) {
         return (
           <Route
             component={!logedIn ? props.component : Prof}
+            exact={props.exact}
+            path={props.path}
+          />
+        );
+      } else {
+        return (
+          <Route
+            component={!logedIn ? props.component : AdminDashboard}
             exact={props.exact}
             path={props.path}
           />
@@ -135,13 +150,27 @@ function App() {
         <title>Gestion de cours</title>
       </Helmet>
       <Router>
-        <Route component={TestCertificate} exact path="/testcertificate" />
+        <Route
+          component={Certificate}
+          exact
+          path="/myfinishedcourses/:h/certificate/:b"
+        />
+        <Route
+          component={Certificate}
+          exact
+          path="/myfinishedformations/:h/certificate/:b"
+        />
         <Route component={AdminAllCourses} exact path="/admin/courses" />
         <Route component={AdminAllFormations} exact path="/admin/formations" />
         {/*this is a test ^|^ */}
         <CondRoute component={Prof} exact={true} path="/prof/dashboard" />
 
         <Route component={Head} path="/" />
+        <Route
+          component={OneFormation}
+          exact
+          path="/mystartedformations/:i/learn"
+        />
         <Route component={Test} exact path="/prof/addCourse" />
         <Route component={AddPic} exact path="/prof/mycourses/:h/addpic" />
 
@@ -198,6 +227,16 @@ function App() {
           path="/admin/changePassword"
         />
         <CondRoute
+          component={ChangePassword}
+          exact={true}
+          path="/changePassword"
+        />
+        <CondRoute
+          component={ProfChangePassword}
+          exact={true}
+          path="/prof/changePassword"
+        />
+        <CondRoute
           component={EditCourse}
           exact={true}
           path="/prof/mycourses/:h"
@@ -231,8 +270,12 @@ function App() {
         />
         <CondRoute component={MyFormations} exact={true} path="/myformations" />
         <Route component={Enroll} path="/courses/:h" />
-        <Route component={Finish} path="/myfinishedcourses/:h" />
-        <Route component={FinishFormation} path="/myfinishedformations/:h" />
+        <Route component={Finish} exact path="/myfinishedcourses/:h" />
+        <Route
+          component={FinishFormation}
+          exact
+          path="/myfinishedformations/:h"
+        />
         <Route component={Start} path="/mycourses/:h" />
         <Route component={StartFormation} path="/myformations/:h" />
         <Route component={EnrollFormation} path="/formations/:h" />

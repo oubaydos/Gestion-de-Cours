@@ -2,9 +2,15 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../../../middleware/auth");
 const Course = require("../../../models/Course");
+const Student = require("../../../models/Student");
 const Formation = require("../../../models/Formation");
 let newCourses = [];
 let ids = [];
+function courseExists(arr, name) {
+  return arr.some(function (el) {
+    return el.course === name;
+  });
+}
 router.post("/", auth, async (req, res) => {
   function delOne(array) {
     let temp = array;
@@ -32,8 +38,34 @@ router.post("/", auth, async (req, res) => {
           {
             $pull: { courses: { $in: [req.body.id] } },
             $inc: { numberOfCourses: -1 },
+          },
+          (e, d) => {
+            if (e) return (error1 = e);
+            console.log(d);
           }
-        );
+        ).then(async () => {
+          await Student.updateMany(
+            { enrolledCourses: { $elemMatch: { course: req.body.id } } },
+            { $pull: { enrolledCourses: { course: req.body.id } } },
+            (er, da) => {
+              console.log(da);
+            }
+          );
+          await Student.updateMany(
+            { startedCourses: { $elemMatch: { course: req.body.id } } },
+            { $pull: { startedCourses: { course: req.body.id } } },
+            (er, da) => {
+              console.log(da);
+            }
+          );
+          await Student.updateMany(
+            { finishedCourses: { $elemMatch: { course: req.body.id } } },
+            { $pull: { finishedCourses: { course: req.body.id } } },
+            (er, da) => {
+              console.log(da);
+            }
+          );
+        });
       });
 
     error1 === null ? (error = error2) : (error = error1);

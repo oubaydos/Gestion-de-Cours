@@ -1,6 +1,8 @@
 import { makeStyles } from "@material-ui/core/styles";
 import MyButton from "../usedComponents/MyButton";
 import { useLocation } from "react-router-dom";
+import DeleteIcon from "@material-ui/icons/Delete";
+import axios from "axios";
 
 let enroll = () => {
   alert("enroll");
@@ -22,7 +24,48 @@ const useStyles = makeStyles({
 });
 function Coursedesc(props) {
   let style = useStyles();
-
+  let delFormation = async () => {
+    await axios
+      .post(
+        "http://localhost:5000/deleteFormation",
+        {
+          id: document.location.pathname.split("/")[3],
+        },
+        { headers: { "x-auth-token": localStorage.getItem("currentUser") } }
+      )
+      .then(
+        (res) => {
+          alert("successfully deleted");
+          console.log(res);
+          document.location.href = "/prof/dashboard";
+        },
+        (err) => {
+          alert("erreur : " + (err.statusCode || ""));
+          console.log(err.response);
+        }
+      );
+  };
+  let delCourse = async () => {
+    await axios
+      .post(
+        "http://localhost:5000/deleteCourse",
+        {
+          id: document.location.pathname.split("/")[3],
+        },
+        { headers: { "x-auth-token": localStorage.getItem("currentUser") } }
+      )
+      .then(
+        (res) => {
+          alert("successfully deleted");
+          console.log(res);
+          document.location.href = "/prof/dashboard";
+        },
+        (err) => {
+          alert("erreur : " + (err.statusCode || ""));
+          console.log(err.response);
+        }
+      );
+  };
   return (
     <div>
       <MyButton
@@ -50,8 +93,18 @@ function Coursedesc(props) {
         value={`Ajouter les ${
           props.isFormation ? "Cours de la fomation" : "Chapitres du cours"
         }`}
-        //using parameters to lock the choice of prof
-        //                        or student in inscription form
+      />
+      <MyButton
+        bgColor="red"
+        marginTop="100px"
+        fgColor=" rgba(255, 255, 255, 1)"
+        //onClick={props.isFormation ? enrollFormation : enroll}
+        className={style.root}
+        onClick={props.isFormation ? delFormation : delCourse}
+        value={
+          props.isFormation ? "supprimer cette formation" : "supprimer ce cours"
+        }
+        startIcon={<DeleteIcon />}
       />
 
       <p

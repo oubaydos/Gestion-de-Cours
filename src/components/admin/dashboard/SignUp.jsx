@@ -126,8 +126,9 @@ function DeleteButton(props) {
       bgColor="#c81236"
       fgColor="white"
       className={style.third}
-      value={<Del />}
       onClick={deleteAccount}
+      startIcon={<PersonAddIcon />}
+      value="Supprimer mon Compte"
       size="13px"
     />
   );
@@ -139,12 +140,8 @@ function ChangePassword(props) {
       bgColor="#7e7e7e"
       fgColor="white"
       className={style.fifth}
-      value={
-        <div>
-          <SettingsIcon />
-          changer le mot de passe
-        </div>
-      }
+      startIcon={<SettingsIcon />}
+      value="changer le mot de passe"
       url="/admin/changePassword"
       size="13px"
     />
@@ -157,7 +154,8 @@ function AddButton(props) {
       bgColor="#4c9a2a"
       fgColor="white"
       className={style.fourth}
-      value={<Add />}
+      startIcon={<PersonAddIcon />}
+      value="Ajouter un autre Admin"
       url="/admin/newAdmin"
       size="13px"
     />

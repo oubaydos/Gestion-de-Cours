@@ -3,6 +3,8 @@ import MyButton from "../usedComponents/MyButton";
 import { makeStyles } from "@material-ui/core/styles";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import axios from "axios";
+import SettingsIcon from "@material-ui/icons/Settings";
+
 const useStyles = makeStyles({
   root: {
     float: "left",
@@ -106,12 +108,27 @@ function DeleteButton(props) {
     <MyButton
       bgColor="red"
       fgColor="white"
-      className={style.third}
-      value={<Del />}
+      className={style.fifth}
+      value="Supprimer mon Compte"
+      startIcon={<DeleteForeverIcon />}
       onClick={deleteAccount}
       size="13px"
     />
   );
 }
+function ChangePassword(props) {
+  let style = useStyles();
+  return (
+    <MyButton
+      bgColor="#7e7e7e"
+      fgColor="white"
+      className={style.fifth}
+      startIcon={<SettingsIcon />}
+      value="changer le mot de passe"
+      url="/changePassword"
+      size="13px"
+    />
+  );
+}
 export default SignUp;
-export { StartedButton, DoneButton, DeleteButton };
+export { StartedButton, DoneButton, DeleteButton, ChangePassword };

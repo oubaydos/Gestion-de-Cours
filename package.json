@@ -40,6 +40,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-social-icons": "^5.3.0",
+    "react-to-pdf": "0.0.14",
     "react-tooltip": "^4.2.19",
     "reactjs-media": "^1.5.1",
     "redux": "^4.1.0",

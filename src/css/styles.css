@@ -98,6 +98,9 @@ footer {
 
 
 .bbody {
+  position: absolute;
+  top:0;
+  left:0;
   margin: 0;
   padding: 0;
   color: black;
@@ -109,7 +112,7 @@ footer {
 .container {
   border: 20px solid tan;
   width: 750px;
-  height: 563px;
+  height: 900px;
   display: table-cell;
   vertical-align: middle;
 }
@@ -142,9 +145,32 @@ footer {
   position:absolute;
   left : 50px;
 }
-.imgSignature{
+.imgSignature,.secImg{
   position:absolute;
-  left:20px;
-  width:200px;
-  height:200px;
+  margin-top:60px;
+  width:150px;
+  height:150px;
+}
+.imgSignature ,.nameSignature{  left:100px;
+}
+.secName{
+  left:550px
+}
+.secImg{
+  left:500px
+}
+.nameSignature,.secName{
+  position:absolute;
+  margin-top:60px;
+  font-size: 14px;
+  color:rgba(0, 86, 210, 1);
+  font-family: Montserrat;
+}
+.id{
+  position:absolute;
+  left : 480px;
+  bottom:20px;
+  font-size: 8px;
+  color:rgb(135, 140, 146);
+  font-family: Comfortaa;
 }

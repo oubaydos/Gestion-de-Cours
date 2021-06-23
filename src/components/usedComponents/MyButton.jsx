@@ -15,6 +15,9 @@ function MyButton(props) {
     fontStyle: "bold",
     minWidth: "130px",
   };
+  if (props.style !== undefined) {
+    style = { ...style, ...props.style };
+  }
   return (
     <Button
       style={style}
@@ -24,6 +27,7 @@ function MyButton(props) {
       size="small"
       href={props.url}
       onClick={props.onClick}
+      startIcon={props.startIcon}
     >
       {props.value}
     </Button>

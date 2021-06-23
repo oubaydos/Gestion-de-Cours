@@ -73,6 +73,7 @@ app.use(
 app.use("/startCourse", require("./routes/api/start/startCourse"));
 app.use("/startFormation", require("./routes/api/start/startFormation"));
 app.use("/finishCourse", require("./routes/api/finish/finishCourse"));
+app.use("/finishFormation", require("./routes/api/finish/finishFormation"));
 app.use("/getChapters", require("./routes/api/courseDesc/getChapters"));
 app.use("/setCurrentChapter", require("./routes/api/start/setCurrentChapter"));
 app.use("/getCurrentChapter", require("./routes/api/start/getCurrentChapter"));
@@ -97,5 +98,21 @@ app.use("/deleteFormation", require("./routes/api/delete/deleteFormation"));
 app.use("/deleteStudent", require("./routes/api/delete/deleteStudent"));
 app.use("/deleteProf", require("./routes/api/delete/deleteProf"));
 app.use("/admin/changePassword", require("./routes/api/admin/changePassword"));
+app.use(
+  "/prof/changePassword",
+  require("./routes/api/change/profChangePassword")
+);
+app.use(
+  "/changePassword",
+  require("./routes/api/change/studentChangePassword")
+);
+app.use(
+  "/getStudentNameAndMark",
+  require("./routes/api/courseDesc/getStudentNameAndMark")
+);
+app.use(
+  "/getFormationCourses",
+  require("./routes/api/formationDesc/getCourses")
+);
 
 //test Pdf

@@ -4,6 +4,8 @@ const auth = require("../../middleware/auth");
 const Student = require("../../models/Student");
 const Prof = require("../../models/Prof");
 const Admin = require("../../models/Admin");
+const Course = require("../../models/Course");
+const Formation = require("../../models/Formation");
 
 router.delete("/", auth, async (req, res) => {
   try {
@@ -28,7 +30,18 @@ router.delete("/", auth, async (req, res) => {
           error2 = err;
           return;
         }
-        if (data) return res.status(200).send(data);
+      }).then(async () => {
+        await Course.deleteMany({ instructor: req.prof.id }, (e, d) => {
+          if (e) return (error1 = e);
+          console.log("data: ", d);
+        }).then(async () => {
+          await Formation.deleteMany({ instructor: req.prof.id }, (e, d) => {
+            if (e) return (error1 = e);
+            console.log("data: ", d);
+          }).then(() => {
+            if (!error1) return res.status(200).send("all is good");
+          });
+        });
       });
     else if (req.admin) {
       await Admin.deleteOne({ _id: req.admin.id }, (err, data) => {

@@ -21,7 +21,12 @@ router.get("/", async (req, res) => {
             console.log("error 410 : ", /*e ||*/ "prof id not found");
             breakOut = true;
             return res.status(410).json({
-              errors: e || "prof id not found",
+              errors:
+                e ||
+                "prof id not found : index : " +
+                  index +
+                  " prof id : " +
+                  item.instructor,
             });
           } else {
             let data = { item, prof: donne.firstName + " " + donne.lastName };

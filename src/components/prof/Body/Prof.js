@@ -3,7 +3,11 @@ import React from "react";
 import Title from "./Title";
 import Desc from "./Desc";
 import Desc1 from "./Desc1";
-import Addcourse from "./Addcourse";
+import Addcourse, {
+  DeleteButton,
+  AddFormation,
+  ChangePassword,
+} from "./Addcourse";
 
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -37,9 +41,7 @@ function Prof(props) {
         <div>
           <div onMouseOver={props.onMouseOver}>
             <Grid container direction="row">
-              <Grid item xs={2}></Grid>
-
-              <Grid container direction="column" item xs={8}>
+              <Grid container direction="column" item xs={12}>
                 <Grid item xs={12}>
                   <Title />
                 </Grid>
@@ -56,18 +58,43 @@ function Prof(props) {
                   alignItems="flex-start"
                   item
                   xs={8}
+                  style={{
+                    position: "absolute",
+                    left: "10px",
+                    bottom: "600px",
+                  }}
                 >
-                  <Grid item xs={6}>
+                  <Grid item xs={4}>
                     <Surveiller />
                   </Grid>
 
-                  <Grid item xs={6}>
+                  <Grid item xs={4}>
                     <Addcourse />
+                  </Grid>
+                  <Grid item xs={4}>
+                    <AddFormation />
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item xs={2}>
-                {" "}
+              <Grid
+                container
+                spacing={10}
+                justify="center"
+                alignItems="center"
+                item
+                xs={4}
+                style={{
+                  position: "absolute",
+                  right: "10px",
+                  bottom: "600px",
+                }}
+              >
+                <Grid item xs={6}>
+                  <ChangePassword />
+                </Grid>
+                <Grid item xs={6}>
+                  <DeleteButton />
+                </Grid>
               </Grid>
             </Grid>
           </div>

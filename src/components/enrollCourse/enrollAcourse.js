@@ -32,6 +32,7 @@ async function enrollFormation() {
       },
       (err) => {
         alert("error : " + err.response.data.errors);
+        console.log(err.response);
       }
     );
   } catch (e) {

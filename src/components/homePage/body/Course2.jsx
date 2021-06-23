@@ -26,7 +26,7 @@ function Course1(props) {
   //
   let i = 0;
   useEffect(() => {
-    getCourses();
+    setTimeout(getCourses, 500);
   }, [loading]);
 
   return (

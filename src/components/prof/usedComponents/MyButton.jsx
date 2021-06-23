@@ -7,22 +7,28 @@ function MyButton(props) {
     color: props.fgColor,
     float: "right",
     filter: "drop-shadow(0px 5px 5px #dbdbdb)",
-    marginRight: "10px",
+    marginRight: props.marginRight || "10px",
     marginTop: props.marginTop || "1px",
+
     borderRadius: 100,
-    fontSize: "12px",
+    fontSize: props.fontSize || "12px",
     fontFamily: "Montserrat",
     fontStyle: "bold",
     minWidth: "130px",
   };
+  if (props.style !== undefined) {
+    style = { ...style, ...props.style };
+  }
   return (
     <Button
       style={style}
       variant="contained"
       color="primary"
       className={props.className}
-      size="small"
+      size={props.size || "small"}
       href={props.url}
+      startIcon={props.startIcon}
+      onClick={props.onClick}
     >
       {props.value}
     </Button>

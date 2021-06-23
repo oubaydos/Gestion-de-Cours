@@ -2,7 +2,12 @@ import React from "react";
 import Img from "./Img";
 import Title from "./Title";
 import Description from "./Description";
-import SignUp, { StartedButton, DoneButton, DeleteButton } from "./SignUp";
+import SignUp, {
+  StartedButton,
+  DoneButton,
+  DeleteButton,
+  ChangePassword,
+} from "./SignUp";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -78,8 +83,24 @@ function Body(props) {
                     <li style={{ marginTop: "150px" }}>
                       <DoneButton />
                     </li>
-                    <li style={{ marginTop: "320px", marginRight: "100px" }}>
+                    <li
+                      style={{
+                        position: "absolute",
+                        right: "-230px",
+                        width: "300px",
+                      }}
+                    >
                       <DeleteButton />
+                    </li>
+                    <li
+                      style={{
+                        position: "absolute",
+                        right: "-240px",
+                        width: "300px",
+                        marginTop: "50px",
+                      }}
+                    >
+                      <ChangePassword />
                     </li>
                   </ol>
                 </Paper>

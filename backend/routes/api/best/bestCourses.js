@@ -16,8 +16,34 @@ router.get("/", async (req, res) => {
       });
     } else {
       let data = rst;
-      data.sort((a, b) =>
-        b.rating > a.rating ? 1 : a.rating > b.rating ? -1 : 0
+      let sortFunc = (a, b) => {
+        if (
+          a.numberOfDoneStudents == b.numberOfDoneStudents &&
+          b.numberOfDoneStudents == 0
+        ) {
+          return 0;
+        }
+        if (a.numberOfDoneStudents != 0 && b.numberOfDoneStudents == 0) {
+          return a.rating !== 0 ? -1 : 1;
+        }
+        if (a.numberOfDoneStudents == 0 && b.numberOfDoneStudents != 0) {
+          return b.rating !== 0 ? 1 : -1;
+        }
+        let bRating = b.rating / b.numberOfDoneStudents;
+        let aRating = a.rating / a.numberOfDoneStudents;
+        if (bRating > aRating) {
+          return 1;
+        }
+        if (aRating > bRating) return -1;
+        return 0;
+      };
+      data.sort(
+        sortFunc
+        // (a, b) =>
+        // b.rating > a.rating ? 1 : a.rating > b.rating ? -1 : 0
+      );
+      data.forEach((item) =>
+        console.log(item.rating, " ", item.numberOfDoneStudents)
       );
       let breakOut = false;
       ans = [];
@@ -34,7 +60,7 @@ router.get("/", async (req, res) => {
           } else {
             ans.push({ item, prof: donne.firstName + " " + donne.lastName });
             if (index === 3) {
-              console.log(ans);
+              //console.log(ans);
               res.status(200).json(ans);
             }
           }

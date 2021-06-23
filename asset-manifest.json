@@ -1,0 +1,42 @@
+{
+  "files": {
+    "main.css": "/static/css/main.52e0533e.chunk.css",
+    "main.js": "/static/js/main.cb383503.chunk.js",
+    "main.js.map": "/static/js/main.cb383503.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.8a42ca34.js",
+    "runtime-main.js.map": "/static/js/runtime-main.8a42ca34.js.map",
+    "static/css/2.8c49bb0a.chunk.css": "/static/css/2.8c49bb0a.chunk.css",
+    "static/js/2.07a44620.chunk.js": "/static/js/2.07a44620.chunk.js",
+    "static/js/2.07a44620.chunk.js.map": "/static/js/2.07a44620.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.8c49bb0a.chunk.css.map": "/static/css/2.8c49bb0a.chunk.css.map",
+    "static/css/main.52e0533e.chunk.css.map": "/static/css/main.52e0533e.chunk.css.map",
+    "static/js/2.07a44620.chunk.js.LICENSE.txt": "/static/js/2.07a44620.chunk.js.LICENSE.txt",
+    "static/media/InkedCapture_LI.jpg": "/static/media/InkedCapture_LI.030d68f0.jpg",
+    "static/media/styles.css": "/static/media/background.0694bcab.png",
+    "static/media/astronaut.74d61fc4.svg": "/static/media/astronaut.74d61fc4.svg",
+    "static/media/chap1.db35546d.pdf": "/static/media/chap1.db35546d.pdf",
+    "static/media/chap2.e828d254.pdf": "/static/media/chap2.e828d254.pdf",
+    "static/media/chap3.a837019a.pdf": "/static/media/chap3.a837019a.pdf",
+    "static/media/chap4.27038587.pdf": "/static/media/chap4.27038587.pdf",
+    "static/media/earth.84c1f0b5.svg": "/static/media/earth.84c1f0b5.svg",
+    "static/media/image404.a71a0614.svg": "/static/media/image404.a71a0614.svg",
+    "static/media/moon.8cff6e6c.svg": "/static/media/moon.8cff6e6c.svg",
+    "static/media/overlay_stars.f2f34344.svg": "/static/media/overlay_stars.f2f34344.svg",
+    "static/media/index.css": "/static/media/roboto-vietnamese-400-normal.c0bec65d.woff2",
+    "static/media/rocket.29bd758e.svg": "/static/media/rocket.29bd758e.svg",
+    "static/media/signature-hajar.dbb6adf7.png": "/static/media/signature-hajar.dbb6adf7.png",
+    "static/media/signature-moi.5026e5de.png": "/static/media/signature-moi.5026e5de.png",
+    "static/media/vid1.1756dda6.mkv": "/static/media/vid1.1756dda6.mkv",
+    "static/media/vid2.472930ad.mkv": "/static/media/vid2.472930ad.mkv",
+    "static/media/vid3.71fee94a.mkv": "/static/media/vid3.71fee94a.mkv",
+    "static/media/vid4.bd91f176.mkv": "/static/media/vid4.bd91f176.mkv"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8a42ca34.js",
+    "static/css/2.8c49bb0a.chunk.css",
+    "static/js/2.07a44620.chunk.js",
+    "static/css/main.52e0533e.chunk.css",
+    "static/js/main.cb383503.chunk.js"
+  ]
+}

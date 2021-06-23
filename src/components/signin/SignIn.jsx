@@ -112,10 +112,8 @@ export default function SignUp() {
         },
         (err) => {
           let error = "";
-          for (let i of err.response.data.errors) {
-            error += i.param + " : " + i.msg + "\n\n";
-          }
-          alert("erreur de code : " + err.response.status + "\n" + error);
+
+          alert("erreur de code : " + err.response.status + "\n" + err);
           console.log(error);
         }
       );

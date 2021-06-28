@@ -113,8 +113,13 @@ export default function SignUp() {
         (err) => {
           let error = "";
 
-          alert("erreur de code : " + err.response.status + "\n" + err);
-          console.log(error);
+          alert(
+            "erreur de code : " +
+              err.response.status +
+              "\n" +
+              err.response.data.errors[0].msg
+          );
+          console.log(err.response);
         }
       );
     } catch (error) {

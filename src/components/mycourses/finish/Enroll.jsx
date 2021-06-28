@@ -6,6 +6,9 @@ import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import { useLocation } from "react-router-dom";
 import MyButton from "../../usedComponents/MyButton";
+function isNumber(num) {
+  return !isNaN(num);
+}
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
@@ -104,19 +107,22 @@ function Enroll() {
                 title={data.data.title}
                 author={data.teacher}
                 rating={
-                  data.data.numberOfDoneStudents === undefined ||
-                  data.data.numberOfDoneStudents === 0
-                    ? 0
-                    : data.data.rating / data.data.numberOfDoneStudents
+                  data.data.numberOfDoneStudents == 0
+                    ? data.data.rating
+                    : parseFloat(
+                        data.data.rating / data.data.numberOfDoneStudents
+                      ).toFixed(2)
                 }
               />
-              <MyButton
-                value="telecharger votre certificat"
-                url={
-                  window.location.pathname + "/certificate/" + data.data.title
-                }
-                style={{ marginTop: "20px" }}
-              />
+              {isNumber(data.mark) && (
+                <MyButton
+                  value="telecharger votre certificat"
+                  url={
+                    window.location.pathname + "/certificate/" + data.data.title
+                  }
+                  style={{ marginTop: "20px" }}
+                />
+              )}
             </Grid>
           </Grid>
         </div>

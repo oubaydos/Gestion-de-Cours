@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     left: "70%",
-    top: "20%",
+    top: "22%",
     position: "absolute",
     height: "100%",
   },

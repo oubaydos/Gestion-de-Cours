@@ -133,7 +133,12 @@ function Coursedesc(props) {
           top: props.title.length >= 40 ? "36%" : "30%",
         }}
       >
-        {props.description}
+        {props.description.split("\n").map((item) => (
+          <div>
+            {item}
+            <br />
+          </div>
+        ))}
       </p>
       <p
         style={{

@@ -18,14 +18,15 @@ let unenroll = () => {
 };
 const useStyles = makeStyles({
   root: {
-    top: "60%",
+    top: "55%",
+    zIndex: 1,
     float: "left",
     position: "absolute",
     marginLeft: "12%",
     fontFamily: "Cascadia Code",
     width: "1000x",
     height: "35px",
-    left: "61%",
+    left: "60%",
   },
   second: {
     top: "65%",

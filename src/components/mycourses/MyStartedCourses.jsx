@@ -45,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "18px",
   },
 }));
+function removeDuplicates(data, key) {
+  return [...new Map(data.map((item) => [key(item), item])).values()];
+}
 function Album() {
   document.body.style.overflow = "scroll";
 
@@ -56,7 +59,7 @@ function Album() {
       (res) => {
         console.log("res : : : : ");
         console.log(res);
-        setData(res.data);
+        setData(removeDuplicates(res.data, (item) => item.data._id));
       },
       (err) => {
         alert("error : " + err.response.data.errors);
@@ -117,10 +120,11 @@ function Album() {
                       title={card.data.title}
                       author={card.teacher}
                       rating={
-                        card.data.numberOfDoneStudents === undefined ||
-                        card.data.numberOfDoneStudents === 0
-                          ? 0
-                          : card.data.rating / card.data.numberOfDoneStudents
+                        card.data.numberOfDoneStudents == 0
+                          ? card.data.rating
+                          : parseFloat(
+                              card.data.rating / card.data.numberOfDoneStudents
+                            ).toFixed(2)
                       }
                       id={card.data._id}
                     />

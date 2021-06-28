@@ -3,7 +3,9 @@ const router = express.Router();
 const Formation = require("../../../models/Formation");
 const Prof = require("../../../models/Prof");
 let ans = [];
+
 router.get("/", async (req, res) => {
+  let err1 = null;
   await Formation.find({}, async (err, rst) => {
     if (err || rst === null || rst === undefined) {
       console.log("erreur 410 : ", /*err ||*/ "Formation id not found");
@@ -21,10 +23,14 @@ router.get("/", async (req, res) => {
         if (breakOut) return;
         await Prof.findById(item.instructor, (e, donne) => {
           if (e || donne === null || donne === undefined) {
-            console.log("error 410 : ", /*e ||*/ "prof id not found");
+            console.log(
+              "error 410 : ",
+              /*e ||*/ "prof id not found" + item.instructor + item
+            );
             breakOut = true;
+            err1 = e || "prof id not found";
             return res.status(410).json({
-              errors: e || "prof id not found",
+              errors: e || `prof id not found ${item.instructor}`,
             });
           } else {
             let data = { item, prof: donne.firstName + " " + donne.lastName };
@@ -33,7 +39,7 @@ router.get("/", async (req, res) => {
         });
         if (index === rst.length - 1) {
           console.log(ans);
-          res.status(200).json(ans);
+          if (err1 === null) res.status(200).json(ans);
         }
       });
     }

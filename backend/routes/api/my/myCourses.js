@@ -32,19 +32,26 @@ router.post("/", auth, async (req, res) => {
       if (!error1 && !error2 && !error) {
         let breakOut = false;
         console.log(coursesIds);
-        if (coursesIds.length === 0) res.status(200).send("[]");
+        if (coursesIds.length === 0) res.status(200).send([]);
         else
           coursesIds.forEach(async (i, index) => {
             if (breakOut) return;
             await Course.findById(i, async (err, data) => {
+              console.log("course");
               if (err || !data) {
                 error1 = err || "probleme dans les cours de cet etudiant";
                 breakOut = true;
+                console.log("course err");
+
                 return;
               } else {
                 await Prof.findById(data.instructor, (e, d) => {
+                  console.log("prof");
+
                   if (e || !d) {
                     error1 = e || "pb dans le prof";
+                    console.log("prof err");
+
                     return (breakOut = true);
                   }
                   if (!e && d) {

@@ -69,7 +69,7 @@ export default function BasicTable() {
         .then((res) => window.location.reload());
     } catch (e) {
       alert("erreur de serveur");
-      console.log(e);
+      console.log(e, e.response || "");
     }
   };
   let getData = async () => {
@@ -100,7 +100,7 @@ export default function BasicTable() {
                   d.getSeconds().padLeft(),
                 ].join(":")
               }`;
-            } else {
+            } else if (i.startingTime !== undefined) {
               let d = new Date(new Date().getTime() - i.startingTime);
               i.duration = `${
                 d.getDate() -
@@ -113,6 +113,8 @@ export default function BasicTable() {
                   d.getSeconds().padLeft(),
                 ].join(":")
               }`;
+            } else {
+              i.duration = 0;
             }
             if (i.startingTime !== undefined) {
               let d = new Date(i.startingTime);

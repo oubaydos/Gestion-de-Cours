@@ -56,6 +56,9 @@ function Album() {
   let [loading, setLoading] = useState(true);
 
   //axios
+  function removeDuplicates(data, key) {
+    return [...new Map(data.map((item) => [key(item), item])).values()];
+  }
   const getCourses = async () => {
     try {
       await axios
@@ -64,7 +67,10 @@ function Album() {
         })
         .then((res) => {
           console.log(res.data);
-          setcourses({ data: res.data });
+
+          setcourses({
+            data: removeDuplicates(res.data, (item) => item.data._id),
+          });
           setLoading(false);
         });
     } catch (err) {
@@ -75,7 +81,7 @@ function Album() {
   let i = 0;
   useEffect(() => {
     //hna bdlt chi haja latkhsr
-    if (loading) setTimeout(getCourses, 500);
+    if (loading) getCourses();
   }, [loading]);
   return (
     <div>
@@ -123,10 +129,11 @@ function Album() {
                       title={card.data.title}
                       author={card.prof}
                       rating={
-                        card.data.numberOfDoneStudents === undefined ||
-                        card.data.numberOfDoneStudents === 0
-                          ? 0
-                          : card.data.rating / card.data.numberOfDoneStudents
+                        card.data.numberOfDoneStudents == 0
+                          ? card.data.rating
+                          : parseFloat(
+                              card.data.rating / card.data.numberOfDoneStudents
+                            ).toFixed(2)
                       }
                       id={card.data._id}
                     />

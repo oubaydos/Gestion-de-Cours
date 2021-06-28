@@ -7,6 +7,7 @@ import Rating from "@material-ui/lab/Rating";
 
 const useStyles = makeStyles({
   root: {
+    zIndex: 1,
     top: "45%",
     float: "left",
     position: "absolute",
@@ -38,6 +39,7 @@ const useStyles = makeStyles({
 function Coursedesc(props) {
   const [value, setValue] = useState(null);
   let handleChangeFormation = async (mark) => {
+    alert("clicked");
     await axios
       .post(
         `http://localhost:5000/setMarkFormation`,
@@ -89,8 +91,8 @@ function Coursedesc(props) {
       <p
         className={style.root}
         style={{
-          left: props.isFormation ? "50%" : "53%",
-          top: props.title.length >= 40 ? "850px" : "800px",
+          left: props.isFormation ? "0%" : "0%",
+          top: props.title.length >= 40 ? "700px" : "650px",
         }}
       >
         {props.rated
@@ -102,8 +104,8 @@ function Coursedesc(props) {
       {!props.rated && (
         <Rating
           style={{
-            left: props.isFormation ? "70%" : "73%",
-            top: props.title.length >= 40 ? "890px" : "840px",
+            left: props.isFormation ? "35%" : "35%",
+            top: props.title.length >= 40 ? "700px" : "650px",
           }}
           name="half-rating"
           precision={0.5}
@@ -115,7 +117,7 @@ function Coursedesc(props) {
             if (props.isFormation) handleChangeFormation(value);
             else handleChange(value);
             console.log(value);
-            window.location.reload();
+            setTimeout(() => window.location.reload(), 250);
           }}
         />
       )}
@@ -173,7 +175,7 @@ function Coursedesc(props) {
           fontFamily: "Architects Daughter",
           fontSize: props.isFormation ? "25px" : "30px",
           fontWeight: 200,
-          top: "20%",
+          top: "22%",
 
           paddingRight: "100px",
         }}

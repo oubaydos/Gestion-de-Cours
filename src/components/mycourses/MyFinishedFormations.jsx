@@ -120,10 +120,11 @@ function Album() {
                       title={card.data.title}
                       author={card.teacher}
                       rating={
-                        card.data.numberOfDoneStudents === undefined ||
-                        card.data.numberOfDoneStudents === 0
-                          ? 0
-                          : card.data.rating / card.data.numberOfDoneStudents
+                        card.data.numberOfDoneStudents == 0
+                          ? card.data.rating
+                          : parseFloat(
+                              card.data.rating / card.data.numberOfDoneStudents
+                            ).toFixed(2)
                       }
                       id={card.data._id}
                     />

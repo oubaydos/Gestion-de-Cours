@@ -92,7 +92,7 @@ router.post(
             }
           }
         );
-      if (e) throw new Error("erreur dans les credentielles");
+      if (e) throw new Error("Identifiants non valides");
       return true;
     }),
   check("password", "le mot de passe est trop court (<6)").isLength({
@@ -102,7 +102,7 @@ router.post(
     const errors = validationResult(req);
     console.log(errors);
     if (!errors.isEmpty()) {
-      return res.status(410).json({
+      return res.status(401).json({
         errors: errors.array(),
       });
     }

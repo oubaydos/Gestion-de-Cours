@@ -92,14 +92,15 @@ export default function SignUp() {
       !errors.password &&
       state.prof !== state.student
     ) {
-      setSent(true);
     } else {
       return;
     }
     try {
       data.isStudent = state.student;
       await axios.post(`http://localhost:5000/users`, data).then(
-        (res) => {},
+        (res) => {
+          setSent(true);
+        },
         (err) => {
           let error = "";
           for (let i of err.response.data.errors) {

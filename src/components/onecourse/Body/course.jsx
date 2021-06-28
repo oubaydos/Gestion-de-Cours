@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -135,7 +135,13 @@ function Course(props) {
       alert("erreur");
     }
   };
-
+  useEffect(() => {
+    if (passedTest) {
+      setTimeout(() => {
+        document.getElementById("quiz").scrollIntoView();
+      }, 100);
+    }
+  }, [passedTest]);
   const handleStay = () => {
     setActiveStep((prevActiveStep) => prevActiveStep);
   };
@@ -298,7 +304,10 @@ function Course(props) {
                   variant="contained"
                   onClick={() => {
                     setPassedTest(true);
-                    window.open(props.test, "_blank");
+                    // window.open(
+                    //   `${document.location.pathname}/quiz` /*props.test*/,
+                    //   "_blank"
+                    // );
                   }}
                   color="primary"
                   size="small"
@@ -327,6 +336,20 @@ function Course(props) {
                     terminer le cours
                   </Button>
                 </Grid>
+              )}
+              {passedTest && (
+                <iframe
+                  id="quiz"
+                  src={props.test}
+                  width="750"
+                  height="749"
+                  frameborder="0"
+                  marginheight="0"
+                  marginwidth="0"
+                  title="quiz"
+                >
+                  Loading…
+                </iframe>
               )}
             </Grid>
           </div>
@@ -469,7 +492,7 @@ function Course(props) {
                   variant="contained"
                   onClick={() => {
                     setPassedTest(true);
-                    window.open(props.test, "_blank");
+                    //window.open(props.test, "_blank");
                   }}
                   color="primary"
                   //href={props.test}

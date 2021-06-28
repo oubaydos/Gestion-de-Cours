@@ -61,7 +61,7 @@ function Album() {
           setLoading(false);
         });
     } catch (err) {
-      console.log("error : ", err.response);
+      console.log("error : ", err, "\n", err.response);
     }
   };
   //
@@ -118,7 +118,9 @@ function Album() {
                         card.item.numberOfDoneStudents === undefined ||
                         card.item.numberOfDoneStudents === 0
                           ? 0
-                          : card.item.rating / card.item.numberOfDoneStudents
+                          : parseFloat(
+                              card.item.rating / card.item.numberOfDoneStudents
+                            ).toFixed(2)
                       }
                       id={card.item._id}
                     />

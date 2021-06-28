@@ -5,11 +5,12 @@ function Description(props) {
     <div>
       <p
         style={{
-          width: "40%",
+          width: "35%",
           marginLeft: "10%",
           fontFamily: "Comfortaa",
           lineHeight: "1.6",
           fontSize: "17px",
+          height: "20%",
         }}
       >
         Nous sommes conscients des conséquences de covid19 sur le Maroc, en

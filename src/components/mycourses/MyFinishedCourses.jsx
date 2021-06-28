@@ -45,18 +45,23 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "18px",
   },
 }));
+function removeDuplicates(data, key) {
+  return [...new Map(data.map((item) => [key(item), item])).values()];
+}
 function Album() {
   document.body.style.overflow = "scroll";
 
   const classes = useStyles();
   const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   async function getCourse() {
     await axios.post(`http://localhost:5000/myFinishedCourses`).then(
       (res) => {
-        console.log("res : : : : ");
-        console.log(res);
-        setData(res.data);
+        console.log("set : : : : ");
+        console.log(new Set(res.data));
+
+        setData(removeDuplicates(res.data, (item) => item.data._id));
       },
       (err) => {
         console.log(err.response);
@@ -65,10 +70,13 @@ function Album() {
     );
   }
   useEffect(() => {
-    if (data === null) {
-      setTimeout(getCourse, 500);
+    let i = 0;
+    if (loading && i === 0) {
+      i++;
+      getCourse();
+      setLoading(false);
     }
-  }, [data]);
+  }, [loading]);
   return (
     <div>
       {data === null ? (
@@ -79,7 +87,15 @@ function Album() {
           <header>
             <Header />
           </header>
-
+          <button
+            id="button"
+            onClick={() => {
+              alert("cclikced");
+              console.log("hello data", data);
+            }}
+          >
+            click me
+          </button>
           <main>
             <div className={classes.heroContent}>
               <Container maxWidth="sm">
@@ -118,10 +134,11 @@ function Album() {
                       title={card.data.title}
                       author={card.teacher}
                       rating={
-                        card.data.numberOfDoneStudents === undefined ||
-                        card.data.numberOfDoneStudents === 0
-                          ? 0
-                          : card.data.rating / card.data.numberOfDoneStudents
+                        card.data.numberOfDoneStudents == 0
+                          ? card.data.rating
+                          : parseFloat(
+                              card.data.rating / card.data.numberOfDoneStudents
+                            ).toFixed(2)
                       }
                       id={card.data._id}
                     />

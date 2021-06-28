@@ -55,12 +55,15 @@ function Album() {
   let [loading, setLoading] = useState(true);
 
   //axios
+  function removeDuplicates(data, key) {
+    return [...new Map(data.map((item) => [key(item), item])).values()];
+  }
   const getCourses = async () => {
     try {
       await axios.post(`http://localhost:5000/myCourses`).then(
         (res) => {
           courses = res.data;
-          setcourses(res.data);
+          setcourses(removeDuplicates(res.data, (item) => item.data._id));
           setLoading(false);
           courses.map((item) => {
             console.log(item);
@@ -121,7 +124,13 @@ function Album() {
                       alt="course1"
                       title={card.data.title}
                       author={card.prof}
-                      rating={card.data.rating}
+                      rating={
+                        card.data.numberOfDoneStudents == 0
+                          ? card.data.rating
+                          : parseFloat(
+                              card.data.rating / card.data.numberOfDoneStudents
+                            ).toFixed(2)
+                      }
                       id={card.data._id}
                     />
                   </Grid>

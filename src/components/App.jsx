@@ -60,6 +60,8 @@ import AdminChangePassword from "./admin/changePassword";
 import ProfChangePassword from "./prof/changePassword";
 import ChangePassword from "./changePassword/changePassword";
 import OneFormation from "./Formation/formation";
+import Quiz from "./onecourse/Quiz";
+
 import "../css/styles.css";
 
 function App() {
@@ -104,7 +106,11 @@ function App() {
     console.log(logedIn);
   });
   function AdminRoute(props) {
-    if (localStorage.getItem("isAdmin") === "true") {
+    let temp = localStorage.getItem("isAdmin");
+    if (props.inverse) {
+      temp === "true" ? (temp = null) : (temp = "true");
+    }
+    if (temp === "true") {
       return (
         <Route
           component={props.component}
@@ -217,11 +223,17 @@ function App() {
           exact={true}
           path="/mystartedformations/:i/learn"
         />
+        <Route
+          StudentRoute
+          component={Quiz}
+          exact={true}
+          path="/mystartedcourses/:i/learn/quiz"
+        />
         <ProfRoute component={ProfAddCourse} exact path="/prof/addCourse" />
         <ProfRoute component={AddPic} exact path="/prof/mycourses/:h/addpic" />
 
         <ProfRoute component={AddFormation} exact path="/prof/addFormation" />
-        <ProfRoute component={NewAdmin} exact path="/admin/newAdmin" />
+        <AdminRoute component={NewAdmin} exact path="/admin/newAdmin" />
         <AdminRoute
           component={AdminCourseDetails}
           exact

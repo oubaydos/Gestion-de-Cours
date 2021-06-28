@@ -100,9 +100,7 @@ function Certificate(props) {
                 :
                 <br />
                 <div class="cours">
-                  {document.location.pathname
-                    .split("/")[4]
-                    .replace(/%20/g, " ")}
+                  {decodeURI(document.location.pathname.split("/")[4])}
                 </div>
                 <br />
                 {mark !== "le cours n'est pas encore noté par le prof" && (

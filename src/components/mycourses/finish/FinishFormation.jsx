@@ -108,10 +108,11 @@ function Enroll() {
                 title={data.data.title}
                 author={data.teacher}
                 rating={
-                  data.data.numberOfDoneStudents === undefined ||
-                  data.data.numberOfDoneStudents === 0
-                    ? 0
-                    : data.data.rating / data.data.numberOfDoneStudents
+                  data.data.numberOfDoneStudents == 0
+                    ? data.data.rating
+                    : parseFloat(
+                        data.data.rating / data.data.numberOfDoneStudents
+                      ).toFixed(2)
                 }
               />
               <MyButton

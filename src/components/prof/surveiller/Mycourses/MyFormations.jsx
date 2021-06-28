@@ -130,7 +130,13 @@ function Album() {
                       alt="course1"
                       title={card.data.title}
                       author={card.prof}
-                      rating={card.data.rating}
+                      rating={
+                        card.data.numberOfDoneStudents == 0
+                          ? card.data.rating
+                          : parseFloat(
+                              card.data.rating / card.data.numberOfDoneStudents
+                            ).toFixed(2)
+                      }
                       id={card.data._id}
                     />
                   </Grid>

@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "18px",
   },
 }));
+function removeDuplicates(data, key) {
+  return [...new Map(data.map((item) => [key(item), item])).values()];
+}
 function Album() {
   document.body.style.overflow = "scroll";
 
@@ -59,7 +62,7 @@ function Album() {
     try {
       await axios.post(`http://localhost:5000/myCourses`).then(
         (res) => {
-          setcourses(res.data);
+          setcourses(removeDuplicates(res.data, (item) => item.data._id));
           setLoading(false);
           courses.map((item) => {
             console.log(item);
@@ -83,7 +86,7 @@ function Album() {
   let i = 0;
   useEffect(() => {
     //hna bdlt chi haja latkhsr
-    if (loading) setTimeout(getCourses, 500);
+    if (loading) getCourses();
   }, [loading]);
   return (
     <div>
@@ -128,7 +131,13 @@ function Album() {
                       alt="course1"
                       title={card.data.title}
                       author={card.prof}
-                      rating={card.data.rating}
+                      rating={
+                        card.data.numberOfDoneStudents == 0
+                          ? card.data.rating
+                          : parseFloat(
+                              card.data.rating / card.data.numberOfDoneStudents
+                            ).toFixed(2)
+                      }
                       id={card.data._id}
                     />
                   </Grid>

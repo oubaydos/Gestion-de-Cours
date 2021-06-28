@@ -3,14 +3,15 @@ import deleteCourse, { deleteFormation } from "./deleteAcourse";
 import MyButton from "../../usedComponents/MyButton";
 const useStyles = makeStyles({
   root: {
-    top: "45%",
+    top: "60%",
     float: "left",
     position: "absolute",
     marginLeft: "12%",
     fontFamily: "Cascadia Code",
     width: "1000x",
     height: "35px",
-    left: "30%",
+    left: "62%",
+    zIndex: 1,
   },
 });
 function Coursedesc(props) {

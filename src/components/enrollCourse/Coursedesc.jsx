@@ -3,14 +3,13 @@ import enroll, { enrollFormation } from "./enrollAcourse";
 import MyButton from "../usedComponents/MyButton";
 const useStyles = makeStyles({
   root: {
-    top: "60%",
-    float: "left",
+    top: "55%",
+    zIndex: 1,
     position: "absolute",
     marginLeft: "12%",
     fontFamily: "Cascadia Code",
-    width: "200px",
-    height: "35px",
-    left: "61%",
+    width: "230px",
+    left: "60%",
   },
 });
 function Coursedesc(props) {

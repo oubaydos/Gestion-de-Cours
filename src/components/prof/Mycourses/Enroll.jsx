@@ -100,7 +100,11 @@ function Enroll() {
                 alt="course1"
                 title={data.data.title}
                 author={data.teacher}
-                rating={data.data.rating}
+                rating={
+                  data.data.numberOfDoneStudents == 0
+                    ? data.data.rating
+                    : data.data.rating / data.data.numberOfDoneStudents
+                }
               />
             </Grid>
           </Grid>
